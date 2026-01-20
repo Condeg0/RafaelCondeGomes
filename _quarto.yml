@@ -1,0 +1,15 @@
+project:
+  type: website
+  output-dir: _site
+
+website:
+  title: "Rafael Condé Gomes"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: about.qmd
+        text: About
+
+execute:
+  freeze: auto  # CRITICAL: Uses saved notebook outputs; doesn't re-run code on server.
