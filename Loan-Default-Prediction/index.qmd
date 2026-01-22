@@ -96,6 +96,7 @@ Instead of accepting the default decision threshold of 0.5, I implemented a cust
 * X-Axis: Percentage of loans approved (sorted by safety).
 * Y-Axis: Total Portfolio Profit.
 
+[Profit as a percentage of loan approval rate](LogReg-StrategyCurve.png)
 This visualization allows stakeholders to visually "pick" their risk appetite.
 
 ---
