@@ -53,6 +53,7 @@ The project is organized as a Python package (`src`), separating business logic 
 │   └── config.py         # Centralized Assumptions
 ├── notebooks/            # Narrative Analysis
 └── README.md
+```
 
 ### Feature Engineering Pipeline
 A critical component was the FinancialFeatureEngineer transformer, which derives economic variables before the model sees the data. This calculates the Present Value (PV) of the loan using standard amortization formulas.
