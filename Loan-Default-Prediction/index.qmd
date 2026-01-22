@@ -1,0 +1,6 @@
+---
+title: "Credit Risk Optimization Engine"
+description: "Increasing loan portfolio profitability by 40% using Machine Learning algorithms (XGBoost, Random Forest & Logistic Regression)."
+author: "Rafael Condé Gomes"
+categories: [Machine Learning, Finance, Python]
+---
