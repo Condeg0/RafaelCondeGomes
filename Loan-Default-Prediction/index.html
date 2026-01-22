@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Rafael Condé Gomes">
-<meta name="description" content="Increasing loan portfolio profitability by 40% using Machine Learning algorithms (XGBoost, Random Forest &amp; Logistic Regression).">
+<meta name="dcterms.date" content="2026-01-22">
 
-<title>Credit Risk Optimization Engine – Rafael Condé Gomes</title>
+<title>Optimizing Credit Risk: A Profit-First Approach – Rafael Condé Gomes</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,6 +21,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -74,7 +109,7 @@ ul.task-list li input[type="checkbox"] {
 
 </head>
 
-<body class="nav-fixed fullcontent quarto-light">
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -110,25 +145,50 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#executive-summary" id="toc-executive-summary" class="nav-link active" data-scroll-target="#executive-summary">Executive Summary</a></li>
+  <li><a href="#the-business-problem" id="toc-the-business-problem" class="nav-link" data-scroll-target="#the-business-problem">1. The Business Problem</a>
+  <ul class="collapse">
+  <li><a href="#asymmetry-of-errors" id="toc-asymmetry-of-errors" class="nav-link" data-scroll-target="#asymmetry-of-errors">Asymmetry of Errors</a></li>
+  <li><a href="#the-objective" id="toc-the-objective" class="nav-link" data-scroll-target="#the-objective">The Objective</a></li>
+  </ul></li>
+  <li><a href="#system-architecture" id="toc-system-architecture" class="nav-link" data-scroll-target="#system-architecture">2. System Architecture</a>
+  <ul class="collapse">
+  <li><a href="#directory-structure" id="toc-directory-structure" class="nav-link" data-scroll-target="#directory-structure">Directory Structure</a></li>
+  </ul></li>
+  <li><a href="#modeling-strategy" id="toc-modeling-strategy" class="nav-link" data-scroll-target="#modeling-strategy">3. Modeling Strategy</a>
+  <ul class="collapse">
+  <li><a href="#model-selection" id="toc-model-selection" class="nav-link" data-scroll-target="#model-selection">Model Selection</a></li>
+  <li><a href="#the-strategy-curve" id="toc-the-strategy-curve" class="nav-link" data-scroll-target="#the-strategy-curve">The “Strategy Curve”</a></li>
+  </ul></li>
+  <li><a href="#results-analysis" id="toc-results-analysis" class="nav-link" data-scroll-target="#results-analysis">4. Results &amp; Analysis</a>
+  <ul class="collapse">
+  <li><a href="#performance-metrics" id="toc-performance-metrics" class="nav-link" data-scroll-target="#performance-metrics">Performance Metrics</a></li>
+  <li><a href="#business-insight-the-optimization-peak" id="toc-business-insight-the-optimization-peak" class="nav-link" data-scroll-target="#business-insight-the-optimization-peak">Business Insight: The Optimization Peak</a></li>
+  </ul></li>
+  <li><a href="#key-risk-drivers-interpretation" id="toc-key-risk-drivers-interpretation" class="nav-link" data-scroll-target="#key-risk-drivers-interpretation">5. Key Risk Drivers (Interpretation)</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Credit Risk Optimization Engine</h1>
+<div class="quarto-title-block"><div><h1 class="title">Optimizing Credit Risk: A Profit-First Approach</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
   <div class="quarto-categories">
     <div class="quarto-category">Machine Learning</div>
     <div class="quarto-category">Finance</div>
+    <div class="quarto-category">Risk Modeling</div>
     <div class="quarto-category">Python</div>
   </div>
   </div>
 
-<div>
-  <div class="description">
-    Increasing loan portfolio profitability by 40% using Machine Learning algorithms (XGBoost, Random Forest &amp; Logistic Regression).
-  </div>
-</div>
 
 
 <div class="quarto-title-meta">
@@ -140,6 +200,12 @@ ul.task-list li input[type="checkbox"] {
           </div>
   </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">January 22, 2026</p>
+    </div>
+  </div>
   
     
   </div>
@@ -149,53 +215,138 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="the-challenge" class="level1">
-<h1>The Challenge</h1>
-<p>Standard credit risk models optimize for accuracy (F1-score), treating a $500 default the same as a $50,000 default. In finance, this is a mistake. <strong>Accuracy does not pay the bills; Profit does.</strong></p>
-</section>
-<section id="the-solution" class="level1">
-<h1>The Solution</h1>
-<p>I built a custom “Profit-Centric” optimization engine that:</p>
-<ol type="1">
-<li><strong>Re-engineers the Target:</strong> Shifts focus from “Did they default?” to “What is the Expected Loss?”</li>
-<li><strong>Simulates P&amp;L:</strong> Calculates the “Efficient Frontier” of approval rates.</li>
-<li><strong>Optimizes Decisioning:</strong> Recommends a cutoff that maximizes Net Portfolio Profit.</li>
-</ol>
-<div class="callout callout-style-default callout-note no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Key Result
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>The model identified <strong>$1.26M in uncaptured value</strong> and projected a <strong>40% ROI lift</strong> by rejecting the riskiest 17.3% of applicants.</p>
-</div>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="LogReg-StrategyCurve.png" class="img-fluid figure-img"></p>
-<figcaption>The Efficiency Frontier: Finding the optimal approval rate</figcaption>
-</figure>
-</div>
-<p><em>Figure 1: By shifting the approval threshold from 100% to 82.7%, we avoid the “tail risk” (massive losses) while retaining the profitable core.</em></p>
-</section>
-<section id="technical-architecture" class="level1">
-<h1>Technical Architecture</h1>
-<p>This was not just a notebook experiment. I built a modular Python package to handle the pipeline:</p>
+<section id="executive-summary" class="level1">
+<h1>Executive Summary</h1>
+<p>In consumer lending, accuracy is a misleading metric. A model that blindly predicts “No Default” can achieve 85% accuracy but bankrupt a lender by missing the few massive defaults.</p>
+<p>This project re-engineers the credit scoring process by shifting the optimization objective from <strong>Statistical Accuracy (F1-Score)</strong> to <strong>Economic Profit</strong>.</p>
+<p>By developing a modular classification engine and applying a custom profit-maximization threshold, this strategy achieved:</p>
 <ul>
-<li><strong>Pipelines:</strong> Custom <code>scikit-learn</code> transformers to prevent data leakage.</li>
-<li><strong>Feature Engineering:</strong> Derived financial metrics (Principal, Installment-to-Income) using annuity formulas.</li>
-<li><strong>Explainability:</strong> Used SHAP values to prove that FICO and Inquiry Velocity are the primary risk drivers.</li>
+<li><strong>Financial Impact:</strong> Projected portfolio value of <strong>$1.26M</strong>, a <strong>~40% ROI lift</strong> over the baseline.</li>
+<li><strong>Risk Policy:</strong> Identified an optimal cutoff rejecting the riskiest <strong>17.3%</strong> of applicants.</li>
+<li><strong>Model Performance:</strong> Achieved a <strong>0.685 ROC-AUC</strong> using a defensible, regulator-friendly Logistic Regression model.</li>
+</ul>
+<hr>
+</section>
+<section id="the-business-problem" class="level1">
+<h1>1. The Business Problem</h1>
+<section id="asymmetry-of-errors" class="level3">
+<h3 class="anchored" data-anchor-id="asymmetry-of-errors">Asymmetry of Errors</h3>
+<p>In credit risk, confusion matrix errors are not created equal:</p>
+<ul>
+<li><strong>False Positive (Type I Error):</strong> We reject a good applicant. <em>Cost = Opportunity Cost of Interest.</em></li>
+<li><strong>False Negative (Type II Error):</strong> We approve a defaulter. <em>Cost = Loss of Principal.</em></li>
+</ul>
+<p>Since the Principal is significantly larger than the Interest, avoiding False Negatives is mathematically more critical than avoiding False Positives. Standard “out-of-the-box” machine learning models often fail to capture this asymmetry.</p>
+</section>
+<section id="the-objective" class="level3">
+<h3 class="anchored" data-anchor-id="the-objective">The Objective</h3>
+<p>Build a system that answers: <strong>“What is the exact probability threshold that maximizes Net Portfolio Profit?”</strong></p>
+<hr>
+</section>
+</section>
+<section id="system-architecture" class="level1">
+<h1>2. System Architecture</h1>
+<p>To ensure reproducibility and prevent data leakage, I moved beyond ad-hoc notebooks to a production-grade modular architecture.</p>
+<section id="directory-structure" class="level3">
+<h3 class="anchored" data-anchor-id="directory-structure">Directory Structure</h3>
+<p>The project is organized as a Python package (<code>src</code>), separating business logic from training pipelines.</p>
+<pre class="text"><code>├── src/
+│   ├── data_pipeline.py  # Custom Transformers (Financial Engineering)
+│   ├── training.py       # Cross-Validation &amp; Hyperparameter Tuning
+│   ├── evaluation.py     # Profit &amp; Strategy Curve Logic
+│   └── config.py         # Centralized Assumptions
+├── notebooks/            # Narrative Analysis
+└── README.md
+
+### Feature Engineering Pipeline
+A critical component was the FinancialFeatureEngineer transformer, which derives economic variables before the model sees the data. This calculates the Present Value (PV) of the loan using standard amortization formulas.
+
+```python
+# src/data_pipeline.py Snippet
+
+def engineer_financial_features(df):
+    """
+    Derives the Principal (PV) using the Annuity Formula.
+    PV = Installment * (1 - (1+r)^-n) / r
+    """
+    monthly_rate = df['int.rate'] / 12
+    term = 36 # Assumed 36-month term
+    
+    # Vectorized Calculation of Risk Exposure
+    df['principal'] = df['installment'] * (
+        1 - (1 + monthly_rate)**(-term)
+    ) / monthly_rate
+    
+    return df</code></pre>
+<hr>
+</section>
+</section>
+<section id="modeling-strategy" class="level1">
+<h1>3. Modeling Strategy</h1>
+<section id="model-selection" class="level3">
+<h3 class="anchored" data-anchor-id="model-selection">Model Selection</h3>
+<p>I benchmarked three architectures:</p>
+<ol type="1">
+<li>Logistic Regression: Linear, highly interpretable (industry standard for compliance).</li>
+<li>Random Forest: Handles non-linearities but prone to overfitting on noise.</li>
+<li>XGBoost: Gradient boosting for maximizing weak signals.</li>
+</ol>
+<p><strong>Winner: Logistic Regression</strong>. Surprisingly, the simpler linear model outperformed the complex tree ensembles on the test set (AUC 0.685 vs 0.67 &amp; 0.77 respectively). This suggests the signal in this specific dataset is largely linear (e.g., FICO scores linearly correlate with risk), and the complex models were overfitting the noise.</p>
+</section>
+<section id="the-strategy-curve" class="level3">
+<h3 class="anchored" data-anchor-id="the-strategy-curve">The “Strategy Curve”</h3>
+<p>Instead of accepting the default decision threshold of 0.5, I implemented a custom evaluation function to plot Profit vs.&nbsp;Approval Rate.</p>
+<ul>
+<li>X-Axis: Percentage of loans approved (sorted by safety).</li>
+<li>Y-Axis: Total Portfolio Profit.</li>
+</ul>
+<p>This visualization allows stakeholders to visually “pick” their risk appetite.</p>
+<hr>
+</section>
+</section>
+<section id="results-analysis" class="level1">
+<h1>4. Results &amp; Analysis</h1>
+<section id="performance-metrics" class="level3">
+<h3 class="anchored" data-anchor-id="performance-metrics">Performance Metrics</h3>
+<p>The final model demonstrated robust separation power between “Good” and “Bad” loans.</p>
+<ul>
+<li>ROC-AUC: 0.685</li>
+<li>Precision (Class 0 - Paid): 0.86</li>
+<li>Recall (Class 1 - Default): Tunable via threshold.</li>
 </ul>
 </section>
-<section id="view-the-code" class="level1">
-<h1>View the Code</h1>
-<p>This project is structured as a production-ready Python package.</p>
-<p><a href="https://github.com/Condeg0/Loan-Default-Prediction" class="btn btn-primary" role="button"><i class="bi bi-github"></i> View on GitHub</a></p>
+<section id="business-insight-the-optimization-peak" class="level3">
+<h3 class="anchored" data-anchor-id="business-insight-the-optimization-peak">Business Insight: The Optimization Peak</h3>
+<p>The analysis revealed a convex profit curve.</p>
+<ol type="1">
+<li><strong>At 100% Approval:</strong> The portfolio absorbs all toxic assets, significantly reducing net profit.</li>
+<li><strong>At 82.7% Approval (The Peak):</strong> By cutting the bottom 17.3% of risky applicants, we maximize profit at $1,264,043.</li>
+<li><strong>Below 80% Approval:</strong> We start rejecting too many good customers, and the opportunity cost (lost interest) begins to outweigh the savings from avoided defaults.</li>
+</ol>
+<p>::: <strong>Managerial Conclusion:</strong> The optimal policy is strict but not draconian. We should approve the safest ~83% of applicants. This creates a projected 40% increase in profitability compared to a naive strategy. ::: —</p>
+</section>
+</section>
+<section id="key-risk-drivers-interpretation" class="level1">
+<h1>5. Key Risk Drivers (Interpretation)</h1>
+<p>Using coefficient analysis (and SHAP values for tree benchmarks), the primary drivers of default were:</p>
+<ol type="1">
+<li><strong>FICO Score:</strong> The single strongest predictor. Lower scores exponentially increase default odds.</li>
+<li><strong>Inquiries (Last 6 Months):</strong> A high velocity of recent credit applications is a strong distress signal.</li>
+<li><strong>Interest Rate:</strong> The market is efficient—loans priced with higher rates did default more often, confirming that the original underwriters correctly identified risk (though they often underpriced it).</li>
+</ol>
+<hr>
+</section>
+<section id="conclusion" class="level1">
+<h1>Conclusion</h1>
+<p>This project demonstrates that Data Science is not just about prediction; it is about decision-making.</p>
+<p>By translating a classification problem into a financial optimization problem, I delivered a model that speaks the language of the business: Profit, ROI, and Risk Exposure.</p>
+<ul>
+<li>Code Repository: <a href="https://github.com/Condeg0/Loan-Default-Prediction" class="btn btn-primary" role="button">{{&lt; fa brands github &gt;}} View on GitHub</a></li>
+<li>Tech Stack: Python, Scikit-Learn, Pandas, Matplotlib.</li>
+</ul>
 
+
+<!-- -->
 
 </section>
 
@@ -270,6 +421,57 @@ ul.task-list li input[type="checkbox"] {
         container: window.document.getElementById('quarto-embedded-source-code-modal')
       });
       clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
@@ -599,7 +801,146 @@ ul.task-list li input[type="checkbox"] {
       }
     }
   });
-  </script>
+  </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Optimizing Credit Risk: A Profit-First Approach"</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Rafael Condé Gomes"</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> "2026-01-22"</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span><span class="co"> [Machine Learning, Finance, Risk Modeling, Python]</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">    toc: true</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co">    code-fold: true</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="fu"># Executive Summary</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>In consumer lending, accuracy is a misleading metric. A model that blindly predicts "No Default" can achieve 85% accuracy but bankrupt a lender by missing the few massive defaults.</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>This project re-engineers the credit scoring process by shifting the optimization objective from **Statistical Accuracy (F1-Score)** to **Economic Profit**.</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>By developing a modular classification engine and applying a custom profit-maximization threshold, this strategy achieved:</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Financial Impact:** Projected portfolio value of **$1.26M**, a **~40% ROI lift** over the baseline.</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Risk Policy:** Identified an optimal cutoff rejecting the riskiest **17.3%** of applicants.</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Model Performance:** Achieved a **0.685 ROC-AUC** using a defensible, regulator-friendly Logistic Regression model.</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="fu"># 1. The Business Problem</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="fu">### Asymmetry of Errors</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>In credit risk, confusion matrix errors are not created equal:</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**False Positive (Type I Error):** We reject a good applicant. *Cost = Opportunity Cost of Interest.*</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**False Negative (Type II Error):** We approve a defaulter. *Cost = Loss of Principal.*</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>Since the Principal is significantly larger than the Interest, avoiding False Negatives is mathematically more critical than avoiding False Positives. Standard "out-of-the-box" machine learning models often fail to capture this asymmetry.</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a><span class="fu">### The Objective</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>Build a system that answers: **"What is the exact probability threshold that maximizes Net Portfolio Profit?"**</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a><span class="fu"># 2. System Architecture</span></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>To ensure reproducibility and prevent data leakage, I moved beyond ad-hoc notebooks to a production-grade modular architecture.</span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a><span class="fu">### Directory Structure</span></span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>The project is organized as a Python package (<span class="in">`src`</span>), separating business logic from training pipelines.</span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a><span class="in">```text</span></span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a><span class="in">├── src/</span></span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a><span class="in">│   ├── data_pipeline.py  # Custom Transformers (Financial Engineering)</span></span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a><span class="in">│   ├── training.py       # Cross-Validation &amp; Hyperparameter Tuning</span></span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a><span class="in">│   ├── evaluation.py     # Profit &amp; Strategy Curve Logic</span></span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a><span class="in">│   └── config.py         # Centralized Assumptions</span></span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a><span class="in">├── notebooks/            # Narrative Analysis</span></span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a><span class="in">└── README.md</span></span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a><span class="in">### Feature Engineering Pipeline</span></span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a><span class="in">A critical component was the FinancialFeatureEngineer transformer, which derives economic variables before the model sees the data. This calculates the Present Value (PV) of the loan using standard amortization formulas.</span></span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a><span class="in">```python</span></span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a><span class="in"># src/data_pipeline.py Snippet</span></span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a><span class="in">def engineer_financial_features(df):</span></span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a><span class="in">    """</span></span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a><span class="in">    Derives the Principal (PV) using the Annuity Formula.</span></span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a><span class="in">    PV = Installment * (1 - (1+r)^-n) / r</span></span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a><span class="in">    """</span></span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a><span class="in">    monthly_rate = df['int.rate'] / 12</span></span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a><span class="in">    term = 36 # Assumed 36-month term</span></span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a><span class="in">    # Vectorized Calculation of Risk Exposure</span></span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a><span class="in">    df['principal'] = df['installment'] * (</span></span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a><span class="in">        1 - (1 + monthly_rate)**(-term)</span></span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a><span class="in">    ) / monthly_rate</span></span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a><span class="in">    return df</span></span>
+<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a><span class="fu"># 3. Modeling Strategy</span></span>
+<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a><span class="fu">### Model Selection</span></span>
+<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a>I benchmarked three architectures:</span>
+<span id="cb2-86"><a href="#cb2-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-87"><a href="#cb2-87" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Logistic Regression: Linear, highly interpretable (industry standard for compliance).</span>
+<span id="cb2-88"><a href="#cb2-88" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Random Forest: Handles non-linearities but prone to overfitting on noise.</span>
+<span id="cb2-89"><a href="#cb2-89" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>XGBoost: Gradient boosting for maximizing weak signals.</span>
+<span id="cb2-90"><a href="#cb2-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-91"><a href="#cb2-91" aria-hidden="true" tabindex="-1"></a>**Winner: Logistic Regression**. Surprisingly, the simpler linear model outperformed the complex tree ensembles on the test set (AUC 0.685 vs 0.67 &amp; 0.77 respectively). This suggests the signal in this specific dataset is largely linear (e.g., FICO scores linearly correlate with risk), and the complex models were overfitting the noise.</span>
+<span id="cb2-92"><a href="#cb2-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-93"><a href="#cb2-93" aria-hidden="true" tabindex="-1"></a><span class="fu">### The "Strategy Curve"</span></span>
+<span id="cb2-94"><a href="#cb2-94" aria-hidden="true" tabindex="-1"></a>Instead of accepting the default decision threshold of 0.5, I implemented a custom evaluation function to plot Profit vs. Approval Rate.</span>
+<span id="cb2-95"><a href="#cb2-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-96"><a href="#cb2-96" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>X-Axis: Percentage of loans approved (sorted by safety).</span>
+<span id="cb2-97"><a href="#cb2-97" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Y-Axis: Total Portfolio Profit.</span>
+<span id="cb2-98"><a href="#cb2-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-99"><a href="#cb2-99" aria-hidden="true" tabindex="-1"></a>This visualization allows stakeholders to visually "pick" their risk appetite.</span>
+<span id="cb2-100"><a href="#cb2-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-101"><a href="#cb2-101" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb2-102"><a href="#cb2-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-103"><a href="#cb2-103" aria-hidden="true" tabindex="-1"></a><span class="fu"># 4. Results &amp; Analysis</span></span>
+<span id="cb2-104"><a href="#cb2-104" aria-hidden="true" tabindex="-1"></a><span class="fu">### Performance Metrics</span></span>
+<span id="cb2-105"><a href="#cb2-105" aria-hidden="true" tabindex="-1"></a>The final model demonstrated robust separation power between "Good" and "Bad" loans.</span>
+<span id="cb2-106"><a href="#cb2-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-107"><a href="#cb2-107" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>ROC-AUC: 0.685</span>
+<span id="cb2-108"><a href="#cb2-108" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Precision (Class 0 - Paid): 0.86</span>
+<span id="cb2-109"><a href="#cb2-109" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Recall (Class 1 - Default): Tunable via threshold.</span>
+<span id="cb2-110"><a href="#cb2-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-111"><a href="#cb2-111" aria-hidden="true" tabindex="-1"></a><span class="fu">### Business Insight: The Optimization Peak</span></span>
+<span id="cb2-112"><a href="#cb2-112" aria-hidden="true" tabindex="-1"></a>The analysis revealed a convex profit curve.</span>
+<span id="cb2-113"><a href="#cb2-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-114"><a href="#cb2-114" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**At 100% Approval:** The portfolio absorbs all toxic assets, significantly reducing net profit.</span>
+<span id="cb2-115"><a href="#cb2-115" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**At 82.7% Approval (The Peak):** By cutting the bottom 17.3% of risky applicants, we maximize profit at $1,264,043.</span>
+<span id="cb2-116"><a href="#cb2-116" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>**Below 80% Approval:** We start rejecting too many good customers, and the opportunity cost (lost interest) begins to outweigh the savings from avoided defaults.</span>
+<span id="cb2-117"><a href="#cb2-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-118"><a href="#cb2-118" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb2-119"><a href="#cb2-119" aria-hidden="true" tabindex="-1"></a>**Managerial Conclusion:** The optimal policy is strict but not draconian. We should approve the safest ~83% of applicants. This creates a projected 40% increase in profitability compared to a naive strategy.</span>
+<span id="cb2-120"><a href="#cb2-120" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb2-121"><a href="#cb2-121" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb2-122"><a href="#cb2-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-123"><a href="#cb2-123" aria-hidden="true" tabindex="-1"></a><span class="fu"># 5. Key Risk Drivers (Interpretation)</span></span>
+<span id="cb2-124"><a href="#cb2-124" aria-hidden="true" tabindex="-1"></a>Using coefficient analysis (and SHAP values for tree benchmarks), the primary drivers of default were:</span>
+<span id="cb2-125"><a href="#cb2-125" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-126"><a href="#cb2-126" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**FICO Score:** The single strongest predictor. Lower scores exponentially increase default odds.</span>
+<span id="cb2-127"><a href="#cb2-127" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**Inquiries (Last 6 Months):** A high velocity of recent credit applications is a strong distress signal.</span>
+<span id="cb2-128"><a href="#cb2-128" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>**Interest Rate:** The market is efficient—loans priced with higher rates did default more often, confirming that the original underwriters correctly identified risk (though they often underpriced it).</span>
+<span id="cb2-129"><a href="#cb2-129" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-130"><a href="#cb2-130" aria-hidden="true" tabindex="-1"></a>--- </span>
+<span id="cb2-131"><a href="#cb2-131" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-132"><a href="#cb2-132" aria-hidden="true" tabindex="-1"></a><span class="fu"># Conclusion</span></span>
+<span id="cb2-133"><a href="#cb2-133" aria-hidden="true" tabindex="-1"></a>This project demonstrates that Data Science is not just about prediction; it is about decision-making.</span>
+<span id="cb2-134"><a href="#cb2-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-135"><a href="#cb2-135" aria-hidden="true" tabindex="-1"></a>By translating a classification problem into a financial optimization problem, I delivered a model that speaks the language of the business: Profit, ROI, and Risk Exposure.</span>
+<span id="cb2-136"><a href="#cb2-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-137"><a href="#cb2-137" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Code Repository: <span class="co">[</span><span class="ot">{{&lt; fa brands github &gt;}} View on GitHub</span><span class="co">](https://github.com/Condeg0/Loan-Default-Prediction)</span>{.btn .btn-primary role="button"}</span>
+<span id="cb2-138"><a href="#cb2-138" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Tech Stack: Python, Scikit-Learn, Pandas, Matplotlib.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+</div></div></div></div></div>
 </div> <!-- /content -->
 
 
