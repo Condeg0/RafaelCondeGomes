@@ -1,37 +1,138 @@
 ---
-title: "Credit Risk Optimization Engine"
-description: "Increasing loan portfolio profitability by 40% using Machine Learning algorithms (XGBoost, Random Forest & Logistic Regression)."
+title: "Optimizing Credit Risk: A Profit-First Approach"
 author: "Rafael Condé Gomes"
-categories: [Machine Learning, Finance, Python]
+date: "2026-01-22"
+categories: [Machine Learning, Finance, Risk Modeling, Python]
+format:
+  html:
+    toc: true
+    code-fold: true
+    code-tools: true
 ---
 
-# The Challenge
-Standard credit risk models optimize for accuracy (F1-score), treating a $500 default the same as a $50,000 default. In finance, this is a mistake. **Accuracy does not pay the bills; Profit does.**
+# Executive Summary
 
-# The Solution
-I built a custom "Profit-Centric" optimization engine that:
+In consumer lending, accuracy is a misleading metric. A model that blindly predicts "No Default" can achieve 85% accuracy but bankrupt a lender by missing the few massive defaults.
 
-1.  **Re-engineers the Target:** Shifts focus from "Did they default?" to "What is the Expected Loss?"
-2.  **Simulates P&L:** Calculates the "Efficient Frontier" of approval rates.
-3.  **Optimizes Decisioning:** Recommends a cutoff that maximizes Net Portfolio Profit.
+This project re-engineers the credit scoring process by shifting the optimization objective from **Statistical Accuracy (F1-Score)** to **Economic Profit**.
 
-::: {.callout-note icon=false}
-## Key Result
-The model identified **$1.26M in uncaptured value** and projected a **40% ROI lift** by rejecting the riskiest 17.3% of applicants.
+By developing a modular classification engine and applying a custom profit-maximization threshold, this strategy achieved:
+
+* **Financial Impact:** Projected portfolio value of **$1.26M**, a **~40% ROI lift** over the baseline.
+* **Risk Policy:** Identified an optimal cutoff rejecting the riskiest **17.3%** of applicants.
+* **Model Performance:** Achieved a **0.685 ROC-AUC** using a defensible, regulator-friendly Logistic Regression model.
+
+---
+
+# 1. The Business Problem
+
+### Asymmetry of Errors
+In credit risk, confusion matrix errors are not created equal:
+
+* **False Positive (Type I Error):** We reject a good applicant. *Cost = Opportunity Cost of Interest.*
+* **False Negative (Type II Error):** We approve a defaulter. *Cost = Loss of Principal.*
+
+Since the Principal is significantly larger than the Interest, avoiding False Negatives is mathematically more critical than avoiding False Positives. Standard "out-of-the-box" machine learning models often fail to capture this asymmetry.
+
+### The Objective
+Build a system that answers: **"What is the exact probability threshold that maximizes Net Portfolio Profit?"**
+
+---
+
+# 2. System Architecture
+
+To ensure reproducibility and prevent data leakage, I moved beyond ad-hoc notebooks to a production-grade modular architecture.
+
+### Directory Structure
+The project is organized as a Python package (`src`), separating business logic from training pipelines.
+
+```text
+├── src/
+│   ├── data_pipeline.py  # Custom Transformers (Financial Engineering)
+│   ├── training.py       # Cross-Validation & Hyperparameter Tuning
+│   ├── evaluation.py     # Profit & Strategy Curve Logic
+│   └── config.py         # Centralized Assumptions
+├── notebooks/            # Narrative Analysis
+└── README.md
+
+### Feature Engineering Pipeline
+A critical component was the FinancialFeatureEngineer transformer, which derives economic variables before the model sees the data. This calculates the Present Value (PV) of the loan using standard amortization formulas.
+
+```python
+# src/data_pipeline.py Snippet
+
+def engineer_financial_features(df):
+    """
+    Derives the Principal (PV) using the Annuity Formula.
+    PV = Installment * (1 - (1+r)^-n) / r
+    """
+    monthly_rate = df['int.rate'] / 12
+    term = 36 # Assumed 36-month term
+    
+    # Vectorized Calculation of Risk Exposure
+    df['principal'] = df['installment'] * (
+        1 - (1 + monthly_rate)**(-term)
+    ) / monthly_rate
+    
+    return df
+```
+
+---
+
+# 3. Modeling Strategy
+
+### Model Selection
+I benchmarked three architectures:
+
+1. Logistic Regression: Linear, highly interpretable (industry standard for compliance).
+2. Random Forest: Handles non-linearities but prone to overfitting on noise.
+3. XGBoost: Gradient boosting for maximizing weak signals.
+
+**Winner: Logistic Regression**. Surprisingly, the simpler linear model outperformed the complex tree ensembles on the test set (AUC 0.685 vs 0.67 & 0.77 respectively). This suggests the signal in this specific dataset is largely linear (e.g., FICO scores linearly correlate with risk), and the complex models were overfitting the noise.
+
+### The "Strategy Curve"
+Instead of accepting the default decision threshold of 0.5, I implemented a custom evaluation function to plot Profit vs. Approval Rate.
+
+* X-Axis: Percentage of loans approved (sorted by safety).
+* Y-Axis: Total Portfolio Profit.
+
+This visualization allows stakeholders to visually "pick" their risk appetite.
+
+---
+
+# 4. Results & Analysis
+### Performance Metrics
+The final model demonstrated robust separation power between "Good" and "Bad" loans.
+
+* ROC-AUC: 0.685
+* Precision (Class 0 - Paid): 0.86
+* Recall (Class 1 - Default): Tunable via threshold.
+
+### Business Insight: The Optimization Peak
+The analysis revealed a convex profit curve.
+
+1. **At 100% Approval:** The portfolio absorbs all toxic assets, significantly reducing net profit.
+2. **At 82.7% Approval (The Peak):** By cutting the bottom 17.3% of risky applicants, we maximize profit at $1,264,043.
+3. **Below 80% Approval:** We start rejecting too many good customers, and the opportunity cost (lost interest) begins to outweigh the savings from avoided defaults.
+
 :::
+**Managerial Conclusion:** The optimal policy is strict but not draconian. We should approve the safest ~83% of applicants. This creates a projected 40% increase in profitability compared to a naive strategy.
+:::
+---
 
-![The Efficiency Frontier: Finding the optimal approval rate](LogReg-StrategyCurve.png)
+# 5. Key Risk Drivers (Interpretation)
+Using coefficient analysis (and SHAP values for tree benchmarks), the primary drivers of default were:
 
-*Figure 1: By shifting the approval threshold from 100% to 82.7%, we avoid the "tail risk" (massive losses) while retaining the profitable core.*
+1. **FICO Score:** The single strongest predictor. Lower scores exponentially increase default odds.
+2. **Inquiries (Last 6 Months):** A high velocity of recent credit applications is a strong distress signal.
+3. **Interest Rate:** The market is efficient—loans priced with higher rates did default more often, confirming that the original underwriters correctly identified risk (though they often underpriced it).
 
-# Technical Architecture
-This was not just a notebook experiment. I built a modular Python package to handle the pipeline:
+--- 
 
-* **Pipelines:** Custom `scikit-learn` transformers to prevent data leakage.
-* **Feature Engineering:** Derived financial metrics (Principal, Installment-to-Income) using annuity formulas.
-* **Explainability:** Used SHAP values to prove that FICO and Inquiry Velocity are the primary risk drivers.
+# Conclusion
+This project demonstrates that Data Science is not just about prediction; it is about decision-making.
 
-# View the Code
-This project is structured as a production-ready Python package.
+By translating a classification problem into a financial optimization problem, I delivered a model that speaks the language of the business: Profit, ROI, and Risk Exposure.
 
-[<i class="bi bi-github"></i> View on GitHub](https://github.com/Condeg0/Loan-Default-Prediction){.btn .btn-primary role="button"}
+* Code Repository: [{{< fa brands github >}} View on GitHub](https://github.com/Condeg0/Loan-Default-Prediction){.btn .btn-primary role="button"}
+* Tech Stack: Python, Scikit-Learn, Pandas, Matplotlib.
