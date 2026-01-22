@@ -115,7 +115,7 @@ The analysis revealed a convex profit curve.
 2. **At 82.7% Approval (The Peak):** By cutting the bottom 17.3% of risky applicants, we maximize profit at $1,264,043.
 3. **Below 80% Approval:** We start rejecting too many good customers, and the opportunity cost (lost interest) begins to outweigh the savings from avoided defaults.
 
-:::
+::: {.callout-note appearance="simple" icon=false}
 **Managerial Conclusion:** The optimal policy is strict but not draconian. We should approve the safest ~83% of applicants. This creates a projected 40% increase in profitability compared to a naive strategy.
 :::
 
