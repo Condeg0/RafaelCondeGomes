@@ -135,5 +135,5 @@ This project demonstrates that Data Science is not just about prediction; it is 
 
 By translating a classification problem into a financial optimization problem, I delivered a model that speaks the language of the business: Profit, ROI, and Risk Exposure.
 
-* Code Repository: [{{< fa brands github >}} View on GitHub](https://github.com/Condeg0/Loan-Default-Prediction){.btn .btn-primary role="button"}
+* Code Repository: View on GitHub](https://github.com/Condeg0/Loan-Default-Prediction){.btn .btn-primary role="button"}
 * Tech Stack: Python, Scikit-Learn, Pandas, Matplotlib.
