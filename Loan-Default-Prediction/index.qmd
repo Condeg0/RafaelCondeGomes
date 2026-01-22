@@ -4,3 +4,21 @@ description: "Increasing loan portfolio profitability by 40% using Machine Learn
 author: "Rafael Condé Gomes"
 categories: [Machine Learning, Finance, Python]
 ---
+
+# The Challenge
+Standard credit risk models optimize for accuracy (F1-score), treating a $500 default the same as a $50,000 default. In finance, this is a mistake. **Accuracy does not pay the bills; Profit does.**
+
+# The Solution
+I built a custom "Profit-Centric" optimization engine that:
+1.  **Re-engineers the Target:** Shifts focus from "Did they default?" to "What is the Expected Loss?"
+2.  **Simulates P&L:** Calculates the "Efficient Frontier" of approval rates.
+3.  **Optimizes Decisioning:** Recommends a cutoff that maximizes Net Portfolio Profit.
+
+::: {.callout-note icon=false}
+## Key Result
+The model identified **$1.26M in uncaptured value** and projected a **40% ROI lift** by rejecting the riskiest 17.3% of applicants.
+:::
+
+![The Efficiency Frontier: Finding the optimal approval rate](LogReg-StrategyCurve.png)
+
+*Figure 1: By shifting the approval threshold from 100% to 82.7%, we avoid the "tail risk" (massive losses) while retaining the profitable core.*
