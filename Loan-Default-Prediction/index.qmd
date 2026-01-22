@@ -88,7 +88,7 @@ I benchmarked three architectures:
 2. Random Forest: Handles non-linearities but prone to overfitting on noise.
 3. XGBoost: Gradient boosting for maximizing weak signals.
 
-**Winner: Logistic Regression**. Surprisingly, the simpler linear model outperformed the complex tree ensembles on the test set (AUC 0.685 vs 0.67 & 0.77 respectively). This suggests the signal in this specific dataset is largely linear (e.g., FICO scores linearly correlate with risk), and the complex models were overfitting the noise.
+**Winner: Logistic Regression**. Surprisingly, the simpler linear model outperformed the complex tree ensembles on the test set (AUC 0.685 vs 0.67 & 0.66 respectively). This suggests the signal in this specific dataset is largely linear (e.g., FICO scores linearly correlate with risk), and the complex models were overfitting the noise.
 
 ### The "Strategy Curve"
 Instead of accepting the default decision threshold of 0.5, I implemented a custom evaluation function to plot Profit vs. Approval Rate.
