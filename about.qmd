@@ -1,0 +1,32 @@
+---
+title: "Rafael Condé Gomes"
+image: artifacts/IMG_6178.JPG
+about:
+  template: trestles
+  image-shape: round
+  links:
+    - icon: linkedin
+      text: LinkedIn
+      href: https://www.linkedin.com/in/rafael-conde-878284250/
+    - icon: github
+      text: Github
+      href: https://github.com/condeg0
+    - icon: envelope
+      text: Email
+      href: mailto:conde31@usf.edu
+---
+
+## Econometrics & Data Science
+
+I am a double major in **Econometrics & Quantitative Economics** and **Information Science (concentration in Data Science & Analytics)** at the University of South Florida (Class of 2026), focusing on data science & machine learning.
+
+### Current Roles
+- **Technology Director** | Hexa Consulting
+- **Research Associate** | USF Student Investment Club (Macroeconomics)
+
+### Core Competencies
+- **Data Science:** Python, R, Statistical Inference.
+
+::: {.callout-note appearance="minimal"}
+**Looking for my code?** Check the [Projects](./projects.qmd) tab or my [GitHub](https://github.com/condeg0).
+:::
