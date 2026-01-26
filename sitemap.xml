@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://condeg0.github.io/RafaelCondeGomes/index.html</loc>
-    <lastmod>2026-01-26T23:39:41.744Z</lastmod>
+    <loc>https://condeg0.github.io/RafaelCondeGomes/about.html</loc>
+    <lastmod>2026-01-26T23:53:40.587Z</lastmod>
   </url>
   <url>
     <loc>https://condeg0.github.io/RafaelCondeGomes/Loan-Default-Prediction/index.html</loc>
-    <lastmod>2026-01-26T23:39:41.744Z</lastmod>
+    <lastmod>2026-01-26T23:53:40.587Z</lastmod>
+  </url>
+  <url>
+    <loc>https://condeg0.github.io/RafaelCondeGomes/index.html</loc>
+    <lastmod>2026-01-26T23:53:40.609Z</lastmod>
   </url>
 </urlset>
