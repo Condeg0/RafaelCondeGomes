@@ -7,7 +7,7 @@ about:
   links:
     - icon: file-code
       text: Portfolio
-      href: projects.qmd
+      href: projects.html
     - icon: linkedin
       text: Linkedin
       href: https://www.linkedin.com/in/rafael-conde-878284250/
