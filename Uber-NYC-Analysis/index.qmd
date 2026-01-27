@@ -26,35 +26,36 @@ The first step in allocation strategy is defining the operational boundary.
 ![](NYC Uber Rise Map.png)
 
 **Analysis:**
+
 The visualization above plots raw latitude/longitude pickup data.
 * **The "Manhattan Grid":** 90% of liquidity is concentrated in Manhattan (below 59th St) and Downtown Brooklyn.
 * **Airport Corridors:** Distinct clusters appear at JFK and LaGuardia, representing high-value, long-distance fares that require separate queuing logic compared to the short-hop Manhattan traffic.
 
 ---
 
-## 2. Circadian Rhythms & Seasonality
+## 2. Demand Seasonality
 **Professional Metric:** *Temporal Volume Distribution*
-**(Code Title: "Trips by Hour and Month")**
 
-Demand is not random; it follows a strict human schedule. By stacking hourly volume across six months, we isolate the "invariant" demand curve.
+Demand is not random; it follows a "human" schedule. By stacking hourly volume across the six month period, we isolate the "invariant" demand curve.
 
-![](Trips by Base and Month.png)
+![](Trips by Hours and Month.png)
 
 **Analysis:**
-* **The 5:00 PM Spike:** The data reveals a consistent surge beginning at 16:00 and peaking at 17:00-18:00 across all months (April through September).
+
+* **The 17:00 Spike:** The data reveals a consistent surge beginning at 16:00 and peaking at 17:00-18:00 across all months (April through September).
 * **Operational Implication:** Fleet supply must be "pre-loaded" into the Manhattan Grid by 16:30. Drivers logging on after 17:00 are reacting to demand rather than capturing the initial surge.
 
 ---
 
 ## 3. Peak-Load Operational Matrix
 **Professional Metric:** *Day-Hour Heatmap*
-**(Code Title: "Heat Map by Hour and Day")**
 
 Aggregates lie; granular data tells the truth. This heatmap exposes the specific windows of highest opportunity cost.
 
 ![](Heat Map by Hours and Day.png)
 
 **Analysis:**
+
 * **The "Work Hard, Play Hard" Split:**
     * **Weekdays:** Demand is strictly commuter-driven (07:00–09:00 and 17:00–19:00).
     * **Weekends:** The pattern inverts. Friday and Saturday operational windows extend deep into the night (22:00–02:00), requiring shift incentives for late-night drivers.
@@ -64,13 +65,13 @@ Aggregates lie; granular data tells the truth. This heatmap exposes the specific
 
 ## 4. Fleet Scaling & Market Share
 **Professional Metric:** *Base Performance Growth*
-**(Code Title: "Trips by Base and Month")**
 
 Demand analysis is useless without supply analysis. We tracked the pickup volume by "Base" (Uber's internal fleet codes).
 
 ![](Trips by Base and Month.png)
 
 **Analysis:**
+
 * **The "B02617" Anomaly:** While most bases showed steady performance, Base **B02617** (teal bar) demonstrated explosive month-over-month growth, overtaking the incumbent Base B02598 by September.
 * **Business Insight:** This suggests a successful aggressive onboarding strategy or a shift in dispatch priority logic implemented in July/August.
 
