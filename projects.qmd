@@ -4,4 +4,3 @@ title: Projects
 
 Testing this
 
-[Loan Default Analysis](Loan-Default-Prediction/index.qmd)
