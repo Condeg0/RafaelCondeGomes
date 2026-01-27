@@ -46,7 +46,7 @@
     "href": "Uber-NYC-Analysis/index.html#technical-stack",
     "title": "NYC Fleet Allocation & Demand Analysis",
     "section": "Technical Stack",
-    "text": "Technical Stack\nThis analysis utilized the R statistical ecosystem for its superior handling of large-scale vector data.\n\nggplot2 & ggthemes: For layering multidimensional data (Time + Location + Volume).\nlubridate: For parsing 4.5M timestamps into actionable factor levels (Hour, Day, Month).\ndplyr: For high-performance aggregation and grouping.\n\n```r # Sample Code: Generating the Heatmap day_and_hour &lt;- data_2014 %&gt;% group_by(Day, Hour) %&gt;% dplyr::summarize(Total = n())\nggplot(data = day_and_hour, aes(Day, Hour, fill = Total)) + geom_tile(color = “white”) + ggtitle(“Heat Map by Hour and Day”)"
+    "text": "Technical Stack\nThis analysis utilized the R statistical ecosystem for its superior handling of large-scale vector data.\n\nggplot2 & ggthemes: For layering multidimensional data (Time + Location + Volume).\nlubridate: For parsing 4.5M timestamps into actionable factor levels (Hour, Day, Month).\ndplyr: For high-performance aggregation and grouping."
   },
   {
     "objectID": "about.html",

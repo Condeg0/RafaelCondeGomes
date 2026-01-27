@@ -226,8 +226,6 @@ ul.task-list li input[type="checkbox"] {
 <li><strong><code>lubridate</code>:</strong> For parsing 4.5M timestamps into actionable factor levels (Hour, Day, Month).</li>
 <li><strong><code>dplyr</code>:</strong> For high-performance aggregation and grouping.</li>
 </ul>
-<p>```r # Sample Code: Generating the Heatmap day_and_hour &lt;- data_2014 %&gt;% group_by(Day, Hour) %&gt;% dplyr::summarize(Total = n())</p>
-<p>ggplot(data = day_and_hour, aes(Day, Hour, fill = Total)) + geom_tile(color = “white”) + ggtitle(“Heat Map by Hour and Day”)</p>
 
 
 </section>
