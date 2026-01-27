@@ -14,9 +14,6 @@ about:
     - icon: github
       text: Github
       href: https://github.com/Condeg0
-    - icon: envelope
-      text: Email
-      email: mailto:conde31@usf.edu
 ---
 
 ## Data Scientist & Quantitative Analyst
