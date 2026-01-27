@@ -5,9 +5,6 @@ about:
   template: trestles
   image-shape: round
   links:
-    - icon: file-code
-      text: Portfolio
-      href: projects.qmd
     - icon: linkedin
       text: LinkedIn
       href: https://www.linkedin.com/in/YOUR-LINKEDIN-HANDLE
@@ -18,6 +15,26 @@ about:
       text: Email
       href: mailto:YOUR_EMAIL@usf.edu
 ---
+
+## Data Scientist & Quantitative Analyst
+
+I am a final-year double major in **Econometrics** and **Information Science (Data Science)** at the University of South Florida.
+
+**Valid decisions require solid evidence, yet they are rarely based on it.**
+
+My focus is bridging that gap. I combine **econometric rigor** with **computational data science** to transform ambiguity into actionable intelligence. My goal is to replace intuition with inference, helping organizations optimize efficiency and solve complex real-world problems with precision.
+
+### Professional Experience
+- **Technology Director** | Hexa Consulting
+- **Research Associate** | USF Student Investment Club (Macroeconomics)
+
+### Key Projects
+- **Credit Risk Optimization:** Developed a profit-maximizing threshold model for loan default prediction.
+- **Tail Hedging Strategy:** Quantitative analysis of convex strategies for portfolio protection.
+
+::: {.callout-note appearance="minimal"}
+**Portfolio & Code:** View my technical projects [here](./projects.qmd).
+:::
 
 ## Data Scientist & Quantitative Analyst
 
