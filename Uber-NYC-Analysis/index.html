@@ -116,14 +116,11 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#executive-summary" id="toc-executive-summary" class="nav-link active" data-scroll-target="#executive-summary">Executive Summary</a></li>
-  <li><a href="#temporal-demand-cycles" id="toc-temporal-demand-cycles" class="nav-link" data-scroll-target="#temporal-demand-cycles">1. Temporal Demand Cycles</a>
-  <ul class="collapse">
-  <li><a href="#hourly-drift" id="toc-hourly-drift" class="nav-link" data-scroll-target="#hourly-drift">Hourly Drift</a></li>
-  <li><a href="#the-thursday-phenomenon" id="toc-the-thursday-phenomenon" class="nav-link" data-scroll-target="#the-thursday-phenomenon">The “Thursday Phenomenon”</a></li>
-  </ul></li>
-  <li><a href="#heatmap-analysis" id="toc-heatmap-analysis" class="nav-link" data-scroll-target="#heatmap-analysis">2. Heatmap Analysis</a></li>
-  <li><a href="#geospatial-clustering" id="toc-geospatial-clustering" class="nav-link" data-scroll-target="#geospatial-clustering">3. Geospatial Clustering</a></li>
-  <li><a href="#technical-implementation" id="toc-technical-implementation" class="nav-link" data-scroll-target="#technical-implementation">Technical Implementation</a></li>
+  <li><a href="#geospatial-liquidity-clusters" id="toc-geospatial-liquidity-clusters" class="nav-link" data-scroll-target="#geospatial-liquidity-clusters">1. Geospatial Liquidity Clusters</a></li>
+  <li><a href="#circadian-rhythms-seasonality" id="toc-circadian-rhythms-seasonality" class="nav-link" data-scroll-target="#circadian-rhythms-seasonality">2. Circadian Rhythms &amp; Seasonality</a></li>
+  <li><a href="#peak-load-operational-matrix" id="toc-peak-load-operational-matrix" class="nav-link" data-scroll-target="#peak-load-operational-matrix">3. Peak-Load Operational Matrix</a></li>
+  <li><a href="#fleet-scaling-market-share" id="toc-fleet-scaling-market-share" class="nav-link" data-scroll-target="#fleet-scaling-market-share">4. Fleet Scaling &amp; Market Share</a></li>
+  <li><a href="#technical-stack" id="toc-technical-stack" class="nav-link" data-scroll-target="#technical-stack">Technical Stack</a></li>
   </ul>
 </nav>
     </div>
@@ -135,8 +132,11 @@ ul.task-list li input[type="checkbox"] {
 <h1 class="title">NYC Fleet Allocation &amp; Demand Analysis</h1>
   <div class="quarto-categories">
     <div class="quarto-category">R</div>
-    <div class="quarto-category">Visualization</div>
-    <div class="quarto-category">Geospatial</div>
+    <div class="quarto-category">ggplot2</div>
+    <div class="quarto-category">lubridate</div>
+    <div class="quarto-category">dplyr</div>
+    <div class="quarto-category">Geospatial Analysis</div>
+    <div class="quarto-category">Operational Research</div>
   </div>
   </div>
 
@@ -168,51 +168,52 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="executive-summary" class="level2">
 <h2 class="anchored" data-anchor-id="executive-summary">Executive Summary</h2>
-<p>Efficient fleet management requires predicting where demand will materialize before it happens. Using a dataset of <strong>4.5 million Uber pickups</strong> in New York City (Apr–Sep 2014), this project isolates the temporal and geospatial patterns that drive urban mobility.</p>
-<p><strong>The Objective:</strong> Transform raw trip logs into actionable scheduling intelligence for driver allocation.</p>
+<p>Optimizing fleet allocation requires understanding the <strong>spatiotemporal</strong> behaviors of urban populations. This project analyzes <strong>4.5 million Uber pickups</strong> (Apr–Sep 2014) to identify demand clusters, seasonal drift, and fleet scaling opportunities.</p>
+<p><strong>The Goal:</strong> Move from reactive dispatching to predictive positioning.</p>
+<hr>
 </section>
-<section id="temporal-demand-cycles" class="level2">
-<h2 class="anchored" data-anchor-id="temporal-demand-cycles">1. Temporal Demand Cycles</h2>
-<p>Understanding the “heartbeat” of the city is crucial for shift scheduling.</p>
-<section id="hourly-drift" class="level3">
-<h3 class="anchored" data-anchor-id="hourly-drift">Hourly Drift</h3>
-<p>Demand does not follow a bell curve. It follows a <strong>commuter-agglomeration</strong> pattern. The data reveals a slow buildup starting at 16:00, peaking at 17:00-18:00 (End of Business Day), and maintaining high liquidity until late evening.</p>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><strong>Operational Insight:</strong> Drivers logging off at 5 PM miss the highest volume window. Shift incentives should be weighted to capture the 17:00–21:00 block.</p>
-</div>
-</div>
-<p><em>(Insert your “Trips by Hour” bar chart here)</em></p>
+<section id="geospatial-liquidity-clusters" class="level2">
+<h2 class="anchored" data-anchor-id="geospatial-liquidity-clusters">1. Geospatial Liquidity Clusters</h2>
+<p><strong>Professional Metric:</strong> <em>Spatial Density Estimation</em> <strong>(Code Title: “NYC Map Based on Uber Rides During Apr-2014 to Sep-2014”)</strong></p>
+<p>The first step in allocation strategy is defining the operational boundary.</p>
+<p><img src="hero_map.png" class="img-fluid"></p>
+<p><strong>Analysis:</strong> The visualization above plots raw latitude/longitude pickup data. * <strong>The “Manhattan Grid”:</strong> 90% of liquidity is concentrated in Manhattan (below 59th St) and Downtown Brooklyn. * <strong>Airport Corridors:</strong> Distinct clusters appear at JFK and LaGuardia, representing high-value, long-distance fares that require separate queuing logic compared to the short-hop Manhattan traffic.</p>
+<hr>
 </section>
-<section id="the-thursday-phenomenon" class="level3">
-<h3 class="anchored" data-anchor-id="the-thursday-phenomenon">The “Thursday Phenomenon”</h3>
-<p>Contrary to the assumption that Friday/Saturday are the busiest days, the data shows <strong>Thursday</strong> consistently outperforming or matching Friday in trip volume.</p>
-<p><em>(Insert your “Trips by Day of Week” chart here)</em></p>
+<section id="circadian-rhythms-seasonality" class="level2">
+<h2 class="anchored" data-anchor-id="circadian-rhythms-seasonality">2. Circadian Rhythms &amp; Seasonality</h2>
+<p><strong>Professional Metric:</strong> <em>Temporal Volume Distribution</em> <strong>(Code Title: “Trips by Hour and Month”)</strong></p>
+<p>Demand is not random; it follows a strict human schedule. By stacking hourly volume across six months, we isolate the “invariant” demand curve.</p>
+<p><img src="hourly_distribution.png" class="img-fluid"></p>
+<p><strong>Analysis:</strong> * <strong>The 5:00 PM Spike:</strong> The data reveals a consistent surge beginning at 16:00 and peaking at 17:00-18:00 across all months (April through September). * <strong>Operational Implication:</strong> Fleet supply must be “pre-loaded” into the Manhattan Grid by 16:30. Drivers logging on after 17:00 are reacting to demand rather than capturing the initial surge.</p>
+<hr>
 </section>
+<section id="peak-load-operational-matrix" class="level2">
+<h2 class="anchored" data-anchor-id="peak-load-operational-matrix">3. Peak-Load Operational Matrix</h2>
+<p><strong>Professional Metric:</strong> <em>Day-Hour Heatmap</em> <strong>(Code Title: “Heat Map by Hour and Day”)</strong></p>
+<p>Aggregates lie; granular data tells the truth. This heatmap exposes the specific windows of highest opportunity cost.</p>
+<p><img src="demand_heatmap.png" class="img-fluid"></p>
+<p><strong>Analysis:</strong> * <strong>The “Work Hard, Play Hard” Split:</strong> * <strong>Weekdays:</strong> Demand is strictly commuter-driven (07:00–09:00 and 17:00–19:00). * <strong>Weekends:</strong> The pattern inverts. Friday and Saturday operational windows extend deep into the night (22:00–02:00), requiring shift incentives for late-night drivers. * <strong>The Efficiency Void:</strong> The block between 10:00 and 15:00 on weekdays represents “dead miles.” Algorithms should deprioritize holding drivers in the city center during these hours.</p>
+<hr>
 </section>
-<section id="heatmap-analysis" class="level2">
-<h2 class="anchored" data-anchor-id="heatmap-analysis">2. Heatmap Analysis</h2>
-<p>Granularity matters. Aggregated totals hide specific liquidity pockets. By mapping <code>Hour</code> vs.&nbsp;<code>Day</code>, we see the “dead zones” (early week mornings) vs.&nbsp;the “hot zones.”</p>
-<p><em>(Insert your “Heat Map by Hour and Day” chart here)</em></p>
+<section id="fleet-scaling-market-share" class="level2">
+<h2 class="anchored" data-anchor-id="fleet-scaling-market-share">4. Fleet Scaling &amp; Market Share</h2>
+<p><strong>Professional Metric:</strong> <em>Base Performance Growth</em> <strong>(Code Title: “Trips by Base and Month”)</strong></p>
+<p>Demand analysis is useless without supply analysis. We tracked the pickup volume by “Base” (Uber’s internal fleet codes).</p>
+<p><img src="base_growth.png" class="img-fluid"></p>
+<p><strong>Analysis:</strong> * <strong>The “B02617” Anomaly:</strong> While most bases showed steady performance, Base <strong>B02617</strong> (teal bar) demonstrated explosive month-over-month growth, overtaking the incumbent Base B02598 by September. * <strong>Business Insight:</strong> This suggests a successful aggressive onboarding strategy or a shift in dispatch priority logic implemented in July/August.</p>
+<hr>
 </section>
-<section id="geospatial-clustering" class="level2">
-<h2 class="anchored" data-anchor-id="geospatial-clustering">3. Geospatial Clustering</h2>
-<p>The most significant operational metric is location. The visualization below maps individual pickups. The density (visualized in blue) effectively recreates the map of Manhattan, showing that demand is strictly confined to the borough’s grid, with sparse outlier activity in the outer boroughs.</p>
-<p><em>(Insert your Blue NYC Map chart here)</em></p>
-</section>
-<section id="technical-implementation" class="level2">
-<h2 class="anchored" data-anchor-id="technical-implementation">Technical Implementation</h2>
-<p>The analysis was performed in <strong>R</strong> using <code>ggplot2</code> for visualization and <code>dplyr</code> for high-performance data manipulation.</p>
-<p>```r # Sample of the Geospatial Plotting Logic min_lat &lt;- 40.5774 max_lat &lt;- 40.9176 min_long &lt;- -74.15 max_long &lt;- -73.7004</p>
-<p>ggplot(data = data_2014, aes(x = Lon, y = Lat)) + geom_point(size = 1, color = “blue”) + scale_x_continuous(limits = c(min_long, max_long)) + scale_y_continuous(limits = c(min_lat, max_lat)) + theme_map() + ggtitle(“NYC Geospatial Demand Density”)</p>
+<section id="technical-stack" class="level2">
+<h2 class="anchored" data-anchor-id="technical-stack">Technical Stack</h2>
+<p>This analysis utilized the <strong>R</strong> statistical ecosystem for its superior handling of large-scale vector data.</p>
+<ul>
+<li><strong><code>ggplot2</code> &amp; <code>ggthemes</code>:</strong> For layering multidimensional data (Time + Location + Volume).</li>
+<li><strong><code>lubridate</code>:</strong> For parsing 4.5M timestamps into actionable factor levels (Hour, Day, Month).</li>
+<li><strong><code>dplyr</code>:</strong> For high-performance aggregation and grouping.</li>
+</ul>
+<p>```r # Sample Code: Generating the Heatmap day_and_hour &lt;- data_2014 %&gt;% group_by(Day, Hour) %&gt;% dplyr::summarize(Total = n())</p>
+<p>ggplot(data = day_and_hour, aes(Day, Hour, fill = Total)) + geom_tile(color = “white”) + ggtitle(“Heat Map by Hour and Day”)</p>
 
 
 </section>

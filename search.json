@@ -4,42 +4,49 @@
     "href": "Uber-NYC-Analysis/index.html",
     "title": "NYC Fleet Allocation & Demand Analysis",
     "section": "",
-    "text": "Efficient fleet management requires predicting where demand will materialize before it happens. Using a dataset of 4.5 million Uber pickups in New York City (Apr–Sep 2014), this project isolates the temporal and geospatial patterns that drive urban mobility.\nThe Objective: Transform raw trip logs into actionable scheduling intelligence for driver allocation."
+    "text": "Optimizing fleet allocation requires understanding the spatiotemporal behaviors of urban populations. This project analyzes 4.5 million Uber pickups (Apr–Sep 2014) to identify demand clusters, seasonal drift, and fleet scaling opportunities.\nThe Goal: Move from reactive dispatching to predictive positioning."
   },
   {
     "objectID": "Uber-NYC-Analysis/index.html#executive-summary",
     "href": "Uber-NYC-Analysis/index.html#executive-summary",
     "title": "NYC Fleet Allocation & Demand Analysis",
     "section": "",
-    "text": "Efficient fleet management requires predicting where demand will materialize before it happens. Using a dataset of 4.5 million Uber pickups in New York City (Apr–Sep 2014), this project isolates the temporal and geospatial patterns that drive urban mobility.\nThe Objective: Transform raw trip logs into actionable scheduling intelligence for driver allocation."
+    "text": "Optimizing fleet allocation requires understanding the spatiotemporal behaviors of urban populations. This project analyzes 4.5 million Uber pickups (Apr–Sep 2014) to identify demand clusters, seasonal drift, and fleet scaling opportunities.\nThe Goal: Move from reactive dispatching to predictive positioning."
   },
   {
-    "objectID": "Uber-NYC-Analysis/index.html#temporal-demand-cycles",
-    "href": "Uber-NYC-Analysis/index.html#temporal-demand-cycles",
+    "objectID": "Uber-NYC-Analysis/index.html#geospatial-liquidity-clusters",
+    "href": "Uber-NYC-Analysis/index.html#geospatial-liquidity-clusters",
     "title": "NYC Fleet Allocation & Demand Analysis",
-    "section": "1. Temporal Demand Cycles",
-    "text": "1. Temporal Demand Cycles\nUnderstanding the “heartbeat” of the city is crucial for shift scheduling.\n\nHourly Drift\nDemand does not follow a bell curve. It follows a commuter-agglomeration pattern. The data reveals a slow buildup starting at 16:00, peaking at 17:00-18:00 (End of Business Day), and maintaining high liquidity until late evening.\n\n\n\n\n\n\nTip\n\n\n\nOperational Insight: Drivers logging off at 5 PM miss the highest volume window. Shift incentives should be weighted to capture the 17:00–21:00 block.\n\n\n(Insert your “Trips by Hour” bar chart here)\n\n\nThe “Thursday Phenomenon”\nContrary to the assumption that Friday/Saturday are the busiest days, the data shows Thursday consistently outperforming or matching Friday in trip volume.\n(Insert your “Trips by Day of Week” chart here)"
+    "section": "1. Geospatial Liquidity Clusters",
+    "text": "1. Geospatial Liquidity Clusters\nProfessional Metric: Spatial Density Estimation (Code Title: “NYC Map Based on Uber Rides During Apr-2014 to Sep-2014”)\nThe first step in allocation strategy is defining the operational boundary.\n\nAnalysis: The visualization above plots raw latitude/longitude pickup data. * The “Manhattan Grid”: 90% of liquidity is concentrated in Manhattan (below 59th St) and Downtown Brooklyn. * Airport Corridors: Distinct clusters appear at JFK and LaGuardia, representing high-value, long-distance fares that require separate queuing logic compared to the short-hop Manhattan traffic."
   },
   {
-    "objectID": "Uber-NYC-Analysis/index.html#heatmap-analysis",
-    "href": "Uber-NYC-Analysis/index.html#heatmap-analysis",
+    "objectID": "Uber-NYC-Analysis/index.html#circadian-rhythms-seasonality",
+    "href": "Uber-NYC-Analysis/index.html#circadian-rhythms-seasonality",
     "title": "NYC Fleet Allocation & Demand Analysis",
-    "section": "2. Heatmap Analysis",
-    "text": "2. Heatmap Analysis\nGranularity matters. Aggregated totals hide specific liquidity pockets. By mapping Hour vs. Day, we see the “dead zones” (early week mornings) vs. the “hot zones.”\n(Insert your “Heat Map by Hour and Day” chart here)"
+    "section": "2. Circadian Rhythms & Seasonality",
+    "text": "2. Circadian Rhythms & Seasonality\nProfessional Metric: Temporal Volume Distribution (Code Title: “Trips by Hour and Month”)\nDemand is not random; it follows a strict human schedule. By stacking hourly volume across six months, we isolate the “invariant” demand curve.\n\nAnalysis: * The 5:00 PM Spike: The data reveals a consistent surge beginning at 16:00 and peaking at 17:00-18:00 across all months (April through September). * Operational Implication: Fleet supply must be “pre-loaded” into the Manhattan Grid by 16:30. Drivers logging on after 17:00 are reacting to demand rather than capturing the initial surge."
   },
   {
-    "objectID": "Uber-NYC-Analysis/index.html#geospatial-clustering",
-    "href": "Uber-NYC-Analysis/index.html#geospatial-clustering",
+    "objectID": "Uber-NYC-Analysis/index.html#peak-load-operational-matrix",
+    "href": "Uber-NYC-Analysis/index.html#peak-load-operational-matrix",
     "title": "NYC Fleet Allocation & Demand Analysis",
-    "section": "3. Geospatial Clustering",
-    "text": "3. Geospatial Clustering\nThe most significant operational metric is location. The visualization below maps individual pickups. The density (visualized in blue) effectively recreates the map of Manhattan, showing that demand is strictly confined to the borough’s grid, with sparse outlier activity in the outer boroughs.\n(Insert your Blue NYC Map chart here)"
+    "section": "3. Peak-Load Operational Matrix",
+    "text": "3. Peak-Load Operational Matrix\nProfessional Metric: Day-Hour Heatmap (Code Title: “Heat Map by Hour and Day”)\nAggregates lie; granular data tells the truth. This heatmap exposes the specific windows of highest opportunity cost.\n\nAnalysis: * The “Work Hard, Play Hard” Split: * Weekdays: Demand is strictly commuter-driven (07:00–09:00 and 17:00–19:00). * Weekends: The pattern inverts. Friday and Saturday operational windows extend deep into the night (22:00–02:00), requiring shift incentives for late-night drivers. * The Efficiency Void: The block between 10:00 and 15:00 on weekdays represents “dead miles.” Algorithms should deprioritize holding drivers in the city center during these hours."
   },
   {
-    "objectID": "Uber-NYC-Analysis/index.html#technical-implementation",
-    "href": "Uber-NYC-Analysis/index.html#technical-implementation",
+    "objectID": "Uber-NYC-Analysis/index.html#fleet-scaling-market-share",
+    "href": "Uber-NYC-Analysis/index.html#fleet-scaling-market-share",
     "title": "NYC Fleet Allocation & Demand Analysis",
-    "section": "Technical Implementation",
-    "text": "Technical Implementation\nThe analysis was performed in R using ggplot2 for visualization and dplyr for high-performance data manipulation.\n```r # Sample of the Geospatial Plotting Logic min_lat &lt;- 40.5774 max_lat &lt;- 40.9176 min_long &lt;- -74.15 max_long &lt;- -73.7004\nggplot(data = data_2014, aes(x = Lon, y = Lat)) + geom_point(size = 1, color = “blue”) + scale_x_continuous(limits = c(min_long, max_long)) + scale_y_continuous(limits = c(min_lat, max_lat)) + theme_map() + ggtitle(“NYC Geospatial Demand Density”)"
+    "section": "4. Fleet Scaling & Market Share",
+    "text": "4. Fleet Scaling & Market Share\nProfessional Metric: Base Performance Growth (Code Title: “Trips by Base and Month”)\nDemand analysis is useless without supply analysis. We tracked the pickup volume by “Base” (Uber’s internal fleet codes).\n\nAnalysis: * The “B02617” Anomaly: While most bases showed steady performance, Base B02617 (teal bar) demonstrated explosive month-over-month growth, overtaking the incumbent Base B02598 by September. * Business Insight: This suggests a successful aggressive onboarding strategy or a shift in dispatch priority logic implemented in July/August."
+  },
+  {
+    "objectID": "Uber-NYC-Analysis/index.html#technical-stack",
+    "href": "Uber-NYC-Analysis/index.html#technical-stack",
+    "title": "NYC Fleet Allocation & Demand Analysis",
+    "section": "Technical Stack",
+    "text": "Technical Stack\nThis analysis utilized the R statistical ecosystem for its superior handling of large-scale vector data.\n\nggplot2 & ggthemes: For layering multidimensional data (Time + Location + Volume).\nlubridate: For parsing 4.5M timestamps into actionable factor levels (Hour, Day, Month).\ndplyr: For high-performance aggregation and grouping.\n\n```r # Sample Code: Generating the Heatmap day_and_hour &lt;- data_2014 %&gt;% group_by(Day, Hour) %&gt;% dplyr::summarize(Total = n())\nggplot(data = day_and_hour, aes(Day, Hour, fill = Total)) + geom_tile(color = “white”) + ggtitle(“Heat Map by Hour and Day”)"
   },
   {
     "objectID": "about.html",
