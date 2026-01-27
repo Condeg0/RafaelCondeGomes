@@ -1,6 +1,6 @@
 ---
 title: "Rafael Condé Gomes"
-image: profile.jpg
+image: artifacts/IMG_6178.JPG
 about:
   template: trestles
   image-shape: round
