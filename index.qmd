@@ -4,6 +4,9 @@ image: artifacts/IMG_6178.JPG
 about:
   template: trestles
   image-shape: round
+    - icon: file-code
+      text: Portfolio
+      href: ./projects.qmd
 ---
 
 ## Data Scientist & Quantitative Analyst (Test)
