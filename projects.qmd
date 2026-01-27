@@ -11,7 +11,7 @@ format:
 
 ::: {.g-col-12 .g-col-md-6}
 ### Optimizing Credit Risk: A Profit-First Approach
-![](Loan-Default-Prediction/LogReg-StrategtyCurve.png) **Stack:** Python, Scikit-Learn, Pandas, Matplotlib, Seaborn
+![](Loan-Default-Prediction/LogReg-StrategyCurve.png) **Stack:** Python, Scikit-Learn, Pandas, Matplotlib, Seaborn
 
 **The Problem:** Standard default prediction models maximize accuracy (AUC) but often fail to maximize *profit*. A bank loses more money on a False Negative (default) than it gains from a True Negative (repayment).
 
