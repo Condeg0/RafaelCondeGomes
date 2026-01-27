@@ -1,0 +1,65 @@
+---
+title: "NYC Fleet Allocation & Demand Analysis"
+author: "Rafael Condé Gomes"
+date: 2026-01-27
+categories: [R, Visualization, Geospatial]
+image: hero_map.png
+format:
+  html:
+    toc: true
+    code-fold: true
+---
+
+## Executive Summary
+
+Efficient fleet management requires predicting where demand will materialize before it happens. Using a dataset of **4.5 million Uber pickups** in New York City (Apr–Sep 2014), this project isolates the temporal and geospatial patterns that drive urban mobility.
+
+**The Objective:** Transform raw trip logs into actionable scheduling intelligence for driver allocation.
+
+## 1. Temporal Demand Cycles
+
+Understanding the "heartbeat" of the city is crucial for shift scheduling.
+
+### Hourly Drift
+Demand does not follow a bell curve. It follows a **commuter-agglomeration** pattern. The data reveals a slow buildup starting at 16:00, peaking at 17:00-18:00 (End of Business Day), and maintaining high liquidity until late evening.
+
+::: {.callout-tip}
+**Operational Insight:** Drivers logging off at 5 PM miss the highest volume window. Shift incentives should be weighted to capture the 17:00–21:00 block.
+:::
+
+*(Insert your "Trips by Hour" bar chart here)*
+
+### The "Thursday Phenomenon"
+Contrary to the assumption that Friday/Saturday are the busiest days, the data shows **Thursday** consistently outperforming or matching Friday in trip volume.
+
+*(Insert your "Trips by Day of Week" chart here)*
+
+## 2. Heatmap Analysis
+
+Granularity matters. Aggregated totals hide specific liquidity pockets. By mapping `Hour` vs. `Day`, we see the "dead zones" (early week mornings) vs. the "hot zones."
+
+*(Insert your "Heat Map by Hour and Day" chart here)*
+
+## 3. Geospatial Clustering
+
+The most significant operational metric is location. The visualization below maps individual pickups. The density (visualized in blue) effectively recreates the map of Manhattan, showing that demand is strictly confined to the borough's grid, with sparse outlier activity in the outer boroughs.
+
+*(Insert your Blue NYC Map chart here)*
+
+## Technical Implementation
+
+The analysis was performed in **R** using `ggplot2` for visualization and `dplyr` for high-performance data manipulation.
+
+```r
+# Sample of the Geospatial Plotting Logic
+min_lat <- 40.5774
+max_lat <- 40.9176
+min_long <- -74.15
+max_long <- -73.7004
+
+ggplot(data = data_2014, aes(x = Lon, y = Lat)) +
+  geom_point(size = 1, color = "blue") +
+  scale_x_continuous(limits = c(min_long, max_long)) +
+  scale_y_continuous(limits = c(min_lat, max_lat)) +
+  theme_map() +
+  ggtitle("NYC Geospatial Demand Density")
