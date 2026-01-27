@@ -1,6 +1,6 @@
 ---
 title: "Rafael Condé Gomes"
-image:   artifacts/IMG_6178.JPG
+image: profile.jpg
 about:
   template: trestles
   image-shape: round
@@ -16,7 +16,7 @@ about:
       href: https://github.com/condeg0
     - icon: envelope
       text: Email
-      href: mailto:conde31@usf.edu
+      href: mailto:YOUR_EMAIL@usf.edu
 ---
 
 ## Data Scientist & Quantitative Analyst
