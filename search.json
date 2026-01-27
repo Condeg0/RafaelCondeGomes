@@ -2,9 +2,16 @@
   {
     "objectID": "projects.html",
     "href": "projects.html",
-    "title": "Projects",
+    "title": "Technical Projects",
     "section": "",
-    "text": "Loan Deault Analysis"
+    "text": "Stack: Python, Scikit-Learn, Pandas, Seaborn\nThe Problem: Standard default prediction models maximize accuracy (AUC) but often fail to maximize profit. A bank loses more money on a False Negative (default) than it gains from a True Negative (repayment).\nThe Solution: I engineered a Threshold Optimization Engine that shifts the decision boundary based on the specific cost-benefit matrix of the loan portfolio.\n\nStrategy: Prioritized recall for high-risk segments to minimize costly defaults.\nResult: While raw accuracy remained comparable to baseline, the risk-adjusted revenue improved significantly by rejecting “borderline” applicants that standard models would have accepted.\n\nView Full Analysis & Code →"
+  },
+  {
+    "objectID": "projects.html#featured-case-studies",
+    "href": "projects.html#featured-case-studies",
+    "title": "Technical Projects",
+    "section": "",
+    "text": "Stack: Python, Scikit-Learn, Pandas, Seaborn\nThe Problem: Standard default prediction models maximize accuracy (AUC) but often fail to maximize profit. A bank loses more money on a False Negative (default) than it gains from a True Negative (repayment).\nThe Solution: I engineered a Threshold Optimization Engine that shifts the decision boundary based on the specific cost-benefit matrix of the loan portfolio.\n\nStrategy: Prioritized recall for high-risk segments to minimize costly defaults.\nResult: While raw accuracy remained comparable to baseline, the risk-adjusted revenue improved significantly by rejecting “borderline” applicants that standard models would have accepted.\n\nView Full Analysis & Code →"
   },
   {
     "objectID": "index.html",
