@@ -4,12 +4,12 @@ image: artifacts/IMG_6178.JPG
 about:
   template: trestles
   image-shape: round
-    - icon: file-code
-      text: Portfolio
-      href: ./projects.qmd
+    - icon: linkedin
+      text: Linkedin
+      href: https://www.linkedin.com/in/rafael-conde-878284250/
 ---
 
-## Data Scientist & Quantitative Analyst (Test)
+## Data Scientist & Quantitative Analyst
 
 I am a final-year double major in **Econometrics** and **Information Science (Data Science)** at the University of South Florida.
 
