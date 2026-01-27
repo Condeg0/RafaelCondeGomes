@@ -79,13 +79,3 @@ This analysis utilized the **R** statistical ecosystem for its superior handling
 * **`ggplot2` & `ggthemes`:** For layering multidimensional data (Time + Location + Volume).
 * **`lubridate`:** For parsing 4.5M timestamps into actionable factor levels (Hour, Day, Month).
 * **`dplyr`:** For high-performance aggregation and grouping.
-
-```r
-# Sample Code: Generating the Heatmap
-day_and_hour <- data_2014 %>%
-  group_by(Day, Hour) %>%
-  dplyr::summarize(Total = n())
-
-ggplot(data = day_and_hour, aes(Day, Hour, fill = Total)) +
-  geom_tile(color = "white") +
-  ggtitle("Heat Map by Hour and Day")
