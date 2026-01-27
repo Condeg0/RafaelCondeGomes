@@ -1,19 +1,22 @@
 ---
 title: "Rafael Condé Gomes"
-image: profile.jpg
+image: artifacts/IMG_6178.JPG
 about:
   template: trestles
   image-shape: round
   links:
+    - icon: file-code
+      text: Portfolio
+      href: projects.qmd
     - icon: linkedin
       text: LinkedIn
-      href: https://www.linkedin.com/in/YOUR-LINKEDIN-HANDLE
+      href: https://www.linkedin.com/in/rafael-conde-878284250/
     - icon: github
       text: Github
       href: https://github.com/condeg0
     - icon: envelope
       text: Email
-      href: mailto:YOUR_EMAIL@usf.edu
+      href: mailto:conde31@usf.edu
 ---
 
 ## Data Scientist & Quantitative Analyst
