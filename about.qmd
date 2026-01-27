@@ -1,32 +1,31 @@
 ---
-title: "Rafael Condé Gomes"
-image: artifacts/IMG_6178.JPG
-about:
-  template: trestles
-  image-shape: round
-  links:
-    - icon: linkedin
-      text: LinkedIn
-      href: https://www.linkedin.com/in/rafael-conde-878284250/
-    - icon: github
-      text: Github
-      href: https://github.com/condeg0
-    - icon: envelope
-      text: Email
-      href: mailto:conde31@usf.edu
+title: "About Me"
 ---
 
-## Econometrics & Data Science
+## Professional Profile
 
-I am a double major in **Econometrics & Quantitative Economics** and **Information Science (concentration in Data Science & Analytics)** at the University of South Florida (Class of 2026), focusing on data science & machine learning.
+I am an aspiring Data Scientist and Quantitative Analyst with a rigorous academic background in both economic theory and data science. My objective is to leverage statistical modeling and machine learning to drive actionable insights in business.
 
-### Current Roles
-- **Technology Director** | Hexa Consulting
-- **Research Associate** | USF Student Investment Club (Macroeconomics)
+I am currently finishing my dual degree at the University of South Florida (May 2026) with a **3.89 GPA**.
 
-### Core Competencies
-- **Data Science:** Python, R, Statistical Inference.
+## Research Interests
 
-::: {.callout-note appearance="minimal"}
-**Looking for my code?** Check the [Projects](./projects.qmd) tab or my [GitHub](https://github.com/condeg0).
-:::
+My academic and project work is driven by a focus on market behavior and risk:
+
+* **Quantitative Finance:** Application of Monte Carlo simulations and stochastic calculus to option pricing.
+* **Risk Management:** Interest in **tail-risk management** and non-Gaussian market distributions (referencing frameworks by N. Taleb and O. Peters).
+* **Machine Learning:** Utilizing LSTMs and Random Forests for time-series forecasting and classification.
+
+## Technical Skills
+
+| Domain | Stack |
+|:---|:---|
+| **Programming** | Python (Pandas, NumPy), R, SQL |
+| **Data Science** | PyTorch, Scikit-Learn, TensorFlow, Statsmodels |
+| **Methods** | Random Forests, Linear Regressions, Decision Trees, Neural Networks, ARIMA, ARMA, VAR,Monte Carlo Methods |
+| **Tools/Dev** | Git, Unix/Linux, Quarto |
+
+## Background
+
+* **Competitive Athletics:** Former top-ranked junior tennis athlete (Brazil). This background has fostered a disciplined, goal-oriented approach to my professional work.
+* **Languages:** Portuguese (Native), English (Fluent), Spanish (Conversational).
