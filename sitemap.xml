@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://condeg0.github.io/RafaelCondeGomes/projects.html</loc>
-    <lastmod>2026-01-27T14:16:18.277Z</lastmod>
-  </url>
-  <url>
-    <loc>https://condeg0.github.io/RafaelCondeGomes/index.html</loc>
-    <lastmod>2026-01-27T14:16:18.277Z</lastmod>
-  </url>
-  <url>
-    <loc>https://condeg0.github.io/RafaelCondeGomes/Loan-Default-Prediction/index.html</loc>
-    <lastmod>2026-01-27T14:16:18.256Z</lastmod>
+    <loc>https://condeg0.github.io/RafaelCondeGomes/Uber-NYC-Analysis/index.html</loc>
+    <lastmod>2026-01-27T14:39:54.524Z</lastmod>
   </url>
   <url>
     <loc>https://condeg0.github.io/RafaelCondeGomes/about.html</loc>
-    <lastmod>2026-01-27T14:16:18.257Z</lastmod>
+    <lastmod>2026-01-27T14:39:54.524Z</lastmod>
+  </url>
+  <url>
+    <loc>https://condeg0.github.io/RafaelCondeGomes/Loan-Default-Prediction/index.html</loc>
+    <lastmod>2026-01-27T14:39:54.524Z</lastmod>
+  </url>
+  <url>
+    <loc>https://condeg0.github.io/RafaelCondeGomes/index.html</loc>
+    <lastmod>2026-01-27T14:39:54.545Z</lastmod>
+  </url>
+  <url>
+    <loc>https://condeg0.github.io/RafaelCondeGomes/projects.html</loc>
+    <lastmod>2026-01-27T14:39:54.545Z</lastmod>
   </url>
 </urlset>
