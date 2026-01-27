@@ -23,3 +23,21 @@ I engineered a **Threshold Optimization Engine** that shifts the decision bounda
 
 [**View Full Analysis & Code &rarr;**](./Loan-Default-Prediction/index.html){.btn .btn-primary}
 :::
+
+::: {.g-col-12 .g-col-md-6}
+### NYC Ride-Share Demand Analysis
+![](./Uber-NYC-Analysis/hero_map.png)
+
+**Stack:** R (ggplot2, dplyr), Geospatial Analysis
+
+**The Problem:**
+Ride-sharing platforms face a "Cold Start" problem every day: Where should drivers position themselves *before* demand spikes? Inefficient positioning leads to higher wait times and lost revenue.
+
+**The Solution:**
+I conducted a spatiotemporal analysis of 4.5M+ Uber pickups to identify high-density clusters and temporal demand cycles.
+
+* **Insight:** Identified a non-linear demand surge on Thursdays (not Fridays) suggesting commuter-heavy usage over nightlife.
+* **Application:** These heatmaps serve as a proxy for "Pre-Surge" indicators for fleet management.
+
+[**View Visual Analysis &rarr;**](./Uber-NYC-Analysis/index.html){.btn .btn-primary}
+:::
