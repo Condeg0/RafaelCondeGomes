@@ -23,8 +23,8 @@ This project analyzes **4.5 million Uber pickups** in New York City to identify 
 
 ![](NYC Uber Rise Map.png)
 
-**Finding:**
-The pickup density is heavily skewed.
+**Finding:** The pickup density is heavily skewed.
+
 * **Manhattan Core:** The vast majority of rides occur in Manhattan (below 59th St) and Downtown Brooklyn.
 * **Airport Clusters:** Outside the city grid, the only significant hotspots are **JFK** and **LaGuardia Airports**.
 * **Operational Insight:** For a driver, leaving Manhattan without an airport fare is statistically inefficient, as return trips from outer boroughs are rare.
@@ -36,8 +36,8 @@ The pickup density is heavily skewed.
 
 ![](Trips by Hours and Month.png)
 
-**Finding:**
-Demand follows a strict daily cycle that is consistent across all six months (Apr–Sep).
+**Finding:**Demand follows a strict daily cycle that is consistent across all six months (Apr–Sep).
+
 * **The Build-Up:** Ride volume begins to rise significantly at **16:00 (4 PM)**.
 * **The Peak:** The busiest hour is consistently **17:00–18:00 (5–6 PM)**, coinciding with the end of the traditional workday.
 * **Late Night:** Demand tapers off after 21:00, except on weekends (see below).
@@ -49,8 +49,8 @@ Demand follows a strict daily cycle that is consistent across all six months (Ap
 
 ![](Heat Map by Hour and Day of Week.png)
 
-**Finding:**
-Aggregating data by day of the week reveals two distinct distinct "shifts":
+**Finding:** Aggregating data by day of the week reveals two distinct distinct "shifts":
+
 1.  **The Commuter Shift (Mon–Thu):** Demand is strictly focused on rush hours (07:00–09:00 and 17:00–19:00).
 2.  **The Nightlife Shift (Fri–Sat):** The evening peak extends well past midnight, staying high until **02:00 AM**.
 
@@ -63,8 +63,8 @@ Aggregating data by day of the week reveals two distinct distinct "shifts":
 
 ![](Trips by Base and Month.png)
 
-**Finding:**
-While most bases (like B02598 and B02682) showed stable monthly volume, **Base B02617 (Teal)** grew exponentially.
+**Finding:** While most bases (like B02598 and B02682) showed stable monthly volume, **Base B02617 (Teal)** grew exponentially.
+
 * **April:** ~30k trips
 * **September:** ~180k trips
 * This suggests that Uber likely consolidated drivers into this specific base or ran an aggressive onboarding campaign during the summer of 2014.
@@ -74,16 +74,7 @@ While most bases (like B02598 and B02682) showed stable monthly volume, **Base B
 ## Technical Implementation
 **Stack:** R, RStudio
 **Key Libraries:**
+
 * `ggplot2`: Used for the heatmaps and bar charts.
 * `lubridate`: Parsed the timestamps to extract Hour, Day, and Month factors.
 * `dplyr`: Grouped the 4.5M rows for aggregation.
-
-```r
-# Code used to generate the Hourly Histogram
-hour_data <- data_2014 %>%
-  group_by(Hour) %>%
-  dplyr::summarize(Total = n())
-
-ggplot(data = hour_data, aes(x = Hour, y = Total)) +
-  geom_bar(stat = "identity", fill = "lightblue", color = "red") +
-  ggtitle("Trips By Hour")
