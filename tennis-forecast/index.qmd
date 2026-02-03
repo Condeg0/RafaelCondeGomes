@@ -27,7 +27,7 @@ A common pitfall in sports modeling is "look-ahead bias" (using future stats to 
 
 The model uses a **Siamese (Twin) Architecture** to process players independently before fusion. This allows the network to learn a "Momentum Embedding" for each athlete—a vector representation of their current form—before assessing the specific matchup.
 
-```{mermaid}
+```mermaid
 %%| label: fig-arch
 %%| fig-cap: "Hybrid Siamese LSTM Architecture"
 graph TD
@@ -75,11 +75,10 @@ Primary Driver: rank_diff (Ranking Difference) remains the strongest predictor, 
 
 Secondary Signal: ace_roll_diff (Serving Momentum) and bpSaved_roll_diff (Clutch Factor) provide the marginal edge needed to beat the closing line.
 
-{width=80%}
+![SHAP values for LSTM Model](./shap_summary_lstm.png){width=80%}
 
 # 4. Tech Stack & Implementation
 ::: {.panel-tabset}
-
 Core Stack
 Language: Python 3.10
 
@@ -98,16 +97,13 @@ Deployment
 Experiment Tracking: Custom Artifact Logging (Metrics, Plots, Params)
 
 Validation: Strict Time-Series Split (Walk-Forward Validation)
-
 :::
 
 # 5. Project Links
+
 ::: {.grid}
-
 ::: {.g-col-6} View Source Code on GitHub{.btn .btn-primary .btn-lg role="button"} :::
-
 ::: {.g-col-6} Read Technical Report{.btn .btn-outline-primary .btn-lg role="button"} :::
-
 :::
 
 
