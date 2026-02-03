@@ -1,0 +1,115 @@
+---
+title: "BreakPoint AI: Momentum Modeling in ATP Tennis"
+description: "A Hybrid Siamese LSTM for sports forecasting, featuring strict time-series validation, Bayesian optimization, and institutional-grade risk calibration."
+date: 2026-02-03
+categories: [Deep Learning, Quantitative Finance, Time-Series, PyTorch]
+image: "assets/calibration_curve.png"
+format:
+  html:
+    toc: true
+    code-fold: true
+---
+
+# Executive Summary
+
+**BreakPoint AI** treats a tennis match not as a static row of data, but as the **collision of two historical trajectories**.
+
+By implementing a **Hybrid Siamese LSTM**, this system captures latent "momentum" features from raw match sequences that static baselines miss. Unlike standard data science projects that optimize solely for accuracy, this project prioritizes **Calibration** and **Reliability**, mirroring the constraints of institutional risk modeling.
+
+::: {.callout-tip icon="true"}
+## Quant Methodology: The "Leakage-Free" Guarantee
+A common pitfall in sports modeling is "look-ahead bias" (using future stats to predict past events). BreakPoint AI enforces a strict `date < current_date` filtration system for every training batch, ensuring the model's edge is genuine and deployable.
+:::
+
+---
+
+# 1. System Architecture
+
+The model uses a **Siamese (Twin) Architecture** to process players independently before fusion. This allows the network to learn a "Momentum Embedding" for each athlete—a vector representation of their current form—before assessing the specific matchup.
+
+```{mermaid}
+%%| label: fig-arch
+%%| fig-cap: "Hybrid Siamese LSTM Architecture"
+graph TD
+    subgraph "Sequence Processing (Twin LSTMs)"
+        A[Player A History<br/>(Last 10 Matches)] -->|LSTM| E1[Momentum Embedding A]
+        B[Player B History<br/>(Last 10 Matches)] -->|LSTM| E2[Momentum Embedding B]
+    end
+    
+    subgraph "Context Fusion"
+        C[Static Context<br/>(Rank, Surface, H2H)] --> F[Fusion Layer]
+        E1 --> F
+        E2 --> F
+    end
+    
+    F -->|Dense + Dropout| O[Win Probability]
+    
+    style F fill:#f9f,stroke:#333,stroke-width:2px
+    style O fill:#bbf,stroke:#333,stroke-width:2px
+```
+
+# 2. Performance & Reliability
+In high-variance domains like ATP Tennis, an AUC of ~0.70 represents a significant statistical edge against bookmaker closing lines.
+
+Model Comparison
+The LSTM matches the highly optimized Random Forest baseline, but does so using Raw Sequences rather than engineered features, validating the neural network's ability to extract latent signal.
+
+
+| Metric                       | Random Forest (Baseline)                 | Siamese LSTM                          | Architectural Insight                                             |
+| :---                         | :---                                     | :---                                  | :---                                                              |
+| **Test AUC*                  | 0.7062                                   | **0.7060**                            | Parity achieved.                                                  |
+| **Accuracy**                | 64.67%                                   | **64.61%**                            | Consistent edge over noise.                                       |
+| **Input Data**               | Engineered Features (*Rolling averages*) | Raw Sequences (*Match-by-match logs*) | LSTM successfully learned the "Rolling" feature logic internally. |
+
+
+**Reliability Diagram (Calibration)**
+Does the model know what it doesn't know? This plot shows that our LSTM is perfectly calibrated (Orange line follows the Blue diagonal). When the model predicts a 70% win probability, the player wins ~70% of the time.
+
+IMAGE HERE!
+
+
+# 3. Explainability (SHAP)
+To ensure the model isn't relying on spurious correlations, we utilize SHAP (SHapley Additive exPlanations).
+
+Primary Driver: rank_diff (Ranking Difference) remains the strongest predictor, aligning with market efficiency.
+
+Secondary Signal: ace_roll_diff (Serving Momentum) and bpSaved_roll_diff (Clutch Factor) provide the marginal edge needed to beat the closing line.
+
+{width=80%}
+
+# 4. Tech Stack & Implementation
+::: {.panel-tabset}
+
+Core Stack
+Language: Python 3.10
+
+Deep Learning: PyTorch 2.0 (Custom nn.Module definitions)
+
+Data Manipulation: Pandas, NumPy (Vectorized operations)
+
+Optimization
+Hyperparameter Tuning: Optuna (Bayesian Search with TPE Sampler)
+
+Search Space: Learning Rate, Dropout, LSTM Hidden Size, Num Layers
+
+Objective: Maximize Validation AUC with Early Stopping
+
+Deployment
+Experiment Tracking: Custom Artifact Logging (Metrics, Plots, Params)
+
+Validation: Strict Time-Series Split (Walk-Forward Validation)
+
+:::
+
+# 5. Project Links
+::: {.grid}
+
+::: {.g-col-6} View Source Code on GitHub{.btn .btn-primary .btn-lg role="button"} :::
+
+::: {.g-col-6} Read Technical Report{.btn .btn-outline-primary .btn-lg role="button"} :::
+
+:::
+
+
+
+
