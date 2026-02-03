@@ -70,9 +70,6 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
-<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
-<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 </head>
@@ -188,13 +185,9 @@ ul.task-list li input[type="checkbox"] {
 <section id="system-architecture" class="level1">
 <h1>1. System Architecture</h1>
 <p>The model uses a <strong>Siamese (Twin) Architecture</strong> to process players independently before fusion. This allows the network to learn a “Momentum Embedding” for each athlete—a vector representation of their current form—before assessing the specific matchup.</p>
-<div class="cell" data-layout-align="default">
-<div class="cell-output-display">
-<div id="fig-arch" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-arch-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div>
-<pre class="mermaid mermaid-js" data-label="fig-arch">graph TD
+<pre class="mermaid"><code>%%| label: fig-arch
+%%| fig-cap: "Hybrid Siamese LSTM Architecture"
+graph TD
     subgraph "Sequence Processing (Twin LSTMs)"
         A[Player A History&lt;br/&gt;(Last 10 Matches)] --&gt;|LSTM| E1[Momentum Embedding A]
         B[Player B History&lt;br/&gt;(Last 10 Matches)] --&gt;|LSTM| E2[Momentum Embedding B]
@@ -209,17 +202,7 @@ ul.task-list li input[type="checkbox"] {
     F --&gt;|Dense + Dropout| O[Win Probability]
     
     style F fill:#f9f,stroke:#333,stroke-width:2px
-    style O fill:#bbf,stroke:#333,stroke-width:2px
-</pre>
-</div>
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-arch-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: Hybrid Siamese LSTM Architecture
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
+    style O fill:#bbf,stroke:#333,stroke-width:2px</code></pre>
 </section>
 <section id="performance-reliability" class="level1">
 <h1>2. Performance &amp; Reliability</h1>
@@ -269,7 +252,12 @@ Figure&nbsp;1: Hybrid Siamese LSTM Architecture
 <p>To ensure the model isn’t relying on spurious correlations, we utilize SHAP (SHapley Additive exPlanations).</p>
 <p>Primary Driver: rank_diff (Ranking Difference) remains the strongest predictor, aligning with market efficiency.</p>
 <p>Secondary Signal: ace_roll_diff (Serving Momentum) and bpSaved_roll_diff (Clutch Factor) provide the marginal edge needed to beat the closing line.</p>
-<p>{width=80%}</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./shap_summary_lstm.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption>SHAP values for LSTM Model</figcaption>
+</figure>
+</div>
 </section>
 <section id="tech-stack-implementation" class="level1">
 <h1>4. Tech Stack &amp; Implementation</h1>
@@ -283,8 +271,7 @@ Figure&nbsp;1: Hybrid Siamese LSTM Architecture
 <section id="project-links" class="level1">
 <h1>5. Project Links</h1>
 <div class="grid">
-<p>::: {.g-col-6} View Source Code on GitHub{.btn .btn-primary .btn-lg role=“button”} :::</p>
-<p>::: {.g-col-6} Read Technical Report{.btn .btn-outline-primary .btn-lg role=“button”} :::</p>
+<p>::: {.g-col-6} View Source Code on GitHub{.btn .btn-primary .btn-lg role=“button”} ::: ::: {.g-col-6} Read Technical Report{.btn .btn-outline-primary .btn-lg role=“button”} :::</p>
 </div>
 
 
