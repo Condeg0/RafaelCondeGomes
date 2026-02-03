@@ -250,14 +250,7 @@ graph TD
 <section id="explainability-shap" class="level1">
 <h1>3. Explainability (SHAP)</h1>
 <p>To ensure the model isn’t relying on spurious correlations, we utilize SHAP (SHapley Additive exPlanations).</p>
-<p>Primary Driver: rank_diff (Ranking Difference) remains the strongest predictor, aligning with market efficiency.</p>
-<p>Secondary Signal: ace_roll_diff (Serving Momentum) and bpSaved_roll_diff (Clutch Factor) provide the marginal edge needed to beat the closing line.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="./shap_summary_lstm.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<figcaption>SHAP values for LSTM Model</figcaption>
-</figure>
-</div>
+<p><img src="./shap_summary_lstm.png" class="img-fluid" style="width:80.0%"></p>
 </section>
 <section id="tech-stack-implementation" class="level1">
 <h1>4. Tech Stack &amp; Implementation</h1>
