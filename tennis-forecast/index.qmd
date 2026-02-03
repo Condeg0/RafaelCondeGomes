@@ -71,11 +71,7 @@ IMAGE HERE!
 # 3. Explainability (SHAP)
 To ensure the model isn't relying on spurious correlations, we utilize SHAP (SHapley Additive exPlanations).
 
-Primary Driver: rank_diff (Ranking Difference) remains the strongest predictor, aligning with market efficiency.
-
-Secondary Signal: ace_roll_diff (Serving Momentum) and bpSaved_roll_diff (Clutch Factor) provide the marginal edge needed to beat the closing line.
-
-![SHAP values for LSTM Model](./shap_summary_lstm.png){width=80%}
+![](./shap_summary_lstm.png){width=80%}
 
 # 4. Tech Stack & Implementation
 ::: {.panel-tabset}
