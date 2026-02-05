@@ -41,10 +41,10 @@ Standard classification models maximize *accuracy*, but banks care about *profit
 
 I engineered a **Threshold Optimization Engine** that shifts the decision boundary based on the specific cost-benefit matrix of the loan portfolio.
 
-* *Strategy:** Prioritized recall for high-risk segments.
+* **Strategy:** Prioritized recall for high-risk segments.
 * **Result:** Projected **~40% ROI lift** ($1.26M portfolio value) compared to standard accuracy-based thresholds.
 
-![**View Full Analysis &rarr;**](./Loan-Default-Prediction/index.html){.btn .btn-primary}
+[**View Full Analysis &rarr;**](./Loan-Default-Prediction/index.html){.btn .btn-primary}
 :::
 
 ::: {.g-col-12 .g-col-md-6}
