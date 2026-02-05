@@ -138,10 +138,12 @@ ul.task-list li input[type="checkbox"] {
 <h3 class="anchored" data-anchor-id="breakpoint-ai-atp-tennis-forecasting">BreakPoint AI: ATP Tennis Forecasting</h3>
 <p><img src="tennis-forecast/shap_summary_lstm.png" class="img-fluid"></p>
 <p><strong>Stack:</strong> Python, PyTorch (LSTMs), Optuna, Time-Series Analysis</p>
-<p><strong>The Problem:</strong></p>
-<p>Sports betting markets are highly efficient. Standard models fail to beat the “closing line” because they rely on static averages rather than dynamic form.</p>
-<p><strong>The Solution:</strong></p>
-<p>I built a <strong>Hybrid Siamese LSTM</strong> network that models a match as the collision of two historical trajectories (momentum), rather than static player stats. * <strong>Innovation:</strong> Strict <code>date &lt; current_date</code> filtration to prevent look-ahead bias (data leakage). * <strong>Result:</strong> Achieved <strong>64.6% Accuracy</strong> and <strong>0.706 AUC</strong>, reaching parity with institutional bookmakers.</p>
+<p><strong>The Problem:</strong> Sports betting markets are highly efficient. Standard models fail to beat the “closing line” because they rely on static averages rather than dynamic form.</p>
+<p><strong>The Solution:</strong> I built a <strong>Hybrid Siamese LSTM</strong> network that models a match as the collision of two historical trajectories (momentum), rather than static player stats.</p>
+<ul>
+<li><strong>Innovation:</strong> Strict <code>date &lt; current_date</code> filtration to prevent look-ahead bias (data leakage).</li>
+<li><strong>Result:</strong> Achieved <strong>64.6% Accuracy</strong> and <strong>0.706 AUC</strong>, reaching parity with institutional bookmakers.</li>
+</ul>
 <p><a href="./tennis-forecast/index.html" class="btn btn-primary"><strong>View Technical Report →</strong></a></p>
 </section>
 <section id="optimizing-credit-risk-profit-first-logic" class="level3 g-col-12 g-col-md-6">
@@ -149,8 +151,7 @@ ul.task-list li input[type="checkbox"] {
 <p><img src="Loan-Default-Prediction/LogReg-StrategyCurve.png" class="img-fluid"></p>
 <p><strong>Stack:</strong> Python, Scikit-Learn, Pandas, Financial Engineering</p>
 <p><strong>The Problem:</strong> Standard classification models maximize <em>accuracy</em>, but banks care about <em>profit</em>. A default costs significantly more than a rejected loan saves.</p>
-<p><strong>The Solution:</strong></p>
-<p>I engineered a <strong>Threshold Optimization Engine</strong> that shifts the decision boundary based on the specific cost-benefit matrix of the loan portfolio.</p>
+<p><strong>The Solution:</strong> I engineered a <strong>Threshold Optimization Engine</strong> that shifts the decision boundary based on the specific cost-benefit matrix of the loan portfolio.</p>
 <ul>
 <li><strong>Strategy:</strong> Prioritized recall for high-risk segments.</li>
 <li><strong>Result:</strong> Projected <strong>~40% ROI lift</strong> ($1.26M portfolio value) compared to standard accuracy-based thresholds.</li>
@@ -161,10 +162,8 @@ ul.task-list li input[type="checkbox"] {
 <h3 class="anchored" data-anchor-id="nyc-ride-share-demand-analysis">NYC Ride-Share Demand Analysis</h3>
 <p><img src="Uber-NYC-Analysis/NYC Uber Rise Map.png" class="img-fluid"></p>
 <p><strong>Stack:</strong> R (ggplot2, dplyr), Geospatial Analysis</p>
-<p><strong>The Problem:</strong></p>
-<p>Drivers face a “Cold Start” problem: knowing where to position themselves <em>before</em> demand spikes to minimize unpaid wait times.</p>
-<p><strong>The Solution:</strong></p>
-<p>I conducted a spatiotemporal analysis of 4.5M+ Uber pickups to identify high-density clusters and recurring time-based demand cycles.</p>
+<p><strong>The Problem:</strong> Drivers face a “Cold Start” problem: knowing where to position themselves <em>before</em> demand spikes to minimize unpaid wait times.</p>
+<p><strong>The Solution:</strong> I conducted a spatiotemporal analysis of 4.5M+ Uber pickups to identify high-density clusters and recurring time-based demand cycles.</p>
 <ul>
 <li><strong>Insight:</strong> Identified a non-linear demand surge on Thursdays (commuter vs.&nbsp;nightlife shifts).</li>
 <li><strong>Application:</strong> Developed heatmaps acting as “Pre-Surge” indicators for fleet positioning.</li>
