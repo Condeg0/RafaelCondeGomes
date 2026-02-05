@@ -54,10 +54,13 @@ I engineered a **Threshold Optimization Engine** that shifts the decision bounda
 **Stack:** R (ggplot2, dplyr), Geospatial Analysis
 
 **The Problem:**
+
 Drivers face a "Cold Start" problem: knowing where to position themselves *before* demand spikes to minimize unpaid wait times.
 
 **The Solution:**
+
 I conducted a spatiotemporal analysis of 4.5M+ Uber pickups to identify high-density clusters and recurring time-based demand cycles.
+
 * **Insight:** Identified a non-linear demand surge on Thursdays (commuter vs. nightlife shifts).
 * **Application:** Developed heatmaps acting as "Pre-Surge" indicators for fleet positioning.
 
