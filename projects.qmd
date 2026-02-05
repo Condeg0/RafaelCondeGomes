@@ -10,38 +10,58 @@ format:
 ::: {.grid}
 
 ::: {.g-col-12 .g-col-md-6}
-### Optimizing Credit Risk: A Profit-First Approach
-![](Loan-Default-Prediction/LogReg-StrategyCurve.png) **Stack:** Python, Scikit-Learn, Pandas, Matplotlib, Seaborn
+### BreakPoint AI: ATP Tennis Forecasting
+![](tennis-forecast/shap_summary_lstm.png)
 
-**The Problem:** Standard default prediction models maximize accuracy (AUC) but often fail to maximize *profit*. A bank loses more money on a False Negative (default) than it gains from a True Negative (repayment).
+**Stack:** Python, PyTorch (LSTMs), Optuna, Time-Series Analysis
+
+**The Problem:**
+
+Sports betting markets are highly efficient. Standard models fail to beat the "closing line" because they rely on static averages rather than dynamic form.
 
 **The Solution:**
+
+I built a **Hybrid Siamese LSTM** network that models a match as the collision of two historical trajectories (momentum), rather than static player stats.
+* **Innovation:** Strict `date < current_date` filtration to prevent look-ahead bias (data leakage).
+* **Result:** Achieved **64.6% Accuracy** and **0.706 AUC**, reaching parity with institutional bookmakers.
+
+[**View Technical Report &rarr;**](./tennis-forecast/index.html){.btn .btn-primary}
+:::
+
+::: {.g-col-12 .g-col-md-6}
+### Optimizing Credit Risk: Profit-First Logic
+![](Loan-Default-Prediction/LogReg-StrategyCurve.png)
+
+**Stack:** Python, Scikit-Learn, Pandas, Financial Engineering
+
+**The Problem:**
+Standard classification models maximize *accuracy*, but banks care about *profit*. A default costs significantly more than a rejected loan saves.
+
+**The Solution:**
+
 I engineered a **Threshold Optimization Engine** that shifts the decision boundary based on the specific cost-benefit matrix of the loan portfolio.
 
-* **Strategy:** Prioritized recall for high-risk segments to minimize costly defaults.
-* **Result:** While raw accuracy remained comparable to baseline, the **risk-adjusted revenue** improved significantly by rejecting "borderline" applicants that standard models would have accepted.
+* *Strategy:** Prioritized recall for high-risk segments.
+* **Result:** Projected **~40% ROI lift** ($1.26M portfolio value) compared to standard accuracy-based thresholds.
 
-[**View Full Analysis & Code &rarr;**](./Loan-Default-Prediction/index.html){.btn .btn-primary}
+![**View Full Analysis &rarr;**](./Loan-Default-Prediction/index.html){.btn .btn-primary}
 :::
 
 ::: {.g-col-12 .g-col-md-6}
 ### NYC Ride-Share Demand Analysis
-![](./Uber-NYC-Analysis/NYC Uber Rise Map.png)
+![](Uber-NYC-Analysis/NYC Uber Rise Map.png)
 
 **Stack:** R (ggplot2, dplyr), Geospatial Analysis
 
 **The Problem:**
-Ride-sharing platforms face a "Cold Start" problem every day: Where should drivers position themselves *before* demand spikes? Inefficient positioning leads to higher wait times and lost revenue.
+Drivers face a "Cold Start" problem: knowing where to position themselves *before* demand spikes to minimize unpaid wait times.
 
 **The Solution:**
-I conducted a spatiotemporal analysis of 4.5M+ Uber pickups to identify high-density clusters and temporal demand cycles.
-[**View Visual Analysis &rarr;**](./tennis-forecast/index.html){.btn .btn-primary}
-:::
-
-* **Insight:** Identified a non-linear demand surge on Thursdays (not Fridays) suggesting commuter-heavy usage over nightlife.
-* **Application:** These heatmaps serve as a proxy for "Pre-Surge" indicators for fleet management.
+I conducted a spatiotemporal analysis of 4.5M+ Uber pickups to identify high-density clusters and recurring time-based demand cycles.
+* **Insight:** Identified a non-linear demand surge on Thursdays (commuter vs. nightlife shifts).
+* **Application:** Developed heatmaps acting as "Pre-Surge" indicators for fleet positioning.
 
 [**View Visual Analysis &rarr;**](./Uber-NYC-Analysis/index.html){.btn .btn-primary}
 :::
 
-
+:::

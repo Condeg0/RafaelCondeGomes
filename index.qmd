@@ -18,7 +18,7 @@ about:
 
 ## Data Scientist & Quantitative Analyst
 
-I am a double major in **Econometrics** and **Information Science (concentration in Data Science & Analytics)** at the University of South Florida (Class of 2026)
+I am a double major in **Econometrics** and **Information Science (concentration in Data Science & Analytics)** at the University of South Florida (Class of 2026).
 
 **I believe valid decisions require solid evidence, yet they are rarely based on it.**
 
@@ -30,7 +30,9 @@ My focus is bridging that gap. I combine **econometric rigor** with **data scien
 - **Tutor** | University of South Florida Athletics
 
 ### Key Projects
-- **Credit Risk Optimization:** Developed a profit-maximizing threshold model for loan default prediction.
+- **BreakPoint AI (Deep Learning):** Developed a Hybrid Siamese LSTM to forecast ATP tennis matches, achieving parity with betting market efficiency.
+- **Credit Risk Optimization:** Engineered a profit-maximizing threshold model that increased portfolio ROI by ~40% over baseline.
+- **NYC Demand Analysis:** Conducted geospatial analysis of 4.5M+ Uber rides to solve the driver "Cold Start" positioning problem.
 
 ::: {.callout-note appearance="minimal"}
 **Portfolio & Code:** View my technical projects [here](./projects.qmd).
