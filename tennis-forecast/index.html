@@ -355,6 +355,12 @@ Figure&nbsp;1: Hybrid Siamese LSTM Architecture
 <section id="key-drivers-interpretation" class="level1">
 <h1>5. Key Drivers (Interpretation)</h1>
 <p>While the LSTM acts as the “Engine,” we use the Random Forest baseline to explain the “Why” (Proxy Analysis).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./shap_summary_rf.png" class="img-fluid figure-img"></p>
+<figcaption>SHAP Value for Random Forests</figcaption>
+</figure>
+</div>
 <p><strong>SHAP Value Analysis:</strong></p>
 <ol type="1">
 <li><strong>Rank Difference (<code>rank_diff</code>):</strong> The market anchor. The widening gap in ranking remains the single strongest predictor.</li>
