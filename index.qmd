@@ -13,7 +13,7 @@ about:
       href: https://github.com/Condeg0
     - icon: file-text
       text: Resumé
-      href: "#"
+      href: artifacts/Resume-RafaelCondeGomes.pdf
 ---
 
 ### Transforming Ambiguity into Action
