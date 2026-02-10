@@ -3,6 +3,7 @@ title: "BreakPoint AI: Momentum Modeling in ATP Tennis"
 author: "Rafael Condé Gomes"
 date: "2026-02-03"
 categories: [Deep Learning, Quantitative Finance, Time-Series, PyTorch]
+image: "calibration_curve_lstm.png"
 format:
   html:
     toc: true
@@ -11,96 +12,36 @@ format:
 
 # Executive Summary
 
-In high-variance sports markets, "accuracy" is the wrong metric. A model that predicts the favorite every time hits 65% accuracy but loses money due to vigorish (house edge).
+Sports betting markets are notoriously efficient; a static model relying on average statistics will rarely beat the "closing line."
+This project treats a tennis match not as a row of data, but as the **collision of two historical trajectories**.
 
-This project shifts the objective from **Binary Classification** to **Probability Calibration (Expected Value)**. By treating a match as the collision of two historical time-series rather than static stats, this system achieved:
+By implementing a **Hybrid Siamese LSTM**, I moved beyond static feature engineering to capture latent "momentum," achieving institutional-grade performance:
 
-* **Market Parity:** Achieved **64.6% Accuracy** and **0.706 AUC**, matching the efficiency of institutional bookmaker closing lines.
-* **Risk Calibration:** Developed a "Reliability-First" architecture where predicted probabilities match empirical win rates (e.g., 70% confidence = 70% win rate).
-* **Signal Extraction:** Proved that a **Siamese LSTM** can learn latent "momentum" features from raw logs without manual feature engineering.
+* **Market Edge:** Achieved **0.706 AUC**, reaching statistical parity with institutional bookmakers in a high-variance domain.
+* **Risk Calibration:** Delivered a perfectly calibrated probability engine (Expected Value $\approx$ Actual Value), essential for Kelly Criterion staking.
+* **Innovation:** Developed a "Twin Network" architecture that learns player form independently before assessing the specific matchup.
 
 ---
 
-# 1. The Forecasting Challenge
+# 1. The Market Problem
 
-### The "Static Data" Trap
-Most sports models rely on "Rank Difference" or "Head-to-Head" records. These are **Static Features**.
-However, an athlete's performance is **Dynamic**—a 5-match winning streak indicates a latent "form" that a static rank cannot capture.
+### The "Static Stats" Fallacy
+Standard sports modeling suffers from a critical flaw: it aggregates performance (e.g., "Player A serves 65% first in") into a single static number.
+This ignores **Momentum**—the temporal reality that a player's form fluctuates significantly over a season.
 
 ### The Objective
-Build a system that answers: **"How much does recent momentum outweigh long-term class?"**
+Build a system that answers: **"Given the exact sequence of the last 10 matches for Player A and Player B, what is the probability of Player A winning today?"**
 
-To do this, we cannot use standard tabular models. We need a Time-Series architecture that "reads" the last 10 matches of Player A and Player B independently before letting them "play" in the model's fusion layer.
+Crucially, this system must avoid **Look-Ahead Bias**, ensuring that no future information leaks into the training set—a common pitfall in academic sports papers.
 
 ---
 
 # 2. System Architecture
 
-To ensure the model is deployable and free of "look-ahead bias" (data leakage), I built a strict time-aware pipeline.
+To capture this temporal dynamic, I utilized a **Siamese (Twin) Architecture**.
+The network processes each player's history independently to generate a "Momentum Embedding" before fusion.
 
-### Directory Structure
-The project uses a modular design to separate the training loop from the model definition, allowing for rapid iteration with Optuna.
-
-```{text}
-├── src/
-│   ├── data.py            # Time-Series Splitter (Prevents Leakage)
-│   ├── features.py        # Rolling Window Logic
-│   ├── models/            # SiameseLSTM & RF Baselines
-│   ├── training.py        # Early Stopping Logic
-│   └── evaluation.py      # Calibration & SHAP
-├── configs/               # Hyperparameter YAMLs
-└── main.py                # CLI Entrypoint
-
-```
-
-### The Engine: Hybrid Siamese LSTM
-
-The core innovation is the `SiameseLSTM` class. It encodes two separate histories into "Momentum Embeddings" before merging them with match context.
-
-```{python}
-# src/models/nn.py Snippet
-
-class SiameseLSTM(nn.Module):
-    def __init__(self, config, input_dim, context_dim):
-        super().__init__()
-
-        # 1. Twin LSTMs (Shared Weights)
-        # Learns the "Universal Concept of Form" applicable to any player
-        self.lstm = nn.LSTM(
-            input_size=input_dim,
-            hidden_size=config.hidden_size,
-            batch_first=True
-        )
-
-    def forward(self, seq_a, seq_b, context):
-        # Generate Momentum Embeddings
-        _, (h_n_a, _) = self.lstm(seq_a) # Player A Form
-        _, (h_n_b, _) = self.lstm(seq_b) # Player B Form
-
-        # Fusion: Form A vs Form B + Context (Surface, Rank)
-        combined = torch.cat([h_n_a[-1], h_n_b[-1], context], dim=1)
-
-        return self.fusion(combined)
-```
-
----
-
-# 3. Modeling Strategy
-
-### Model Selection
-
-I benchmarked the Deep Learning approach against an industry-standard baseline:
-
-1. **Random Forest (Baseline):** Uses manually engineered "Rolling Averages" (e.g., "Avg Aces Last 10 Matches").
-2. **Siamese LSTM (Challenger):** Uses **Raw Match Logs**. It must learn to calculate averages, trends, and volatility itself.
-
-**Winner: Tie (Validation of Signal).**
-The LSTM matched the Random Forest (AUC 0.7060 vs 0.7062). This is a massive success for the Deep Learning approach because it achieved this performance **without** manual feature engineering, proving it successfully extracted the latent signal from noise.
-
-### The "Strategy" Diagram
-
-Visualizing the flow of data through the "Twin" network:
-
+### Model Diagram
 ```{mermaid}
 %%| label: fig-arch
 %%| fig-cap: "Hybrid Siamese LSTM Architecture"
@@ -125,42 +66,61 @@ graph TD
 
 ---
 
+# 3. Modeling Strategy
+
+### Benchmarking Complexity
+
+I compared the deep learning approach against an industry-standard baseline to justify the computational cost.
+
+1. **Random Forest (Baseline):** Trained on manually engineered rolling averages (e.g., "Avg Aces Last 5 Matches").
+2. **Siamese LSTM (Challenger):** Trained on raw, sequential match logs.
+
+**Winner: Tie (with a caveat).**
+The LSTM matched the Random Forest in accuracy (~64.6%) without needing manual feature engineering. This validates that the neural network successfully "learned" the rolling statistics and momentum features automatically from the raw sequence.
+
+---
+
 # 4. Results & Analysis
 
 ### Performance Metrics
 
-The model separates winners from losers with high consistency for a stochastic domain.
+The final model demonstrated robust separation power between winners and losers.
 
-* **ROC-AUC:** 0.706 (Institutional Standard)
-* **Accuracy:** 64.6%
-* **Precision:** 0.65
+| Metric | Random Forest (Baseline) | Siamese LSTM (Ours) | Insight |
+| --- | --- | --- | --- |
+| **Test AUC** | 0.7062 | **0.7060** | Parity achieved with engineered baseline. |
+| **Accuracy** | 64.67% | **64.61%** | Consistent edge over coin-flip noise. |
 
 ### Business Insight: The Calibration Curve
 
-In finance and betting, **Calibration > Accuracy**. If a model says "60% confidence," it must be right 60% of the time. If it is right 80% of the time, it is under-confident (missed value). If it is right 40% of the time, it is over-confident (ruin).
+In quantitative finance, accuracy is secondary to **Calibration**. If a model says "70% confidence," the event must happen 70% of the time to be profitable.
+
+The plot below shows the LSTM's reliability. The Orange line (Model) closely hugs the Blue line (Perfect Calibration).
 
 ::: {.callout-note appearance="simple" icon=false}
-**Quantitative Conclusion:** The model is perfectly calibrated.
-The alignment of the orange curve with the diagonal proves that the LSTM's probability outputs represent real-world probabilities. This allows for **Kelly Criterion** sizing, transforming predictions into a viable portfolio strategy.
+**Betting Implication:** The model knows what it doesn't know.
+Because the probabilities are honest (calibrated), this model can be directly plugged into a **Kelly Criterion** sizing strategy to maximize long-term bankroll growth without the risk of ruin caused by overconfidence.
 :::
 
 ---
 
-# 5. Key Risk Drivers (Interpretation)
+# 5. Key Drivers (Interpretation)
 
-Since LSTMs are "Black Boxes," I used the Random Forest baseline as a **Proxy Explainer** to derive SHAP values. This reveals what the market cares about.
+While the LSTM acts as the "Engine," we use the Random Forest baseline to explain the "Why" (Proxy Analysis).
 
-1. **Rank Difference (`rank_diff`):** The gravity of the ATP tour. Higher ranked players usually win.
-2. **Momentum Gap (`win_pct_roll_diff`):** The second most important feature. If Player A has won 8/10 recently and Player B has won 2/10, the model overrides the Rank logic.
-3. **Serve Dominance (`svpt_roll_diff`):** On Hard/Grass courts, serve percentage is a critical "floor" for performance.
+**SHAP Value Analysis:**
+
+1. **Rank Difference (`rank_diff`):** The market anchor. The widening gap in ranking remains the single strongest predictor.
+2. **Momentum (`win_pct_roll_diff`):** The difference in recent win percentage is the critical secondary factor.
+3. **Serve Metrics (`svpt`):** Performance on serve points acts as a granular proxy for player dominance.
 
 ---
 
 # Conclusion
 
-This project demonstrates that Deep Learning can match the performance of expert systems in noisy, tabular domains.
+This project demonstrates the application of **Deep Learning to Time-Series Forecasting** in a hostile, high-noise environment.
 
-By using a Siamese architecture, I successfully modeled the "Collision of Histories," creating a system that doesn't just predict winners, but accurately prices risk.
+By strictly enforcing time-series validation and prioritizing probability calibration over raw accuracy, BreakPoint AI bridges the gap between "sports data science" and **quantitative financial modeling**.
 
 * **Code Repository:** [View on GitHub](https://www.google.com/search?q=https://github.com/condeg0/breakpoint-ai){.btn .btn-primary role="button"}
-* **Tech Stack:** Python, PyTorch, Optuna, Pandas.
+* **Tech Stack:** Python, PyTorch (LSTMs), Optuna, Pandas.
