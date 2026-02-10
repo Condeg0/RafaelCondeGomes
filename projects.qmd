@@ -11,7 +11,7 @@ format:
 
 ::: {.g-col-12 .g-col-md-6}
 ### BreakPoint AI: ATP Tennis Forecasting
-![](tennis-forecast/shap_summary_lstm.png)
+![](tennis-forecast/shap_summary_rf.png)
 
 **Stack:** Python, PyTorch (LSTMs), Optuna, Time-Series Analysis
 

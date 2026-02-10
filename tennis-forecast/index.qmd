@@ -93,11 +93,4 @@ While LSTMs are "black boxes," we can utilize our Random Forest baseline to isol
 
 ## 5. Project Links
 
-::: {.grid}
-::: {.g-col-12 .g-col-md-6}
-**[View Source Code on GitHub](https://www.google.com/search?q=https://github.com/condeg0/breakpoint-ai)**{.btn .btn-primary .btn-lg role="button"}
-:::
-::: {.g-col-12 .g-col-md-6}
-**[Read Technical Report](https://www.google.com/search?q=../index.html)**{.btn .btn-outline-primary .btn-lg role="button"}
-:::
-:::
+* Code Repository: [View on GitHub](https://github.com/condeg0/breakpoint-ai){.btn .btn-primary role="button"}
