@@ -97,6 +97,8 @@ In quantitative finance, accuracy is secondary to **Calibration**. If a model sa
 
 The plot below shows the LSTM's reliability. The Orange line (Model) closely hugs the Blue line (Perfect Calibration).
 
+![Calibration Curve for LSTM Model](./calibration_curve_lstm.png)
+
 ::: {.callout-note appearance="simple" icon=false}
 **Betting Implication:** The model knows what it doesn't know.
 Because the probabilities are honest (calibrated), this model can be directly plugged into a **Kelly Criterion** sizing strategy to maximize long-term bankroll growth without the risk of ruin caused by overconfidence.
