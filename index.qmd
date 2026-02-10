@@ -1,6 +1,8 @@
 ---
 title: "Rafael Condé Gomes"
 image: artifacts/IMG_6178.JPG
+resources:
+   - artifacts/Resume-RafaelCondeGomes.pdf
 about:
   template: jolla
   image-shape: round
