@@ -70,6 +70,9 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 </head>
@@ -119,11 +122,14 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#executive-summary" id="toc-executive-summary" class="nav-link active" data-scroll-target="#executive-summary">Executive Summary</a></li>
-  <li><a href="#system-architecture" id="toc-system-architecture" class="nav-link" data-scroll-target="#system-architecture">1. System Architecture</a></li>
-  <li><a href="#performance-reliability" id="toc-performance-reliability" class="nav-link" data-scroll-target="#performance-reliability">2. Performance &amp; Reliability</a></li>
-  <li><a href="#explainability-shap" id="toc-explainability-shap" class="nav-link" data-scroll-target="#explainability-shap">3. Explainability (SHAP)</a></li>
-  <li><a href="#tech-stack-implementation" id="toc-tech-stack-implementation" class="nav-link" data-scroll-target="#tech-stack-implementation">4. Tech Stack &amp; Implementation</a></li>
+  <li><a href="#system-architecture" id="toc-system-architecture" class="nav-link active" data-scroll-target="#system-architecture">1. System Architecture</a></li>
+  <li><a href="#performance-reliability" id="toc-performance-reliability" class="nav-link" data-scroll-target="#performance-reliability">2. Performance &amp; Reliability</a>
+  <ul class="collapse">
+  <li><a href="#model-comparison" id="toc-model-comparison" class="nav-link" data-scroll-target="#model-comparison">Model Comparison</a></li>
+  <li><a href="#reliability-diagram-calibration" id="toc-reliability-diagram-calibration" class="nav-link" data-scroll-target="#reliability-diagram-calibration">Reliability Diagram (Calibration)</a></li>
+  </ul></li>
+  <li><a href="#explainability-proxy-analysis" id="toc-explainability-proxy-analysis" class="nav-link" data-scroll-target="#explainability-proxy-analysis">3. Explainability (Proxy Analysis)</a></li>
+  <li><a href="#tech-stack" id="toc-tech-stack" class="nav-link" data-scroll-target="#tech-stack">4. Tech Stack</a></li>
   <li><a href="#project-links" id="toc-project-links" class="nav-link" data-scroll-target="#project-links">5. Project Links</a></li>
   </ul>
 </nav>
@@ -167,51 +173,63 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="executive-summary" class="level1">
-<h1>Executive Summary</h1>
-<p><strong>BreakPoint AI</strong> treats a tennis match not as a static row of data, but as the <strong>collision of two historical trajectories</strong>.</p>
-<p>By implementing a <strong>Hybrid Siamese LSTM</strong>, this system captures latent “momentum” features from raw match sequences that static baselines miss. Unlike standard data science projects that optimize solely for accuracy, this project prioritizes <strong>Calibration</strong> and <strong>Reliability</strong>, mirroring the constraints of institutional risk modeling.</p>
-<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout callout-style-simple callout-note no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
-<i class="callout-icon"></i>
+<i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Quant Methodology: The “Leakage-Free” Guarantee
+<span class="screen-reader-only">Note</span>Executive Summary
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>A common pitfall in sports modeling is “look-ahead bias” (using future stats to predict past events). BreakPoint AI enforces a strict <code>date &lt; current_date</code> filtration system for every training batch, ensuring the model’s edge is genuine and deployable.</p>
+<p><strong>BreakPoint AI</strong> treats a tennis match not as a static row of data, but as the <strong>collision of two historical trajectories</strong>.</p>
+<p>By implementing a <strong>Hybrid Siamese LSTM</strong>, this system captures latent “momentum” features from raw match sequences that static baselines miss. Unlike standard data science projects that optimize solely for accuracy, this project prioritizes <strong>Calibration</strong> and <strong>Reliability</strong>, mirroring the constraints of institutional risk modeling.</p>
 </div>
 </div>
-<hr>
-</section>
-<section id="system-architecture" class="level1">
-<h1>1. System Architecture</h1>
+<section id="system-architecture" class="level2">
+<h2 class="anchored" data-anchor-id="system-architecture">1. System Architecture</h2>
 <p>The model uses a <strong>Siamese (Twin) Architecture</strong> to process players independently before fusion. This allows the network to learn a “Momentum Embedding” for each athlete—a vector representation of their current form—before assessing the specific matchup.</p>
-<pre class="mermaid"><code>%%| label: fig-arch
-%%| fig-cap: "Hybrid Siamese LSTM Architecture"
-graph TD
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div id="fig-arch" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-arch-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>
+<pre class="mermaid mermaid-js" data-label="fig-arch">graph TD
     subgraph "Sequence Processing (Twin LSTMs)"
         A[Player A History&lt;br/&gt;(Last 10 Matches)] --&gt;|LSTM| E1[Momentum Embedding A]
         B[Player B History&lt;br/&gt;(Last 10 Matches)] --&gt;|LSTM| E2[Momentum Embedding B]
     end
-    
+
     subgraph "Context Fusion"
         C[Static Context&lt;br/&gt;(Rank, Surface, H2H)] --&gt; F[Fusion Layer]
         E1 --&gt; F
         E2 --&gt; F
     end
-    
+
     F --&gt;|Dense + Dropout| O[Win Probability]
-    
+
     style F fill:#f9f,stroke:#333,stroke-width:2px
-    style O fill:#bbf,stroke:#333,stroke-width:2px</code></pre>
+    style O fill:#bbf,stroke:#333,stroke-width:2px
+
+</pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-arch-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Hybrid Siamese LSTM Architecture
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
 </section>
-<section id="performance-reliability" class="level1">
-<h1>2. Performance &amp; Reliability</h1>
+<section id="performance-reliability" class="level2">
+<h2 class="anchored" data-anchor-id="performance-reliability">2. Performance &amp; Reliability</h2>
 <p>In high-variance domains like ATP Tennis, an AUC of ~0.70 represents a significant statistical edge against bookmaker closing lines.</p>
-<p>Model Comparison The LSTM matches the highly optimized Random Forest baseline, but does so using Raw Sequences rather than engineered features, validating the neural network’s ability to extract latent signal.</p>
+<section id="model-comparison" class="level3">
+<h3 class="anchored" data-anchor-id="model-comparison">Model Comparison</h3>
+<p>The LSTM matches the highly optimized Random Forest baseline in raw accuracy but does so using <strong>Raw Sequences</strong> rather than engineered features. This validates the neural network’s ability to extract latent signals (momentum) automatically.</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 25%">
@@ -221,54 +239,82 @@ graph TD
 </colgroup>
 <thead>
 <tr class="header">
-<th style="text-align: left;">Metric</th>
-<th style="text-align: left;">Random Forest (Baseline)</th>
-<th style="text-align: left;">Siamese LSTM</th>
-<th style="text-align: left;">Architectural Insight</th>
+<th>Metric</th>
+<th>Random Forest (Baseline)</th>
+<th>Siamese LSTM (Ours)</th>
+<th>Architectural Insight</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">**Test AUC*</td>
-<td style="text-align: left;">0.7062</td>
-<td style="text-align: left;"><strong>0.7060</strong></td>
-<td style="text-align: left;">Parity achieved.</td>
+<td><strong>Test AUC</strong></td>
+<td>0.7062</td>
+<td><strong>0.7060</strong></td>
+<td>Parity achieved.</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><strong>Accuracy</strong></td>
-<td style="text-align: left;">64.67%</td>
-<td style="text-align: left;"><strong>64.61%</strong></td>
-<td style="text-align: left;">Consistent edge over noise.</td>
+<td><strong>Accuracy</strong></td>
+<td>64.67%</td>
+<td><strong>64.61%</strong></td>
+<td>Consistent edge over noise.</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;"><strong>Input Data</strong></td>
-<td style="text-align: left;">Engineered Features (<em>Rolling averages</em>)</td>
-<td style="text-align: left;">Raw Sequences (<em>Match-by-match logs</em>)</td>
-<td style="text-align: left;">LSTM successfully learned the “Rolling” feature logic internally.</td>
+<td><strong>Input Data</strong></td>
+<td>Rolling Averages</td>
+<td><strong>Raw Sequences</strong></td>
+<td>LSTM learned “momentum” logic internally.</td>
 </tr>
 </tbody>
 </table>
-<p><strong>Reliability Diagram (Calibration)</strong> Does the model know what it doesn’t know? This plot shows that our LSTM is perfectly calibrated (Orange line follows the Blue diagonal). When the model predicts a 70% win probability, the player wins ~70% of the time.</p>
-<p>IMAGE HERE!</p>
 </section>
-<section id="explainability-shap" class="level1">
-<h1>3. Explainability (SHAP)</h1>
-<p>To ensure the model isn’t relying on spurious correlations, we utilize SHAP (SHapley Additive exPlanations).</p>
-<p><img src="./shap_summary_lstm.png" class="img-fluid" style="width:80.0%"></p>
+<section id="reliability-diagram-calibration" class="level3">
+<h3 class="anchored" data-anchor-id="reliability-diagram-calibration">Reliability Diagram (Calibration)</h3>
+<p>Does the model know what it doesn’t know?</p>
+<p>The plot below demonstrates that the LSTM is <strong>perfectly calibrated</strong> (the Orange line tracks the diagonal). When the model predicts a 70% win probability, the player actually wins ~70% of the time. This “honesty” is critical for betting strategies or risk management, where Expected Value (EV) relies on accurate probability estimation.</p>
 </section>
-<section id="tech-stack-implementation" class="level1">
-<h1>4. Tech Stack &amp; Implementation</h1>
+</section>
+<section id="explainability-proxy-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="explainability-proxy-analysis">3. Explainability (Proxy Analysis)</h2>
+<p>While LSTMs are “black boxes,” we can utilize our Random Forest baseline to isolate the primary drivers of match outcomes.</p>
+<p><strong>Key Insight:</strong> The SHAP values below reveal that while <strong>Rank Difference</strong> (the market standard) is the strongest predictor, <strong>Momentum Features</strong> (Rolling Win % Difference) act as critical secondary indicators. The LSTM automates the extraction of these momentum features from raw logs.</p>
+</section>
+<section id="tech-stack" class="level2">
+<h2 class="anchored" data-anchor-id="tech-stack">4. Tech Stack</h2>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"></ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">Core Stack</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Optimization</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false" href="">Deployment</a></li></ul>
 <div class="tab-content">
-
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<ul>
+<li><strong>Language:</strong> Python 3.10</li>
+<li><strong>Deep Learning:</strong> PyTorch 2.0 (Custom <code>nn.Module</code> definitions)</li>
+<li><strong>Data Manipulation:</strong> Pandas, NumPy (Vectorized operations)</li>
+</ul>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<ul>
+<li><strong>Hyperparameter Tuning:</strong> Optuna (Bayesian Search with TPE Sampler)</li>
+<li><strong>Search Space:</strong> Learning Rate, Dropout, LSTM Hidden Size, Num Layers</li>
+<li><strong>Objective:</strong> Maximize Validation AUC with Early Stopping</li>
+</ul>
+</div>
+<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
+<ul>
+<li><strong>Experiment Tracking:</strong> Custom Artifact Logging (Metrics, Plots, Params)</li>
+<li><strong>Validation:</strong> Strict Time-Series Split (Walk-Forward Validation)</li>
+</ul>
+</div>
 </div>
 </div>
 </section>
-<section id="project-links" class="level1">
-<h1>5. Project Links</h1>
+<section id="project-links" class="level2">
+<h2 class="anchored" data-anchor-id="project-links">5. Project Links</h2>
 <div class="grid">
-<p>::: {.g-col-6} View Source Code on GitHub{.btn .btn-primary .btn-lg role=“button”} ::: ::: {.g-col-6} Read Technical Report{.btn .btn-outline-primary .btn-lg role=“button”} :::</p>
+<div class="g-col-12 g-col-md-6">
+<p><strong><a href="https://www.google.com/search?q=https://github.com/condeg0/breakpoint-ai">View Source Code on GitHub</a></strong>{.btn .btn-primary .btn-lg role=“button”}</p>
+</div>
+<div class="g-col-12 g-col-md-6">
+<p><strong><a href="https://www.google.com/search?q=../index.html">Read Technical Report</a></strong>{.btn .btn-outline-primary .btn-lg role=“button”}</p>
+</div>
 </div>
 
 

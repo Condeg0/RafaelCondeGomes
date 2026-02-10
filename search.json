@@ -53,7 +53,42 @@
     "href": "tennis-forecast/index.html",
     "title": "BreakPoint AI: Momentum Modeling in ATP Tennis",
     "section": "",
-    "text": "Executive Summary\nBreakPoint AI treats a tennis match not as a static row of data, but as the collision of two historical trajectories.\nBy implementing a Hybrid Siamese LSTM, this system captures latent “momentum” features from raw match sequences that static baselines miss. Unlike standard data science projects that optimize solely for accuracy, this project prioritizes Calibration and Reliability, mirroring the constraints of institutional risk modeling.\n\n\n\n\n\n\nTipQuant Methodology: The “Leakage-Free” Guarantee\n\n\n\nA common pitfall in sports modeling is “look-ahead bias” (using future stats to predict past events). BreakPoint AI enforces a strict date &lt; current_date filtration system for every training batch, ensuring the model’s edge is genuine and deployable.\n\n\n\n\n\n1. System Architecture\nThe model uses a Siamese (Twin) Architecture to process players independently before fusion. This allows the network to learn a “Momentum Embedding” for each athlete—a vector representation of their current form—before assessing the specific matchup.\n%%| label: fig-arch\n%%| fig-cap: \"Hybrid Siamese LSTM Architecture\"\ngraph TD\n    subgraph \"Sequence Processing (Twin LSTMs)\"\n        A[Player A History&lt;br/&gt;(Last 10 Matches)] --&gt;|LSTM| E1[Momentum Embedding A]\n        B[Player B History&lt;br/&gt;(Last 10 Matches)] --&gt;|LSTM| E2[Momentum Embedding B]\n    end\n    \n    subgraph \"Context Fusion\"\n        C[Static Context&lt;br/&gt;(Rank, Surface, H2H)] --&gt; F[Fusion Layer]\n        E1 --&gt; F\n        E2 --&gt; F\n    end\n    \n    F --&gt;|Dense + Dropout| O[Win Probability]\n    \n    style F fill:#f9f,stroke:#333,stroke-width:2px\n    style O fill:#bbf,stroke:#333,stroke-width:2px\n\n\n2. Performance & Reliability\nIn high-variance domains like ATP Tennis, an AUC of ~0.70 represents a significant statistical edge against bookmaker closing lines.\nModel Comparison The LSTM matches the highly optimized Random Forest baseline, but does so using Raw Sequences rather than engineered features, validating the neural network’s ability to extract latent signal.\n\n\n\n\n\n\n\n\n\nMetric\nRandom Forest (Baseline)\nSiamese LSTM\nArchitectural Insight\n\n\n\n\n**Test AUC*\n0.7062\n0.7060\nParity achieved.\n\n\nAccuracy\n64.67%\n64.61%\nConsistent edge over noise.\n\n\nInput Data\nEngineered Features (Rolling averages)\nRaw Sequences (Match-by-match logs)\nLSTM successfully learned the “Rolling” feature logic internally.\n\n\n\nReliability Diagram (Calibration) Does the model know what it doesn’t know? This plot shows that our LSTM is perfectly calibrated (Orange line follows the Blue diagonal). When the model predicts a 70% win probability, the player wins ~70% of the time.\nIMAGE HERE!\n\n\n3. Explainability (SHAP)\nTo ensure the model isn’t relying on spurious correlations, we utilize SHAP (SHapley Additive exPlanations).\n\n\n\n4. Tech Stack & Implementation\n\n\n\n\n\n\n\n\n5. Project Links\n\n::: {.g-col-6} View Source Code on GitHub{.btn .btn-primary .btn-lg role=“button”} ::: ::: {.g-col-6} Read Technical Report{.btn .btn-outline-primary .btn-lg role=“button”} :::"
+    "text": "NoteExecutive Summary\n\n\n\nBreakPoint AI treats a tennis match not as a static row of data, but as the collision of two historical trajectories.\nBy implementing a Hybrid Siamese LSTM, this system captures latent “momentum” features from raw match sequences that static baselines miss. Unlike standard data science projects that optimize solely for accuracy, this project prioritizes Calibration and Reliability, mirroring the constraints of institutional risk modeling."
+  },
+  {
+    "objectID": "tennis-forecast/index.html#system-architecture",
+    "href": "tennis-forecast/index.html#system-architecture",
+    "title": "BreakPoint AI: Momentum Modeling in ATP Tennis",
+    "section": "1. System Architecture",
+    "text": "1. System Architecture\nThe model uses a Siamese (Twin) Architecture to process players independently before fusion. This allows the network to learn a “Momentum Embedding” for each athlete—a vector representation of their current form—before assessing the specific matchup.\n\n\n\n\n\n\ngraph TD\n    subgraph \"Sequence Processing (Twin LSTMs)\"\n        A[Player A History&lt;br/&gt;(Last 10 Matches)] --&gt;|LSTM| E1[Momentum Embedding A]\n        B[Player B History&lt;br/&gt;(Last 10 Matches)] --&gt;|LSTM| E2[Momentum Embedding B]\n    end\n\n    subgraph \"Context Fusion\"\n        C[Static Context&lt;br/&gt;(Rank, Surface, H2H)] --&gt; F[Fusion Layer]\n        E1 --&gt; F\n        E2 --&gt; F\n    end\n\n    F --&gt;|Dense + Dropout| O[Win Probability]\n\n    style F fill:#f9f,stroke:#333,stroke-width:2px\n    style O fill:#bbf,stroke:#333,stroke-width:2px\n\n\n\n\n\nFigure 1: Hybrid Siamese LSTM Architecture"
+  },
+  {
+    "objectID": "tennis-forecast/index.html#performance-reliability",
+    "href": "tennis-forecast/index.html#performance-reliability",
+    "title": "BreakPoint AI: Momentum Modeling in ATP Tennis",
+    "section": "2. Performance & Reliability",
+    "text": "2. Performance & Reliability\nIn high-variance domains like ATP Tennis, an AUC of ~0.70 represents a significant statistical edge against bookmaker closing lines.\n\nModel Comparison\nThe LSTM matches the highly optimized Random Forest baseline in raw accuracy but does so using Raw Sequences rather than engineered features. This validates the neural network’s ability to extract latent signals (momentum) automatically.\n\n\n\n\n\n\n\n\n\nMetric\nRandom Forest (Baseline)\nSiamese LSTM (Ours)\nArchitectural Insight\n\n\n\n\nTest AUC\n0.7062\n0.7060\nParity achieved.\n\n\nAccuracy\n64.67%\n64.61%\nConsistent edge over noise.\n\n\nInput Data\nRolling Averages\nRaw Sequences\nLSTM learned “momentum” logic internally.\n\n\n\n\n\nReliability Diagram (Calibration)\nDoes the model know what it doesn’t know?\nThe plot below demonstrates that the LSTM is perfectly calibrated (the Orange line tracks the diagonal). When the model predicts a 70% win probability, the player actually wins ~70% of the time. This “honesty” is critical for betting strategies or risk management, where Expected Value (EV) relies on accurate probability estimation."
+  },
+  {
+    "objectID": "tennis-forecast/index.html#explainability-proxy-analysis",
+    "href": "tennis-forecast/index.html#explainability-proxy-analysis",
+    "title": "BreakPoint AI: Momentum Modeling in ATP Tennis",
+    "section": "3. Explainability (Proxy Analysis)",
+    "text": "3. Explainability (Proxy Analysis)\nWhile LSTMs are “black boxes,” we can utilize our Random Forest baseline to isolate the primary drivers of match outcomes.\nKey Insight: The SHAP values below reveal that while Rank Difference (the market standard) is the strongest predictor, Momentum Features (Rolling Win % Difference) act as critical secondary indicators. The LSTM automates the extraction of these momentum features from raw logs."
+  },
+  {
+    "objectID": "tennis-forecast/index.html#tech-stack",
+    "href": "tennis-forecast/index.html#tech-stack",
+    "title": "BreakPoint AI: Momentum Modeling in ATP Tennis",
+    "section": "4. Tech Stack",
+    "text": "4. Tech Stack\n\nCore StackOptimizationDeployment\n\n\n\nLanguage: Python 3.10\nDeep Learning: PyTorch 2.0 (Custom nn.Module definitions)\nData Manipulation: Pandas, NumPy (Vectorized operations)\n\n\n\n\nHyperparameter Tuning: Optuna (Bayesian Search with TPE Sampler)\nSearch Space: Learning Rate, Dropout, LSTM Hidden Size, Num Layers\nObjective: Maximize Validation AUC with Early Stopping\n\n\n\n\nExperiment Tracking: Custom Artifact Logging (Metrics, Plots, Params)\nValidation: Strict Time-Series Split (Walk-Forward Validation)"
+  },
+  {
+    "objectID": "tennis-forecast/index.html#project-links",
+    "href": "tennis-forecast/index.html#project-links",
+    "title": "BreakPoint AI: Momentum Modeling in ATP Tennis",
+    "section": "5. Project Links",
+    "text": "5. Project Links\n\n\nView Source Code on GitHub{.btn .btn-primary .btn-lg role=“button”}\n\n\nRead Technical Report{.btn .btn-outline-primary .btn-lg role=“button”}"
   },
   {
     "objectID": "index.html",
