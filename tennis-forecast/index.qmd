@@ -110,6 +110,8 @@ Because the probabilities are honest (calibrated), this model can be directly pl
 
 While the LSTM acts as the "Engine," we use the Random Forest baseline to explain the "Why" (Proxy Analysis).
 
+![SHAP Value for Random Forests](./shap_summary_rf.png)
+
 **SHAP Value Analysis:**
 
 1. **Rank Difference (`rank_diff`):** The market anchor. The widening gap in ranking remains the single strongest predictor.
