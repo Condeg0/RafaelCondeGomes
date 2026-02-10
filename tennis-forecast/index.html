@@ -197,13 +197,13 @@ ul.task-list li input[type="checkbox"] {
 <div aria-describedby="fig-arch-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div>
 <pre class="mermaid mermaid-js" data-label="fig-arch">graph TD
-    subgraph "Sequence Processing (Twin LSTMs)"
-        A[Player A History&lt;br/&gt;(Last 10 Matches)] --&gt;|LSTM| E1[Momentum Embedding A]
-        B[Player B History&lt;br/&gt;(Last 10 Matches)] --&gt;|LSTM| E2[Momentum Embedding B]
+    subgraph SP ["Sequence Processing (Twin LSTMs)"]
+        A["Player A History&lt;br/&gt;(Last 10 Matches)"] --&gt;|LSTM| E1[Momentum Embedding A]
+        B["Player B History&lt;br/&gt;(Last 10 Matches)"] --&gt;|LSTM| E2[Momentum Embedding B]
     end
 
-    subgraph "Context Fusion"
-        C[Static Context&lt;br/&gt;(Rank, Surface, H2H)] --&gt; F[Fusion Layer]
+    subgraph CF ["Context Fusion"]
+        C["Static Context&lt;br/&gt;(Rank, Surface, H2H)"] --&gt; F[Fusion Layer]
         E1 --&gt; F
         E2 --&gt; F
     end
@@ -212,7 +212,6 @@ ul.task-list li input[type="checkbox"] {
 
     style F fill:#f9f,stroke:#333,stroke-width:2px
     style O fill:#bbf,stroke:#333,stroke-width:2px
-
 </pre>
 </div>
 </div>
