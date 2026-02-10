@@ -2,38 +2,31 @@
 title: "Rafael Condé Gomes"
 image: artifacts/IMG_6178.JPG
 about:
-  template: trestles
+  template: jolla
   image-shape: round
   links:
-    - icon: file-code
-      text: Portfolio
-      href: https://condeg0.github.io/RafaelCondeGomes/projects.html
     - icon: linkedin
-      text: Linkedin
+      text: LinkedIn
       href: https://www.linkedin.com/in/rafael-conde-878284250/
     - icon: github
       text: Github
       href: https://github.com/Condeg0
+    - icon: file-text
+      text: Resumé
+      href: "#"
 ---
 
-## Data Scientist & Quantitative Analyst
+### Transforming Ambiguity into Action
 
-I am a double major in **Econometrics** and **Information Science (concentration in Data Science & Analytics)** at the University of South Florida (Class of 2026).
+I am a double major in **Econometrics** and **Data Science** at the University of South Florida.
 
-**I believe valid decisions require solid evidence, yet they are rarely based on it.**
+My work bridges the gap between raw data and decision-making. I replace "gut feeling" with rigorous inference, building systems that optimize efficiency and solve complex problems in finance and operations.
 
-My focus is bridging that gap. I combine **econometric rigor** with **data science** to transform ambiguity into actionable insights. My goal is to replace intuition with inference, helping organizations optimize efficiency and solve complex real-world problems with precision.
-
-### Experience
-- **Technology Director** | Hexa Junior Consulting Company
-- **Research Associate** | USF Student Investment Club (Macroeconomics)
-- **Tutor** | University of South Florida Athletics
-
-### Key Projects
-- **BreakPoint AI (Deep Learning):** Developed a Hybrid Siamese LSTM to forecast ATP tennis matches, achieving parity with betting market efficiency.
-- **Credit Risk Optimization:** Engineered a profit-maximizing threshold model that increased portfolio ROI by ~40% over baseline.
-- **NYC Demand Analysis:** Conducted geospatial analysis of 4.5M+ Uber rides to solve the driver "Cold Start" positioning problem.
-
-::: {.callout-note appearance="minimal"}
-**Portfolio & Code:** View my technical projects [here](./projects.qmd).
+::: {.grid}
+::: {.g-col-12 .g-col-md-6}
+[**View Case Studies**](projects.qmd){.btn .btn-primary .btn-lg role="button"}
+:::
+::: {.g-col-12 .g-col-md-6}
+[**My Background**](about.qmd){.btn .btn-outline-primary .btn-lg role="button"}
+:::
 :::
