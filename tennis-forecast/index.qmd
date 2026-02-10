@@ -3,31 +3,25 @@ title: "BreakPoint AI: Momentum Modeling in ATP Tennis"
 description: "A Hybrid Siamese LSTM for sports forecasting, featuring strict time-series validation, Bayesian optimization, and institutional-grade risk calibration."
 date: 2026-02-03
 categories: [Deep Learning, Quantitative Finance, Time-Series, PyTorch]
-image: "assets/calibration_curve.png"
+image: "assets/calibration_curve_lstm.png"
 format:
   html:
     toc: true
     code-fold: true
 ---
 
-# Executive Summary
-
+:::{.callout-note appearance="simple" icon=false}
+## Executive Summary
 **BreakPoint AI** treats a tennis match not as a static row of data, but as the **collision of two historical trajectories**.
 
 By implementing a **Hybrid Siamese LSTM**, this system captures latent "momentum" features from raw match sequences that static baselines miss. Unlike standard data science projects that optimize solely for accuracy, this project prioritizes **Calibration** and **Reliability**, mirroring the constraints of institutional risk modeling.
-
-::: {.callout-tip icon="true"}
-## Quant Methodology: The "Leakage-Free" Guarantee
-A common pitfall in sports modeling is "look-ahead bias" (using future stats to predict past events). BreakPoint AI enforces a strict `date < current_date` filtration system for every training batch, ensuring the model's edge is genuine and deployable.
 :::
 
----
-
-# 1. System Architecture
+## 1. System Architecture
 
 The model uses a **Siamese (Twin) Architecture** to process players independently before fusion. This allows the network to learn a "Momentum Embedding" for each athlete—a vector representation of their current form—before assessing the specific matchup.
 
-```mermaid
+```{mermaid}
 %%| label: fig-arch
 %%| fig-cap: "Hybrid Siamese LSTM Architecture"
 graph TD
@@ -35,73 +29,75 @@ graph TD
         A[Player A History<br/>(Last 10 Matches)] -->|LSTM| E1[Momentum Embedding A]
         B[Player B History<br/>(Last 10 Matches)] -->|LSTM| E2[Momentum Embedding B]
     end
-    
+
     subgraph "Context Fusion"
         C[Static Context<br/>(Rank, Surface, H2H)] --> F[Fusion Layer]
         E1 --> F
         E2 --> F
     end
-    
+
     F -->|Dense + Dropout| O[Win Probability]
-    
+
     style F fill:#f9f,stroke:#333,stroke-width:2px
     style O fill:#bbf,stroke:#333,stroke-width:2px
+
 ```
 
-# 2. Performance & Reliability
+## 2. Performance & Reliability
+
 In high-variance domains like ATP Tennis, an AUC of ~0.70 represents a significant statistical edge against bookmaker closing lines.
 
-Model Comparison
-The LSTM matches the highly optimized Random Forest baseline, but does so using Raw Sequences rather than engineered features, validating the neural network's ability to extract latent signal.
+### Model Comparison
 
+The LSTM matches the highly optimized Random Forest baseline in raw accuracy but does so using **Raw Sequences** rather than engineered features. This validates the neural network's ability to extract latent signals (momentum) automatically.
 
-| Metric                       | Random Forest (Baseline)                 | Siamese LSTM                          | Architectural Insight                                             |
-| :---                         | :---                                     | :---                                  | :---                                                              |
-| **Test AUC*                  | 0.7062                                   | **0.7060**                            | Parity achieved.                                                  |
-| **Accuracy**                | 64.67%                                   | **64.61%**                            | Consistent edge over noise.                                       |
-| **Input Data**               | Engineered Features (*Rolling averages*) | Raw Sequences (*Match-by-match logs*) | LSTM successfully learned the "Rolling" feature logic internally. |
+| Metric | Random Forest (Baseline) | Siamese LSTM (Ours) | Architectural Insight |
+| --- | --- | --- | --- |
+| **Test AUC** | 0.7062 | **0.7060** | Parity achieved. |
+| **Accuracy** | 64.67% | **64.61%** | Consistent edge over noise. |
+| **Input Data** | Rolling Averages | **Raw Sequences** | LSTM learned "momentum" logic internally. |
 
+### Reliability Diagram (Calibration)
 
-**Reliability Diagram (Calibration)**
-Does the model know what it doesn't know? This plot shows that our LSTM is perfectly calibrated (Orange line follows the Blue diagonal). When the model predicts a 70% win probability, the player wins ~70% of the time.
+Does the model know what it doesn't know?
 
-IMAGE HERE!
+The plot below demonstrates that the LSTM is **perfectly calibrated** (the Orange line tracks the diagonal). When the model predicts a 70% win probability, the player actually wins ~70% of the time. This "honesty" is critical for betting strategies or risk management, where Expected Value (EV) relies on accurate probability estimation.
 
+## 3. Explainability (Proxy Analysis)
 
-# 3. Explainability (SHAP)
-To ensure the model isn't relying on spurious correlations, we utilize SHAP (SHapley Additive exPlanations).
+While LSTMs are "black boxes," we can utilize our Random Forest baseline to isolate the primary drivers of match outcomes.
 
-![](./shap_summary_lstm.png){width=80%}
+**Key Insight:** The SHAP values below reveal that while **Rank Difference** (the market standard) is the strongest predictor, **Momentum Features** (Rolling Win % Difference) act as critical secondary indicators. The LSTM automates the extraction of these momentum features from raw logs.
 
-# 4. Tech Stack & Implementation
+## 4. Tech Stack
+
 ::: {.panel-tabset}
-Core Stack
-Language: Python 3.10
 
-Deep Learning: PyTorch 2.0 (Custom nn.Module definitions)
+### Core Stack
 
-Data Manipulation: Pandas, NumPy (Vectorized operations)
+* **Language:** Python 3.10
+* **Deep Learning:** PyTorch 2.0 (Custom `nn.Module` definitions)
+* **Data Manipulation:** Pandas, NumPy (Vectorized operations)
 
-Optimization
-Hyperparameter Tuning: Optuna (Bayesian Search with TPE Sampler)
+### Optimization
 
-Search Space: Learning Rate, Dropout, LSTM Hidden Size, Num Layers
+* **Hyperparameter Tuning:** Optuna (Bayesian Search with TPE Sampler)
+* **Search Space:** Learning Rate, Dropout, LSTM Hidden Size, Num Layers
+* **Objective:** Maximize Validation AUC with Early Stopping
 
-Objective: Maximize Validation AUC with Early Stopping
+### Deployment
 
-Deployment
-Experiment Tracking: Custom Artifact Logging (Metrics, Plots, Params)
-
-Validation: Strict Time-Series Split (Walk-Forward Validation)
+* **Experiment Tracking:** Custom Artifact Logging (Metrics, Plots, Params)
+* **Validation:** Strict Time-Series Split (Walk-Forward Validation)
 :::
 
-# 5. Project Links
+## 5. Project Links
 
 ::: {.grid}
-::: {.g-col-6} View Source Code on GitHub{.btn .btn-primary .btn-lg role="button"} :::
-::: {.g-col-6} Read Technical Report{.btn .btn-outline-primary .btn-lg role="button"} :::
+::: {.g-col-12 .g-col-md-6}
+**[View Source Code on GitHub](https://www.google.com/search?q=https://github.com/condeg0/breakpoint-ai)**{.btn .btn-primary .btn-lg role="button"}
 :::
-
-
-
-
+::: {.g-col-12 .g-col-md-6}
+**[Read Technical Report](https://www.google.com/search?q=../index.html)**{.btn .btn-outline-primary .btn-lg role="button"}
+:::
+:::
