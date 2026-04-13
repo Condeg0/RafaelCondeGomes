@@ -6,16 +6,19 @@ resources:
 about:
   template: jolla
   image-shape: round
-  links:
-    - icon: linkedin
-      text: LinkedIn
-      href: https://www.linkedin.com/in/rafael-conde-878284250/
-    - icon: github
-      text: Github
-      href: https://github.com/Condeg0
-    - icon: file-text
-      text: Resumé
-      href: artifacts/Resume-RafaelCondeGomes.pdf
+links:
+  - icon: linkedin
+    text: LinkedIn
+    href: https://www.linkedin.com/in/rafael-conde-878284250/
+  - icon: github
+    text: Github
+    href: https://github.com/Condeg0
+  - icon: envelope
+    text: Email
+    href: mailto:your.email@example.com
+  - icon: file-text
+    text: Resumé
+    href: artifacts/Resume-RafaelCondeGomes.pdf
 ---
 
 ### Transforming Ambiguity into Action
