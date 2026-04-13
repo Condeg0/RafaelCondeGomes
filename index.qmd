@@ -2,36 +2,89 @@
 title: "Rafael Condé Gomes"
 image: artifacts/IMG_6178.JPG
 resources:
-   - artifacts/Resume-RafaelCondeGomes.pdf
+  - artifacts/Resume-RafaelCondeGomes.pdf
 about:
   template: jolla
   image-shape: round
-links:
-  - icon: linkedin
-    text: LinkedIn
-    href: https://www.linkedin.com/in/rafael-conde-878284250/
-  - icon: github
-    text: Github
-    href: https://github.com/Condeg0
-  - icon: envelope
-    text: Email
-    href: mailto:your.email@example.com
-  - icon: file-text
-    text: Resumé
-    href: artifacts/Resume-RafaelCondeGomes.pdf
+  links:
+    - icon: linkedin
+      text: LinkedIn
+      href: https://www.linkedin.com/in/rafael-conde-878284250/
+    - icon: github
+      text: Github
+      href: https://github.com/Condeg0
+    - icon: file-text
+      text: Resumé
+      href: https://condeg0.github.io/RafaelCondeGomes/artifacts/Resume-RafaelCondeGomes.pdf
+    - icon: envelope
+      text: Email
+      href: mailto:condeg.rafael@gmail.com
 ---
 
-### Transforming Ambiguity into Action
+### Replacing Intuition with Evidence
 
-I am a double major in **Econometrics** and **Data Science** at the University of South Florida.
+I am a graduating dual-degree student in **Econometrics** and **Data Science** at the University of South Florida.
 
-My work bridges the gap between raw data and decision-making. I replace "gut feeling" with rigorous inference, building systems that optimize efficiency and solve complex problems in finance and operations.
+I build systems that turn ambiguous, high-dimensional data into decisions with measurable outcomes — in financial modeling, predictive ML, and quantitative analysis.
 
 ::: {.grid}
+
 ::: {.g-col-12 .g-col-md-6}
+
 [**View Case Studies**](projects.qmd){.btn .btn-primary .btn-lg role="button"}
+
 :::
+
 ::: {.g-col-12 .g-col-md-6}
+
 [**My Background**](about.qmd){.btn .btn-outline-primary .btn-lg role="button"}
+
 :::
+
+:::
+
+
+---
+
+
+## Technical Stack
+
+::: {.grid}
+
+::: {.g-col-12 .g-col-md-4}
+#### 🤖 Machine Learning
+**Models:** Neural Networks · Gradient Boosting · LASSO · Logistic Regression · Tree Based Models · Linear Regression · SVM · KNN · Hierarchical Clustering · ARIMA · VAR
+
+**Libraries:** PyTorch · Scikit-Learn · XGBoost · LightGBM · CatBoost · Optuna · SHAP
+:::
+
+::: {.g-col-12 .g-col-md-4}
+#### 📊 Data & Statistics
+Python · R · Pandas · NumPy · ggplot2 · dplyr · Matplotlib · Seaborn
+:::
+
+::: {.g-col-12 .g-col-md-4}
+#### 💼 Quantitative Finance & Economics
+Time-Series Forecasting · Threshold Optimization · Risk Modeling
+:::
+
+:::
+
+::: {.grid}
+
+::: {.g-col-12 .g-col-md-4}
+#### 🛠 Tools & Workflow
+Git · Jupyter · RStudio · VSCode · Quarto
+:::
+
+::: {.g-col-12 .g-col-md-4}
+#### 🗄 Data Infrastructure
+SQL · GitHub Pages
+:::
+
+::: {.g-col-12 .g-col-md-4}
+#### 🌐 Languages
+English (Fluent) · Portuguese (Native) · Spanish (Conversational)
+:::
+
 :::

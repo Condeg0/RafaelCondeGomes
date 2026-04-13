@@ -13,6 +13,15 @@ website:
         text: Projects
       - href: about.qmd
         text: About
+  page-footer:
+    left: "© Rafael Condé Gomes"
+    right:
+      - icon: envelope
+        href: mailto:condeg.rafael@gmail.com
+      - icon: linkedin
+        href: https://www.linkedin.com/in/rafael-conde-878284250/
+      - icon: github
+        href: https://github.com/Condeg0
 
 execute:
   freeze: auto
