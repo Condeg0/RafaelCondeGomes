@@ -72,6 +72,7 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
+<link rel="stylesheet" href="lang-toggle.css">
 </head>
 
 <body class="nav-fixed fullcontent quarto-light">
@@ -137,44 +138,44 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="featured-case-studies" class="level2">
-<h2 class="anchored" data-anchor-id="featured-case-studies">Featured Case Studies</h2>
+<section id="featured-case-studiesestudos-de-caso" class="level2">
+<h2 class="anchored" data-anchor-id="featured-case-studiesestudos-de-caso"><span class="lang-en">Featured Case Studies</span><span class="lang-pt">Estudos de Caso</span></h2>
 <div class="grid">
 <section id="breakpoint-ai-atp-tennis-forecasting" class="level3 g-col-12 g-col-md-6">
 <h3 class="anchored" data-anchor-id="breakpoint-ai-atp-tennis-forecasting">BreakPoint AI: ATP Tennis Forecasting</h3>
 <p><img src="tennis-forecast/shap_summary_rf.png" class="img-fluid"></p>
 <p><strong>Stack:</strong> Python, PyTorch (LSTMs), Optuna, Time-Series Analysis</p>
-<p><strong>The Problem:</strong> Sports betting markets are highly efficient. Standard models fail to beat the “closing line” because they rely on static averages rather than dynamic form.</p>
-<p><strong>The Solution:</strong> I built a <strong>Hybrid Siamese LSTM</strong> network that models a match as the collision of two historical trajectories (momentum), rather than static player stats.</p>
+<p><span class="lang-en"><strong>The Problem:</strong></span><span class="lang-pt"><strong>O Problema:</strong></span> <span class="lang-en">Sports betting markets are highly efficient. Standard models fail to beat the “closing line” because they rely on static averages rather than dynamic form.</span><span class="lang-pt">Mercados de apostas esportivas são altamente eficientes. Modelos padrão falham em bater a linha de fechamento porque dependem de médias estáticas, não de forma dinâmica.</span></p>
+<p><span class="lang-en"><strong>The Solution:</strong></span><span class="lang-pt"><strong>A Solução:</strong></span> <span class="lang-en">I built a <strong>Hybrid Siamese LSTM</strong> network that models a match as the collision of two historical trajectories (momentum), rather than static player stats.</span><span class="lang-pt">Construí uma rede <strong>Hybrid Siamese LSTM</strong> que modela uma partida como a colisão de duas trajetórias históricas (momentum), em vez de estatísticas estáticas do jogador.</span></p>
 <ul>
-<li><strong>Innovation:</strong> Strict <code>date &lt; current_date</code> filtration to prevent look-ahead bias (data leakage).</li>
-<li><strong>Result:</strong> Achieved <strong>64.6% Accuracy</strong> and <strong>0.706 AUC</strong>, reaching parity with institutional bookmakers.</li>
+<li><span class="lang-en"><strong>Innovation:</strong></span><span class="lang-pt"><strong>Inovação:</strong></span> <span class="lang-en">Strict <code>date &lt; current_date</code> filtration to prevent look-ahead bias (data leakage).</span><span class="lang-pt">Filtragem rigorosa por data para evitar look-ahead bias (vazamento de dados).</span></li>
+<li><span class="lang-en"><strong>Result:</strong></span><span class="lang-pt"><strong>Resultado:</strong></span> <span class="lang-en">Achieved <strong>64.6% Accuracy</strong> and <strong>0.706 AUC</strong>, reaching parity with institutional bookmakers.</span><span class="lang-pt">Alcançou <strong>64,6% de Acurácia</strong> e <strong>0.706 AUC</strong>, atingindo paridade com casas de apostas institucionais.</span></li>
 </ul>
-<p><a href="./tennis-forecast/index.html" class="btn btn-primary"><strong>View Technical Report →</strong></a></p>
+<p><a href="./tennis-forecast/index.html" class="btn btn-primary"><span class="lang-en"><strong>View Technical Report →</strong></span><span class="lang-pt"><strong>Ver Relatório Técnico →</strong></span></a></p>
 </section>
-<section id="optimizing-credit-risk-profit-first-logic" class="level3 g-col-12 g-col-md-6">
-<h3 class="anchored" data-anchor-id="optimizing-credit-risk-profit-first-logic">Optimizing Credit Risk: Profit-First Logic</h3>
+<section id="optimizing-credit-risk-profit-first-logicotimizando-risco-de-crédito-lógica-profit-first" class="level3 g-col-12 g-col-md-6">
+<h3 class="anchored" data-anchor-id="optimizing-credit-risk-profit-first-logicotimizando-risco-de-crédito-lógica-profit-first"><span class="lang-en">Optimizing Credit Risk: Profit-First Logic</span><span class="lang-pt">Otimizando Risco de Crédito: Lógica Profit-First</span></h3>
 <p><img src="Loan-Default-Prediction/LogReg-StrategyCurve.png" class="img-fluid"></p>
 <p><strong>Stack:</strong> Python, Scikit-Learn, Pandas, Financial Engineering</p>
-<p><strong>The Problem:</strong> Standard classification models maximize <em>accuracy</em>, but banks care about <em>profit</em>. A default costs significantly more than a rejected loan saves.</p>
-<p><strong>The Solution:</strong> I engineered a <strong>Threshold Optimization Engine</strong> that shifts the decision boundary based on the specific cost-benefit matrix of the loan portfolio.</p>
+<p><span class="lang-en"><strong>The Problem:</strong></span><span class="lang-pt"><strong>O Problema:</strong></span> <span class="lang-en">Standard classification models maximize <em>accuracy</em>, but banks care about <em>profit</em>. A default costs significantly more than a rejected loan saves.</span><span class="lang-pt">Modelos padrão maximizam <em>acurácia</em>, mas bancos se importam com <em>lucro</em>. Um default custa muito mais do que um empréstimo rejeitado economiza.</span></p>
+<p><span class="lang-en"><strong>The Solution:</strong></span><span class="lang-pt"><strong>A Solução:</strong></span> <span class="lang-en">I engineered a <strong>Threshold Optimization Engine</strong> that shifts the decision boundary based on the specific cost-benefit matrix of the loan portfolio.</span><span class="lang-pt">Desenvolvi um <strong>Threshold Optimization Engine</strong> que ajusta o limite de decisão com base na matriz custo-benefício específica do portfólio de empréstimos.</span></p>
 <ul>
-<li><strong>Strategy:</strong> Prioritized recall for high-risk segments.</li>
-<li><strong>Result:</strong> Projected <strong>~40% ROI lift</strong> ($1.26M portfolio value) compared to standard accuracy-based thresholds.</li>
+<li><span class="lang-en"><strong>Strategy:</strong></span><span class="lang-pt"><strong>Estratégia:</strong></span> <span class="lang-en">Prioritized recall for high-risk segments.</span><span class="lang-pt">Priorizou recall para segmentos de alto risco.</span></li>
+<li><span class="lang-en"><strong>Result:</strong></span><span class="lang-pt"><strong>Resultado:</strong></span> <span class="lang-en">Projected <strong>~40% ROI lift</strong> ($1.26M portfolio value) compared to standard accuracy-based thresholds.</span><span class="lang-pt">Projetou <strong>~40% de aumento no ROI</strong> (portfólio de $1,26M) em comparação com thresholds baseados em acurácia padrão.</span></li>
 </ul>
-<p><a href="./Loan-Default-Prediction/index.html" class="btn btn-primary"><strong>View Full Analysis →</strong></a></p>
+<p><a href="./Loan-Default-Prediction/index.html" class="btn btn-primary"><span class="lang-en"><strong>View Full Analysis →</strong></span><span class="lang-pt"><strong>Ver Análise Completa →</strong></span></a></p>
 </section>
-<section id="nyc-ride-share-demand-analysis" class="level3 g-col-12 g-col-md-6">
-<h3 class="anchored" data-anchor-id="nyc-ride-share-demand-analysis">NYC Ride-Share Demand Analysis</h3>
+<section id="nyc-ride-share-demand-analysisanálise-de-demanda" class="level3 g-col-12 g-col-md-6">
+<h3 class="anchored" data-anchor-id="nyc-ride-share-demand-analysisanálise-de-demanda">NYC Ride-Share <span class="lang-en">Demand Analysis</span><span class="lang-pt">Análise de Demanda</span></h3>
 <p><img src="Uber-NYC-Analysis/NYC Uber Rise Map.png" class="img-fluid"></p>
 <p><strong>Stack:</strong> R (ggplot2, dplyr), Geospatial Analysis</p>
-<p><strong>The Problem:</strong> Drivers face a “Cold Start” problem: knowing where to position themselves <em>before</em> demand spikes to minimize unpaid wait times.</p>
-<p><strong>The Solution:</strong> I conducted a spatiotemporal analysis of 4.5M+ Uber pickups to identify high-density clusters and recurring time-based demand cycles.</p>
+<p><span class="lang-en"><strong>The Problem:</strong></span><span class="lang-pt"><strong>O Problema:</strong></span> <span class="lang-en">Drivers face a “Cold Start” problem: knowing where to position themselves <em>before</em> demand spikes to minimize unpaid wait times.</span><span class="lang-pt">Motoristas enfrentam o problema “Cold Start”: saber onde se posicionar <em>antes</em> dos picos de demanda para minimizar tempo de espera não remunerado.</span></p>
+<p><span class="lang-en"><strong>The Solution:</strong></span><span class="lang-pt"><strong>A Solução:</strong></span> <span class="lang-en">I conducted a spatiotemporal analysis of 4.5M+ Uber pickups to identify high-density clusters and recurring time-based demand cycles.</span><span class="lang-pt">Realizei uma análise espaço-temporal de 4,5M+ corridas Uber para identificar clusters de alta densidade e ciclos recorrentes de demanda por horário.</span></p>
 <ul>
-<li><strong>Insight:</strong> Identified a non-linear demand surge on Thursdays (commuter vs.&nbsp;nightlife shifts).</li>
-<li><strong>Application:</strong> Developed heatmaps acting as “Pre-Surge” indicators for fleet positioning.</li>
+<li><span class="lang-en"><strong>Insight:</strong></span><span class="lang-pt"><strong>Insight:</strong></span> <span class="lang-en">Identified a non-linear demand surge on Thursdays (commuter vs.&nbsp;nightlife shifts).</span><span class="lang-pt">Identificado aumento não-linear de demanda às quintas-feiras (commuters vs.&nbsp;vida noturna).</span></li>
+<li><span class="lang-en"><strong>Application:</strong></span><span class="lang-pt"><strong>Aplicação:</strong></span> <span class="lang-en">Developed heatmaps acting as “Pre-Surge” indicators for fleet positioning.</span><span class="lang-pt">Desenvolveu heatmaps como indicadores “Pré-Pico” para posicionamento de frota.</span></li>
 </ul>
-<p><a href="./Uber-NYC-Analysis/index.html" class="btn btn-primary"><strong>View Visual Analysis →</strong></a></p>
+<p><a href="./Uber-NYC-Analysis/index.html" class="btn btn-primary"><span class="lang-en"><strong>View Visual Analysis →</strong></span><span class="lang-pt"><strong>Ver Análise Visual →</strong></span></a></p>
 </section>
 </div>
 
@@ -182,6 +183,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 
 </main> <!-- /main -->
+<script src="lang-toggle.js"></script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
