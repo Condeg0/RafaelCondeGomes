@@ -1,6 +1,8 @@
 project:
   type: website
   output-dir: _site
+  resources:
+    - lang-toggle.js
 
 website:
   title: "Rafael Condé Gomes"
@@ -22,6 +24,11 @@ website:
         href: https://www.linkedin.com/in/rafael-conde-878284250/
       - icon: github
         href: https://github.com/Condeg0
+
+format:
+  html:
+    css: lang-toggle.css
+    include-after-body: lang-toggle.html
 
 execute:
   freeze: auto

@@ -5,7 +5,7 @@ format:
     toc: false
 ---
 
-## Featured Case Studies
+## <span class="lang-en">Featured Case Studies</span><span class="lang-pt">Estudos de Caso</span>
 
 ::: {.grid}
 
@@ -15,46 +15,46 @@ format:
 
 **Stack:** Python, PyTorch (LSTMs), Optuna, Time-Series Analysis
 
-**The Problem:** Sports betting markets are highly efficient. Standard models fail to beat the "closing line" because they rely on static averages rather than dynamic form.
+<span class="lang-en">**The Problem:**</span><span class="lang-pt">**O Problema:**</span> <span class="lang-en">Sports betting markets are highly efficient. Standard models fail to beat the "closing line" because they rely on static averages rather than dynamic form.</span><span class="lang-pt">Mercados de apostas esportivas são altamente eficientes. Modelos padrão falham em bater a linha de fechamento porque dependem de médias estáticas, não de forma dinâmica.</span>
 
-**The Solution:** I built a **Hybrid Siamese LSTM** network that models a match as the collision of two historical trajectories (momentum), rather than static player stats.
+<span class="lang-en">**The Solution:**</span><span class="lang-pt">**A Solução:**</span> <span class="lang-en">I built a **Hybrid Siamese LSTM** network that models a match as the collision of two historical trajectories (momentum), rather than static player stats.</span><span class="lang-pt">Construí uma rede **Hybrid Siamese LSTM** que modela uma partida como a colisão de duas trajetórias históricas (momentum), em vez de estatísticas estáticas do jogador.</span>
 
-* **Innovation:** Strict `date < current_date` filtration to prevent look-ahead bias (data leakage).
-* **Result:** Achieved **64.6% Accuracy** and **0.706 AUC**, reaching parity with institutional bookmakers.
+* <span class="lang-en">**Innovation:**</span><span class="lang-pt">**Inovação:**</span> <span class="lang-en">Strict `date < current_date` filtration to prevent look-ahead bias (data leakage).</span><span class="lang-pt">Filtragem rigorosa por data para evitar look-ahead bias (vazamento de dados).</span>
+* <span class="lang-en">**Result:**</span><span class="lang-pt">**Resultado:**</span> <span class="lang-en">Achieved **64.6% Accuracy** and **0.706 AUC**, reaching parity with institutional bookmakers.</span><span class="lang-pt">Alcançou **64,6% de Acurácia** e **0.706 AUC**, atingindo paridade com casas de apostas institucionais.</span>
 
-[**View Technical Report &rarr;**](./tennis-forecast/index.html){.btn .btn-primary}
+[<span class="lang-en">**View Technical Report →**</span><span class="lang-pt">**Ver Relatório Técnico →**</span>](./tennis-forecast/index.html){.btn .btn-primary}
 :::
 
 ::: {.g-col-12 .g-col-md-6}
-### Optimizing Credit Risk: Profit-First Logic
+### <span class="lang-en">Optimizing Credit Risk: Profit-First Logic</span><span class="lang-pt">Otimizando Risco de Crédito: Lógica Profit-First</span>
 ![](Loan-Default-Prediction/LogReg-StrategyCurve.png)
 
 **Stack:** Python, Scikit-Learn, Pandas, Financial Engineering
 
-**The Problem:** Standard classification models maximize *accuracy*, but banks care about *profit*. A default costs significantly more than a rejected loan saves.
+<span class="lang-en">**The Problem:**</span><span class="lang-pt">**O Problema:**</span> <span class="lang-en">Standard classification models maximize *accuracy*, but banks care about *profit*. A default costs significantly more than a rejected loan saves.</span><span class="lang-pt">Modelos padrão maximizam *acurácia*, mas bancos se importam com *lucro*. Um default custa muito mais do que um empréstimo rejeitado economiza.</span>
 
-**The Solution:** I engineered a **Threshold Optimization Engine** that shifts the decision boundary based on the specific cost-benefit matrix of the loan portfolio.
+<span class="lang-en">**The Solution:**</span><span class="lang-pt">**A Solução:**</span> <span class="lang-en">I engineered a **Threshold Optimization Engine** that shifts the decision boundary based on the specific cost-benefit matrix of the loan portfolio.</span><span class="lang-pt">Desenvolvi um **Threshold Optimization Engine** que ajusta o limite de decisão com base na matriz custo-benefício específica do portfólio de empréstimos.</span>
 
-* **Strategy:** Prioritized recall for high-risk segments.
-* **Result:** Projected **~40% ROI lift** ($1.26M portfolio value) compared to standard accuracy-based thresholds.
+* <span class="lang-en">**Strategy:**</span><span class="lang-pt">**Estratégia:**</span> <span class="lang-en">Prioritized recall for high-risk segments.</span><span class="lang-pt">Priorizou recall para segmentos de alto risco.</span>
+* <span class="lang-en">**Result:**</span><span class="lang-pt">**Resultado:**</span> <span class="lang-en">Projected **~40% ROI lift** ($1.26M portfolio value) compared to standard accuracy-based thresholds.</span><span class="lang-pt">Projetou **~40% de aumento no ROI** (portfólio de $1,26M) em comparação com thresholds baseados em acurácia padrão.</span>
 
-[**View Full Analysis &rarr;**](./Loan-Default-Prediction/index.html){.btn .btn-primary}
+[<span class="lang-en">**View Full Analysis →**</span><span class="lang-pt">**Ver Análise Completa →**</span>](./Loan-Default-Prediction/index.html){.btn .btn-primary}
 :::
 
 ::: {.g-col-12 .g-col-md-6}
-### NYC Ride-Share Demand Analysis
+### NYC Ride-Share <span class="lang-en">Demand Analysis</span><span class="lang-pt">Análise de Demanda</span>
 ![](Uber-NYC-Analysis/NYC Uber Rise Map.png)
 
 **Stack:** R (ggplot2, dplyr), Geospatial Analysis
 
-**The Problem:** Drivers face a "Cold Start" problem: knowing where to position themselves *before* demand spikes to minimize unpaid wait times.
+<span class="lang-en">**The Problem:**</span><span class="lang-pt">**O Problema:**</span> <span class="lang-en">Drivers face a "Cold Start" problem: knowing where to position themselves *before* demand spikes to minimize unpaid wait times.</span><span class="lang-pt">Motoristas enfrentam o problema "Cold Start": saber onde se posicionar *antes* dos picos de demanda para minimizar tempo de espera não remunerado.</span>
 
-**The Solution:** I conducted a spatiotemporal analysis of 4.5M+ Uber pickups to identify high-density clusters and recurring time-based demand cycles.
+<span class="lang-en">**The Solution:**</span><span class="lang-pt">**A Solução:**</span> <span class="lang-en">I conducted a spatiotemporal analysis of 4.5M+ Uber pickups to identify high-density clusters and recurring time-based demand cycles.</span><span class="lang-pt">Realizei uma análise espaço-temporal de 4,5M+ corridas Uber para identificar clusters de alta densidade e ciclos recorrentes de demanda por horário.</span>
 
-* **Insight:** Identified a non-linear demand surge on Thursdays (commuter vs. nightlife shifts).
-* **Application:** Developed heatmaps acting as "Pre-Surge" indicators for fleet positioning.
+* <span class="lang-en">**Insight:**</span><span class="lang-pt">**Insight:**</span> <span class="lang-en">Identified a non-linear demand surge on Thursdays (commuter vs. nightlife shifts).</span><span class="lang-pt">Identificado aumento não-linear de demanda às quintas-feiras (commuters vs. vida noturna).</span>
+* <span class="lang-en">**Application:**</span><span class="lang-pt">**Aplicação:**</span> <span class="lang-en">Developed heatmaps acting as "Pre-Surge" indicators for fleet positioning.</span><span class="lang-pt">Desenvolveu heatmaps como indicadores "Pré-Pico" para posicionamento de frota.</span>
 
-[**View Visual Analysis &rarr;**](./Uber-NYC-Analysis/index.html){.btn .btn-primary}
+[<span class="lang-en">**View Visual Analysis →**</span><span class="lang-pt">**Ver Análise Visual →**</span>](./Uber-NYC-Analysis/index.html){.btn .btn-primary}
 :::
 
 :::
