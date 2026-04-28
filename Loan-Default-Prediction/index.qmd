@@ -134,7 +134,7 @@ $$P = A \times \frac{1 - (1 + r/12)^{-36}}{r/12}$$
 <span class="lang-en">The core of the engine is not a classifier — it is a **strategy curve**: a sweep across 200 candidate thresholds (0.01–0.99) that computes realized portfolio profit at each approval rate. A loan is approved when its predicted default probability falls below the threshold. The optimal threshold is determined empirically per model, not fixed at 0.5.</span>
 <span class="lang-pt">O núcleo do motor não é um classificador — é uma **curva de estratégia**: uma varredura por 200 thresholds candidatos (0,01–0,99) que computa o lucro realizado do portfólio em cada taxa de aprovação. Um empréstimo é aprovado quando sua probabilidade prevista de default está abaixo do threshold. O threshold ótimo é determinado empiricamente por modelo, não fixado em 0,5.</span>
 
-![](../../Loan-Default-Prediction/assets/comparison_strategy_curves.png)
+![](./assets/comparison_strategy_curves.png)
 
 <span class="lang-en">The comparison above shows all three models against the naive baseline ($933,898 — approve all applicants). Every model outperforms the baseline at its optimal threshold. Logistic Regression achieves the highest portfolio profit despite having the lowest raw accuracy — a result that requires explanation.</span>
 <span class="lang-pt">A comparação acima mostra os três modelos versus a baseline ingênua ($933.898 — aprovar todos os solicitantes). Cada modelo supera a baseline no seu threshold ótimo. A Regressão Logística atinge o maior lucro do portfólio apesar de ter a menor acurácia bruta — um resultado que requer explicação.</span>
@@ -173,22 +173,22 @@ $$P = A \times \frac{1 - (1 + r/12)^{-36}}{r/12}$$
 ::: {.grid}
 
 ::: {.g-col-12 .g-col-md-4}
-![<span class="lang-en">Logistic Regression — AUC 0.685</span><span class="lang-pt">Regressão Logística — AUC 0,685</span>](../../Loan-Default-Prediction/assets/logisticregression/roc_curve.png)
+![<span class="lang-en">Logistic Regression — AUC 0.685</span><span class="lang-pt">Regressão Logística — AUC 0,685</span>](./assets/logisticregression/roc_curve.png)
 :::
 
 ::: {.g-col-12 .g-col-md-4}
-![<span class="lang-en">Random Forest — AUC 0.673</span><span class="lang-pt">Random Forest — AUC 0,673</span>](../../Loan-Default-Prediction/assets/randomforest/roc_curve.png)
+![<span class="lang-en">Random Forest — AUC 0.673</span><span class="lang-pt">Random Forest — AUC 0,673</span>](./assets/randomforest/roc_curve.png)
 :::
 
 ::: {.g-col-12 .g-col-md-4}
-![<span class="lang-en">XGBoost — AUC 0.661</span><span class="lang-pt">XGBoost — AUC 0,661</span>](../../Loan-Default-Prediction/assets/xgboost/roc_curve.png)
+![<span class="lang-en">XGBoost — AUC 0.661</span><span class="lang-pt">XGBoost — AUC 0,661</span>](./assets/xgboost/roc_curve.png)
 :::
 
 :::
 
 ### <span class="lang-en">Feature Importance (SHAP)</span><span class="lang-pt">Importância das Features (SHAP)</span>
 
-![](../../Loan-Default-Prediction/assets/logisticregression/shap_summary.png)
+![](./assets/logisticregression/shap_summary.png)
 
 <span class="lang-en">SHAP analysis on the selected Logistic Regression model reveals three dominant risk drivers:</span>
 <span class="lang-pt">A análise SHAP no modelo de Regressão Logística selecionado revela três principais fatores de risco:</span>
@@ -207,15 +207,15 @@ $$P = A \times \frac{1 - (1 + r/12)^{-36}}{r/12}$$
 ::: {.grid}
 
 ::: {.g-col-12 .g-col-md-4}
-![<span class="lang-en">Logistic Regression — Optimal at 82.7%</span><span class="lang-pt">Regressão Logística — Ótimo em 82,7%</span>](../../Loan-Default-Prediction/assets/logisticregression/strategy_curve.png)
+![<span class="lang-en">Logistic Regression — Optimal at 82.7%</span><span class="lang-pt">Regressão Logística — Ótimo em 82,7%</span>](./assets/logisticregression/strategy_curve.png)
 :::
 
 ::: {.g-col-12 .g-col-md-4}
-![<span class="lang-en">Random Forest — Optimal at 89.2%</span><span class="lang-pt">Random Forest — Ótimo em 89,2%</span>](../../Loan-Default-Prediction/assets/randomforest/strategy_curve.png)
+![<span class="lang-en">Random Forest — Optimal at 89.2%</span><span class="lang-pt">Random Forest — Ótimo em 89,2%</span>](./assets/randomforest/strategy_curve.png)
 :::
 
 ::: {.g-col-12 .g-col-md-4}
-![<span class="lang-en">XGBoost — Optimal at 84.1%</span><span class="lang-pt">XGBoost — Ótimo em 84,1%</span>](../../Loan-Default-Prediction/assets/xgboost/strategy_curve.png)
+![<span class="lang-en">XGBoost — Optimal at 84.1%</span><span class="lang-pt">XGBoost — Ótimo em 84,1%</span>](./assets/xgboost/strategy_curve.png)
 :::
 
 :::
