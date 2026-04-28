@@ -333,7 +333,7 @@ window.Quarto = {
 <section id="the-strategy-curvea-curva-de-estratégia" class="level2">
 <h2 class="anchored" data-anchor-id="the-strategy-curvea-curva-de-estratégia"><span class="lang-en">The Strategy Curve</span><span class="lang-pt">A Curva de Estratégia</span></h2>
 <p><span class="lang-en">The core of the engine is not a classifier — it is a <strong>strategy curve</strong>: a sweep across 200 candidate thresholds (0.01–0.99) that computes realized portfolio profit at each approval rate. A loan is approved when its predicted default probability falls below the threshold. The optimal threshold is determined empirically per model, not fixed at 0.5.</span> <span class="lang-pt">O núcleo do motor não é um classificador — é uma <strong>curva de estratégia</strong>: uma varredura por 200 thresholds candidatos (0,01–0,99) que computa o lucro realizado do portfólio em cada taxa de aprovação. Um empréstimo é aprovado quando sua probabilidade prevista de default está abaixo do threshold. O threshold ótimo é determinado empiricamente por modelo, não fixado em 0,5.</span></p>
-<p><img src="../../Loan-Default-Prediction/assets/comparison_strategy_curves.png" class="img-fluid"></p>
+<p><img src="./assets/comparison_strategy_curves.png" class="img-fluid"></p>
 <p><span class="lang-en">The comparison above shows all three models against the naive baseline ($933,898 — approve all applicants). Every model outperforms the baseline at its optimal threshold. Logistic Regression achieves the highest portfolio profit despite having the lowest raw accuracy — a result that requires explanation.</span> <span class="lang-pt">A comparação acima mostra os três modelos versus a baseline ingênua ($933.898 — aprovar todos os solicitantes). Cada modelo supera a baseline no seu threshold ótimo. A Regressão Logística atinge o maior lucro do portfólio apesar de ter a menor acurácia bruta — um resultado que requer explicação.</span></p>
 <hr>
 </section>
@@ -416,7 +416,7 @@ window.Quarto = {
 <div class="g-col-12 g-col-md-4">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="../../Loan-Default-Prediction/assets/logisticregression/roc_curve.png" class="img-fluid figure-img"></p>
+<p><img src="./assets/logisticregression/roc_curve.png" class="img-fluid figure-img"></p>
 <figcaption><span class="lang-en">Logistic Regression — AUC 0.685</span><span class="lang-pt">Regressão Logística — AUC 0,685</span></figcaption>
 </figure>
 </div>
@@ -424,7 +424,7 @@ window.Quarto = {
 <div class="g-col-12 g-col-md-4">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="../../Loan-Default-Prediction/assets/randomforest/roc_curve.png" class="img-fluid figure-img"></p>
+<p><img src="./assets/randomforest/roc_curve.png" class="img-fluid figure-img"></p>
 <figcaption><span class="lang-en">Random Forest — AUC 0.673</span><span class="lang-pt">Random Forest — AUC 0,673</span></figcaption>
 </figure>
 </div>
@@ -432,7 +432,7 @@ window.Quarto = {
 <div class="g-col-12 g-col-md-4">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="../../Loan-Default-Prediction/assets/xgboost/roc_curve.png" class="img-fluid figure-img"></p>
+<p><img src="./assets/xgboost/roc_curve.png" class="img-fluid figure-img"></p>
 <figcaption><span class="lang-en">XGBoost — AUC 0.661</span><span class="lang-pt">XGBoost — AUC 0,661</span></figcaption>
 </figure>
 </div>
@@ -441,7 +441,7 @@ window.Quarto = {
 </section>
 <section id="feature-importance-shapimportância-das-features-shap" class="level3">
 <h3 class="anchored" data-anchor-id="feature-importance-shapimportância-das-features-shap"><span class="lang-en">Feature Importance (SHAP)</span><span class="lang-pt">Importância das Features (SHAP)</span></h3>
-<p><img src="../../Loan-Default-Prediction/assets/logisticregression/shap_summary.png" class="img-fluid"></p>
+<p><img src="./assets/logisticregression/shap_summary.png" class="img-fluid"></p>
 <p><span class="lang-en">SHAP analysis on the selected Logistic Regression model reveals three dominant risk drivers:</span> <span class="lang-pt">A análise SHAP no modelo de Regressão Logística selecionado revela três principais fatores de risco:</span></p>
 <p><span class="lang-en"><strong>FICO score</strong> is the strongest monotonic predictor of creditworthiness — higher scores strongly reduce predicted default probability, consistent with its role as a standardized creditworthiness signal.</span> <span class="lang-pt">O <strong>FICO score</strong> é o preditor monotônico mais forte de solvência — scores mais altos reduzem fortemente a probabilidade prevista de default, consistente com seu papel como sinal padronizado de crédito.</span></p>
 <p><span class="lang-en"><strong>Credit inquiries in the last 6 months</strong> (<code>inq.last.6mths</code>) is the second most important feature. High credit-seeking velocity is a well-documented distress signal — applicants approaching multiple lenders simultaneously are more likely to be facing liquidity constraints.</span> <span class="lang-pt"><strong>Consultas de crédito nos últimos 6 meses</strong> (<code>inq.last.6mths</code>) é a segunda feature mais importante. Alta velocidade de busca de crédito é um sinal documentado de dificuldade financeira — solicitantes que abordam múltiplos credores simultaneamente têm maior probabilidade de enfrentar restrições de liquidez.</span></p>
@@ -453,7 +453,7 @@ window.Quarto = {
 <div class="g-col-12 g-col-md-4">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="../../Loan-Default-Prediction/assets/logisticregression/strategy_curve.png" class="img-fluid figure-img"></p>
+<p><img src="./assets/logisticregression/strategy_curve.png" class="img-fluid figure-img"></p>
 <figcaption><span class="lang-en">Logistic Regression — Optimal at 82.7%</span><span class="lang-pt">Regressão Logística — Ótimo em 82,7%</span></figcaption>
 </figure>
 </div>
@@ -461,7 +461,7 @@ window.Quarto = {
 <div class="g-col-12 g-col-md-4">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="../../Loan-Default-Prediction/assets/randomforest/strategy_curve.png" class="img-fluid figure-img"></p>
+<p><img src="./assets/randomforest/strategy_curve.png" class="img-fluid figure-img"></p>
 <figcaption><span class="lang-en">Random Forest — Optimal at 89.2%</span><span class="lang-pt">Random Forest — Ótimo em 89,2%</span></figcaption>
 </figure>
 </div>
@@ -469,7 +469,7 @@ window.Quarto = {
 <div class="g-col-12 g-col-md-4">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="../../Loan-Default-Prediction/assets/xgboost/strategy_curve.png" class="img-fluid figure-img"></p>
+<p><img src="./assets/xgboost/strategy_curve.png" class="img-fluid figure-img"></p>
 <figcaption><span class="lang-en">XGBoost — Optimal at 84.1%</span><span class="lang-pt">XGBoost — Ótimo em 84,1%</span></figcaption>
 </figure>
 </div>
