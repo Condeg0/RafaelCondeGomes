@@ -9,7 +9,7 @@
 <meta name="author" content="Rafael Condé Gomes">
 <meta name="dcterms.date" content="2026-02-03">
 
-<title>BreakPoint AI: Momentum Modeling in ATP Tennis – Rafael Condé Gomes</title>
+<title>BreakPoint AI: Forecasting ATP Tennis with Sequential Deep Learning – Rafael Condé Gomes</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -76,35 +76,6 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
 <link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="../lang-toggle.css">
 </head>
@@ -153,28 +124,12 @@ window.Quarto = {
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
-  <ul>
-  <li><a href="#executive-summary" id="toc-executive-summary" class="nav-link active" data-scroll-target="#executive-summary">Executive Summary</a></li>
-  <li><a href="#the-market-problem" id="toc-the-market-problem" class="nav-link" data-scroll-target="#the-market-problem">1. The Market Problem</a>
   <ul class="collapse">
-  <li><a href="#the-static-stats-fallacy" id="toc-the-static-stats-fallacy" class="nav-link" data-scroll-target="#the-static-stats-fallacy">The “Static Stats” Fallacy</a></li>
-  <li><a href="#the-objective" id="toc-the-objective" class="nav-link" data-scroll-target="#the-objective">The Objective</a></li>
-  </ul></li>
-  <li><a href="#system-architecture" id="toc-system-architecture" class="nav-link" data-scroll-target="#system-architecture">2. System Architecture</a>
-  <ul class="collapse">
-  <li><a href="#model-diagram" id="toc-model-diagram" class="nav-link" data-scroll-target="#model-diagram">Model Diagram</a></li>
-  </ul></li>
-  <li><a href="#modeling-strategy" id="toc-modeling-strategy" class="nav-link" data-scroll-target="#modeling-strategy">3. Modeling Strategy</a>
-  <ul class="collapse">
-  <li><a href="#benchmarking-complexity" id="toc-benchmarking-complexity" class="nav-link" data-scroll-target="#benchmarking-complexity">Benchmarking Complexity</a></li>
-  </ul></li>
-  <li><a href="#results-analysis" id="toc-results-analysis" class="nav-link" data-scroll-target="#results-analysis">4. Results &amp; Analysis</a>
-  <ul class="collapse">
-  <li><a href="#performance-metrics" id="toc-performance-metrics" class="nav-link" data-scroll-target="#performance-metrics">Performance Metrics</a></li>
-  <li><a href="#business-insight-the-calibration-curve" id="toc-business-insight-the-calibration-curve" class="nav-link" data-scroll-target="#business-insight-the-calibration-curve">Business Insight: The Calibration Curve</a></li>
-  </ul></li>
-  <li><a href="#key-drivers-interpretation" id="toc-key-drivers-interpretation" class="nav-link" data-scroll-target="#key-drivers-interpretation">5. Key Drivers (Interpretation)</a></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#the-problem-with-static-featureso-problema-das-features-estáticas" id="toc-the-problem-with-static-featureso-problema-das-features-estáticas" class="nav-link active" data-scroll-target="#the-problem-with-static-featureso-problema-das-features-estáticas"><span class="lang-en">The Problem with Static Features</span><span class="lang-pt">O Problema das Features Estáticas</span></a></li>
+  <li><a href="#temporal-validation-the-silent-failure-modevalidação-temporal-o-erro-silencioso" id="toc-temporal-validation-the-silent-failure-modevalidação-temporal-o-erro-silencioso" class="nav-link" data-scroll-target="#temporal-validation-the-silent-failure-modevalidação-temporal-o-erro-silencioso"><span class="lang-en">Temporal Validation — The Silent Failure Mode</span><span class="lang-pt">Validação Temporal — O Erro Silencioso</span></a></li>
+  <li><a href="#system-architecturearquitetura-do-sistema" id="toc-system-architecturearquitetura-do-sistema" class="nav-link" data-scroll-target="#system-architecturearquitetura-do-sistema"><span class="lang-en">System Architecture</span><span class="lang-pt">Arquitetura do Sistema</span></a></li>
+  <li><a href="#resultsresultados" id="toc-resultsresultados" class="nav-link" data-scroll-target="#resultsresultados"><span class="lang-en">Results</span><span class="lang-pt">Resultados</span></a></li>
+  <li><a href="#conclusionconclusão" id="toc-conclusionconclusão" class="nav-link" data-scroll-target="#conclusionconclusão"><span class="lang-en">Conclusion</span><span class="lang-pt">Conclusão</span></a></li>
   </ul>
 </nav>
     </div>
@@ -183,12 +138,14 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">BreakPoint AI: Momentum Modeling in ATP Tennis</h1>
+<h1 class="title">BreakPoint AI: Forecasting ATP Tennis with Sequential Deep Learning</h1>
   <div class="quarto-categories">
-    <div class="quarto-category">Deep Learning</div>
-    <div class="quarto-category">Quantitative Finance</div>
-    <div class="quarto-category">Time-Series</div>
+    <div class="quarto-category">Python</div>
     <div class="quarto-category">PyTorch</div>
+    <div class="quarto-category">Optuna</div>
+    <div class="quarto-category">XGBoost</div>
+    <div class="quarto-category">Time-Series</div>
+    <div class="quarto-category">Ensemble Learning</div>
   </div>
   </div>
 
@@ -218,89 +175,190 @@ window.Quarto = {
 </header>
 
 
-<section id="executive-summary" class="level1">
-<h1>Executive Summary</h1>
-<p>Sports betting markets are notoriously efficient; a static model relying on average statistics will rarely beat the “closing line.” This project treats a tennis match not as a row of data, but as the <strong>collision of two historical trajectories</strong>.</p>
-<p>By implementing a <strong>Hybrid Siamese LSTM</strong>, I moved beyond static feature engineering to capture latent “momentum,” achieving institutional-grade performance:</p>
+<style>
+.metric-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin: 1.5rem 0 2rem 0;
+}
+.metric-card {
+  background: #f8f9fa;
+  border-left: 4px solid #2c5f8a;
+  border-radius: 4px;
+  padding: 1rem 1.25rem;
+}
+.metric-value {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #2c5f8a;
+  line-height: 1.1;
+}
+.metric-label {
+  font-size: 0.8rem;
+  color: #555;
+  margin-top: 0.2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.metric-sub {
+  font-size: 0.75rem;
+  color: #888;
+  margin-top: 0.15rem;
+}
+.back-link {
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+  display: block;
+}
+@media (max-width: 600px) {
+  .metric-grid { grid-template-columns: 1fr 1fr; }
+}
+</style>
+
+<a class="back-link" href="../projects.html">
+  <span class="lang-en">← Back to Projects</span>
+  <span class="lang-pt">← Voltar aos Projetos</span>
+</a>
+
+<div class="metric-grid">
+  <div class="metric-card">
+    <div class="metric-value">0.717</div>
+    <div class="metric-label">
+      <span class="lang-en">Ensemble AUC</span>
+      <span class="lang-pt">AUC do Ensemble</span>
+    </div>
+    <div class="metric-sub">
+      <span class="lang-en">2024 unseen test set</span>
+      <span class="lang-pt">Conjunto de teste 2024</span>
+    </div>
+  </div>
+  <div class="metric-card">
+    <div class="metric-value">65.5%</div>
+    <div class="metric-label">
+      <span class="lang-en">Best Accuracy</span>
+      <span class="lang-pt">Melhor Acurácia</span>
+    </div>
+    <div class="metric-sub">Siamese LSTM</div>
+  </div>
+  <div class="metric-card">
+    <div class="metric-value">90K+</div>
+    <div class="metric-label">
+      <span class="lang-en">ATP Match Records</span>
+      <span class="lang-pt">Registros de Partidas ATP</span>
+    </div>
+    <div class="metric-sub">1990 – 2024</div>
+  </div>
+</div>
+<hr>
+<section id="the-problem-with-static-featureso-problema-das-features-estáticas" class="level2">
+<h2 class="anchored" data-anchor-id="the-problem-with-static-featureso-problema-das-features-estáticas"><span class="lang-en">The Problem with Static Features</span><span class="lang-pt">O Problema das Features Estáticas</span></h2>
+<p><span class="lang-en">A player’s season average tells you who they are. Their last 10 matches tell you who they are <em>right now</em>.</span> <span class="lang-pt">A média da temporada de um jogador diz quem ele é. As últimas 10 partidas dizem quem ele é <em>agora</em>.</span></p>
+<p><span class="lang-en">Standard tabular models collapse match histories into single static numbers — “65% first serve in,” “2.4 aces per match.” This loses the temporal signal entirely. A player on a 7-match losing streak and a player who just won a Masters title might share identical season averages, but they are not equivalent forecasting targets.</span> <span class="lang-pt">Modelos tabulares padrão reduzem históricos de partidas a números estáticos — “65% de primeiro serviço,” “2,4 aces por partida.” Isso elimina o sinal temporal por completo. Um jogador em uma sequência de 7 derrotas e um jogador que acabou de vencer um Masters podem ter médias idênticas na temporada, mas não são alvos de previsão equivalentes.</span></p>
+<p><span class="lang-en"><strong>BreakPoint AI</strong> treats each match as the collision of two historical trajectories. The architecture is designed around one question: can a model learn momentum patterns directly from raw sequential data, without manual feature smoothing?</span> <span class="lang-pt"><strong>BreakPoint AI</strong> trata cada partida como a colisão de duas trajetórias históricas. A arquitetura é projetada em torno de uma única pergunta: um modelo pode aprender padrões de momentum diretamente de dados sequenciais brutos, sem suavização manual de features?</span></p>
+<hr>
+</section>
+<section id="temporal-validation-the-silent-failure-modevalidação-temporal-o-erro-silencioso" class="level2">
+<h2 class="anchored" data-anchor-id="temporal-validation-the-silent-failure-modevalidação-temporal-o-erro-silencioso"><span class="lang-en">Temporal Validation — The Silent Failure Mode</span><span class="lang-pt">Validação Temporal — O Erro Silencioso</span></h2>
+<p><span class="lang-en">Look-ahead bias is the most common — and most quietly damaging — failure mode in sequential forecasting. If any future information leaks into the training set, results are meaningless. The model hasn’t learned to predict; it has learned to cheat.</span> <span class="lang-pt">O viés de look-ahead é o erro mais comum — e mais silenciosamente prejudicial — em previsão sequencial. Se qualquer informação futura vazar para o conjunto de treinamento, os resultados são inválidos. O modelo não aprendeu a prever; aprendeu a trapacear.</span></p>
+<p><span class="lang-en">Every design decision in this project was made with leakage prevention as a hard constraint:</span> <span class="lang-pt">Cada decisão de design neste projeto foi tomada com a prevenção de vazamento como restrição inegociável:</span></p>
+<p><span class="lang-en"><strong>Temporal splits:</strong> Train ≤ 2022, Validation = 2023, Test = 2024. No shuffling. No cross-validation across time boundaries.</span> <span class="lang-pt"><strong>Divisões temporais:</strong> Treino ≤ 2022, Validação = 2023, Teste = 2024. Sem embaralhamento. Sem validação cruzada além das fronteiras temporais.</span></p>
+<p><span class="lang-en"><strong>Rolling features with <code>shift(1)</code>:</strong> Every rolling statistic is computed over the 10 matches <em>before</em> the current one. The current match is never part of its own feature window.</span> <span class="lang-pt"><strong>Features de janela deslizante com <code>shift(1)</code>:</strong> Toda estatística de janela é calculada sobre as 10 partidas <em>anteriores</em> à atual. A partida atual nunca faz parte de sua própria janela de feature.</span></p>
+<p><span class="lang-en"><strong>LSTM sequence filter:</strong> The <code>_get_sequence()</code> function enforces <code>candidate_dates &lt; current_date</code> (strict less-than) — one character that eliminates an entire class of leakage.</span> <span class="lang-pt"><strong>Filtro de sequência LSTM:</strong> A função <code>_get_sequence()</code> aplica <code>candidate_dates &lt; current_date</code> (estritamente menor) — um caractere que elimina uma classe inteira de vazamento.</span></p>
+<p><span class="lang-en"><strong>Preprocessor isolation:</strong> <code>StandardScaler</code> and <code>OneHotEncoder</code> are fit on the training split only, then applied to validation and test. Fitting on the full dataset would encode distributional information from the future.</span> <span class="lang-pt"><strong>Isolamento do pré-processador:</strong> <code>StandardScaler</code> e <code>OneHotEncoder</code> são ajustados apenas no conjunto de treino. Ajustar no conjunto completo codificaria informações distribucionais do futuro.</span></p>
+<hr>
+</section>
+<section id="system-architecturearquitetura-do-sistema" class="level2">
+<h2 class="anchored" data-anchor-id="system-architecturearquitetura-do-sistema"><span class="lang-en">System Architecture</span><span class="lang-pt">Arquitetura do Sistema</span></h2>
+<section id="feature-engineeringengenharia-de-features" class="level3">
+<h3 class="anchored" data-anchor-id="feature-engineeringengenharia-de-features"><span class="lang-en">Feature Engineering</span><span class="lang-pt">Engenharia de Features</span></h3>
+<p><span class="lang-en">Raw ATP match logs (1990–2024, ~90,000 records) are transformed into a feature matrix across seven groups. Every group uses <code>shift(1)</code> before any aggregation:</span> <span class="lang-pt">Os registros brutos de partidas ATP (1990–2024, ~90.000 registros) são transformados em uma matriz de features em sete grupos. Cada grupo usa <code>shift(1)</code> antes de qualquer agregação:</span></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><span class="lang-en">Feature Group</span><span class="lang-pt">Grupo de Features</span></th>
+<th><span class="lang-en">Examples</span><span class="lang-pt">Exemplos</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="lang-en">Rolling form (10-match window)</span><span class="lang-pt">Forma recente (janela de 10 partidas)</span></td>
+<td><span class="lang-en">Win rate, ace rate, double fault rate, serve points</span><span class="lang-pt">Taxa de vitórias, aces, duplas faltas, pontos de saque</span></td>
+</tr>
+<tr class="even">
+<td><span class="lang-en">Surface-specific win rate</span><span class="lang-pt">Taxa de vitória por superfície</span></td>
+<td><span class="lang-en">Clay, grass, hard court form tracked separately</span><span class="lang-pt">Forma em saibro, grama e quadra dura rastreadas separadamente</span></td>
+</tr>
+<tr class="odd">
+<td><span class="lang-en">Serve efficiency</span><span class="lang-pt">Eficiência de saque</span></td>
+<td><span class="lang-en">BP save rate, 1st/2nd serve win %, rolled over 10 matches</span><span class="lang-pt">Taxa de salvamento de break-points, % de pontos ganhos no 1º/2º saque</span></td>
+</tr>
+<tr class="even">
+<td><span class="lang-en">Rank quality</span><span class="lang-pt">Qualidade de ranking</span></td>
+<td><span class="lang-en">Log-transformed rank points differential</span><span class="lang-pt">Diferencial de pontos de ranking com transformação logarítmica</span></td>
+</tr>
+<tr class="odd">
+<td><span class="lang-en">Momentum</span><span class="lang-pt">Momentum</span></td>
+<td><span class="lang-en">Signed win/loss streak counter, rank trend over 5 matches</span><span class="lang-pt">Contador com sinal de sequência de vitórias/derrotas, tendência de ranking</span></td>
+</tr>
+<tr class="even">
+<td>H2H</td>
+<td><span class="lang-en">Overall and surface-specific head-to-head win rate</span><span class="lang-pt">Taxa de vitória head-to-head geral e por superfície</span></td>
+</tr>
+<tr class="odd">
+<td><span class="lang-en">Context</span><span class="lang-pt">Contexto</span></td>
+<td><span class="lang-en">Rank difference, days since last match (fatigue proxy)</span><span class="lang-pt">Diferença de ranking, dias desde a última partida (proxy de fadiga)</span></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="siamese-lstm-architecturearquitetura-siamese-lstm" class="level3">
+<h3 class="anchored" data-anchor-id="siamese-lstm-architecturearquitetura-siamese-lstm"><span class="lang-en">Siamese LSTM Architecture</span><span class="lang-pt">Arquitetura Siamese LSTM</span></h3>
+<p><span class="lang-en">The deep learning component processes each player’s last 10 matches as an independent time series. Shared LSTM weights encode a universal momentum representation — the same network processes both players, learning patterns that generalize across players rather than memorizing individual styles.</span> <span class="lang-pt">O componente de deep learning processa as últimas 10 partidas de cada jogador como uma série temporal independente. Os pesos compartilhados do LSTM codificam uma representação universal de momentum — a mesma rede processa ambos os jogadores, aprendendo padrões que generalizam entre jogadores.</span></p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">graph TD
+    A["Player A History (10 × seq_features)"] --&gt;|"Shared LSTM"| E1["Momentum Embedding A"]
+    B["Player B History (10 × seq_features)"] --&gt;|"Shared LSTM"| E2["Momentum Embedding B"]
+    C["Match Context (23 features)"] --&gt; F["Fusion Layer"]
+    E1 --&gt; F
+    E2 --&gt; F
+    F --&gt;|"Dense 64 → Dense 32 → Dense 1"| O["Win Probability"]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p><span class="lang-en">The momentum embeddings are concatenated with 23 context features (rank differential, surface, H2H) in a dense fusion layer. This hybrid design lets the LSTM handle temporal dynamics while the tabular path preserves interpretable context signals.</span> <span class="lang-pt">Os embeddings de momentum são concatenados com 23 features de contexto (diferencial de ranking, superfície, H2H) em uma camada de fusão densa. Esse design híbrido permite que o LSTM capture dinâmicas temporais enquanto o caminho tabular preserva sinais de contexto interpretáveis.</span></p>
+</section>
+<section id="optuna-hyperparameter-tuningotimização-de-hiperparâmetros-com-optuna" class="level3">
+<h3 class="anchored" data-anchor-id="optuna-hyperparameter-tuningotimização-de-hiperparâmetros-com-optuna"><span class="lang-en">Optuna Hyperparameter Tuning</span><span class="lang-pt">Otimização de Hiperparâmetros com Optuna</span></h3>
+<p><span class="lang-en">The LSTM architecture was optimized using Optuna’s Bayesian TPE sampler across five hyperparameters: hidden size, number of layers, dropout rate, learning rate, and batch size. Bayesian search is substantially more sample-efficient than grid search when each trial requires a full training run — particularly relevant without GPU infrastructure.</span> <span class="lang-pt">A arquitetura LSTM foi otimizada com o amostrador Bayesiano TPE do Optuna em cinco hiperparâmetros: tamanho oculto, número de camadas, dropout, taxa de aprendizado e tamanho de batch. A busca Bayesiana é substancialmente mais eficiente do que grid search quando cada trial exige uma execução completa de treinamento.</span></p>
+<p><span class="lang-en">Early stopping on validation AUC prevented overfitting across trials. The final LSTM was trained from the best Optuna configuration before evaluation on the held-out 2024 test set.</span> <span class="lang-pt">O early stopping no AUC de validação preveniu overfitting entre os trials. O LSTM final foi treinado a partir da melhor configuração do Optuna antes da avaliação no conjunto de teste 2024.</span></p>
+</section>
+<section id="stacking-ensembleensemble-de-stacking" class="level3">
+<h3 class="anchored" data-anchor-id="stacking-ensembleensemble-de-stacking"><span class="lang-en">Stacking Ensemble</span><span class="lang-pt">Ensemble de Stacking</span></h3>
+<p><span class="lang-en">Four base models feed a stacking meta-learner (XGBoost) trained on out-of-fold validation predictions — never on training labels directly:</span> <span class="lang-pt">Quatro modelos base alimentam um meta-aprendiz de stacking (XGBoost) treinado em previsões out-of-fold da validação — nunca diretamente nos rótulos de treino:</span></p>
 <ul>
-<li><strong>Market Edge:</strong> Achieved <strong>0.706 AUC</strong>, reaching statistical parity with institutional bookmakers in a high-variance domain.</li>
-<li><strong>Risk Calibration:</strong> Delivered a perfectly calibrated probability engine (Expected Value <span class="math inline">\(\approx\)</span> Actual Value), essential for Kelly Criterion staking.</li>
-<li><strong>Innovation:</strong> Developed a “Twin Network” architecture that learns player form independently before assessing the specific matchup.</li>
+<li><span class="lang-en"><strong>Logistic Regression</strong> — linear baseline</span><span class="lang-pt"><strong>Regressão Logística</strong> — baseline linear</span></li>
+<li><span class="lang-en"><strong>Random Forest</strong> — calibrated with Platt scaling</span><span class="lang-pt"><strong>Random Forest</strong> — calibrado com Platt scaling</span></li>
+<li><span class="lang-en"><strong>XGBoost</strong> — strongest individual model</span><span class="lang-pt"><strong>XGBoost</strong> — modelo individual mais forte</span></li>
+<li><span class="lang-en"><strong>Siamese LSTM</strong> — sequential learner on raw match histories</span><span class="lang-pt"><strong>Siamese LSTM</strong> — aprendiz sequencial em históricos brutos</span></li>
 </ul>
 <hr>
 </section>
-<section id="the-market-problem" class="level1">
-<h1>1. The Market Problem</h1>
-<section id="the-static-stats-fallacy" class="level3">
-<h3 class="anchored" data-anchor-id="the-static-stats-fallacy">The “Static Stats” Fallacy</h3>
-<p>Standard sports modeling suffers from a critical flaw: it aggregates performance (e.g., “Player A serves 65% first in”) into a single static number. This ignores <strong>Momentum</strong>—the temporal reality that a player’s form fluctuates significantly over a season.</p>
 </section>
-<section id="the-objective" class="level3">
-<h3 class="anchored" data-anchor-id="the-objective">The Objective</h3>
-<p>Build a system that answers: <strong>“Given the exact sequence of the last 10 matches for Player A and Player B, what is the probability of Player A winning today?”</strong></p>
-<p>Crucially, this system must avoid <strong>Look-Ahead Bias</strong>, ensuring that no future information leaks into the training set—a common pitfall in academic sports papers.</p>
-<hr>
-</section>
-</section>
-<section id="system-architecture" class="level1">
-<h1>2. System Architecture</h1>
-<p>To capture this temporal dynamic, I utilized a <strong>Siamese (Twin) Architecture</strong>. The network processes each player’s history independently to generate a “Momentum Embedding” before fusion.</p>
-<section id="model-diagram" class="level3">
-<h3 class="anchored" data-anchor-id="model-diagram">Model Diagram</h3>
-<div class="cell" data-layout-align="default">
-<div class="cell-output-display">
-<div id="fig-arch" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-arch-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div>
-<pre class="mermaid mermaid-js" data-label="fig-arch">graph TD
-    subgraph SP ["Sequence Processing (Twin LSTMs)"]
-        A["Player A History&lt;br/&gt;(Last 10 Matches)"] --&gt;|LSTM| E1[Momentum Embedding A]
-        B["Player B History&lt;br/&gt;(Last 10 Matches)"] --&gt;|LSTM| E2[Momentum Embedding B]
-    end
-
-    subgraph CF ["Context Fusion"]
-        C["Static Context&lt;br/&gt;(Rank, Surface, H2H)"] --&gt; F[Fusion Layer]
-        E1 --&gt; F
-        E2 --&gt; F
-    end
-
-    F --&gt;|Dense + Dropout| O[Win Probability]
-
-    style F fill:#f9f,stroke:#333,stroke-width:2px
-    style O fill:#bbf,stroke:#333,stroke-width:2px
-
-</pre>
-</div>
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-arch-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: Hybrid Siamese LSTM Architecture
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<hr>
-</section>
-</section>
-<section id="modeling-strategy" class="level1">
-<h1>3. Modeling Strategy</h1>
-<section id="benchmarking-complexity" class="level3">
-<h3 class="anchored" data-anchor-id="benchmarking-complexity">Benchmarking Complexity</h3>
-<p>I compared the deep learning approach against an industry-standard baseline to justify the computational cost.</p>
-<ol type="1">
-<li><strong>Random Forest (Baseline):</strong> Trained on manually engineered rolling averages (e.g., “Avg Aces Last 5 Matches”).</li>
-<li><strong>Siamese LSTM (Challenger):</strong> Trained on raw, sequential match logs.</li>
-</ol>
-<p><strong>Winner: Tie (with a caveat).</strong> The LSTM matched the Random Forest in accuracy (~64.6%) without needing manual feature engineering. This validates that the neural network successfully “learned” the rolling statistics and momentum features automatically from the raw sequence.</p>
-<hr>
-</section>
-</section>
-<section id="results-analysis" class="level1">
-<h1>4. Results &amp; Analysis</h1>
-<section id="performance-metrics" class="level3">
-<h3 class="anchored" data-anchor-id="performance-metrics">Performance Metrics</h3>
-<p>The final model demonstrated robust separation power between winners and losers.</p>
+<section id="resultsresultados" class="level2">
+<h2 class="anchored" data-anchor-id="resultsresultados"><span class="lang-en">Results</span><span class="lang-pt">Resultados</span></h2>
+<p><span class="lang-en">All results evaluated on the unseen 2024 test season:</span> <span class="lang-pt">Todos os resultados avaliados no conjunto de teste 2024 (não visto durante o treino):</span></p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 25%">
@@ -310,76 +368,83 @@ Figure&nbsp;1: Hybrid Siamese LSTM Architecture
 </colgroup>
 <thead>
 <tr class="header">
-<th>Metric</th>
-<th>Random Forest (Baseline)</th>
-<th>Siamese LSTM (Ours)</th>
-<th>Insight</th>
+<th><span class="lang-en">Model</span><span class="lang-pt">Modelo</span></th>
+<th>Test AUC</th>
+<th><span class="lang-en">Accuracy</span><span class="lang-pt">Acurácia</span></th>
+<th><span class="lang-en">Notes</span><span class="lang-pt">Notas</span></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><strong>Test AUC</strong></td>
-<td>0.7062</td>
-<td><strong>0.7060</strong></td>
-<td>Parity achieved with engineered baseline.</td>
+<td><strong><span class="lang-en">Stacking Ensemble</span><span class="lang-pt">Ensemble de Stacking</span></strong></td>
+<td><strong>0.7168</strong></td>
+<td><strong>65.35%</strong></td>
+<td>XGBoost meta-learner</td>
 </tr>
 <tr class="even">
-<td><strong>Accuracy</strong></td>
-<td>64.67%</td>
-<td><strong>64.61%</strong></td>
-<td>Consistent edge over coin-flip noise.</td>
+<td>XGBoost</td>
+<td>0.7185</td>
+<td>65.23%</td>
+<td><span class="lang-en">Strongest individual model</span><span class="lang-pt">Modelo individual mais forte</span></td>
+</tr>
+<tr class="odd">
+<td>Siamese LSTM</td>
+<td>0.7140</td>
+<td>65.50%</td>
+<td><span class="lang-en">Raw sequences, no manual smoothing</span><span class="lang-pt">Sequências brutas, sem suavização manual</span></td>
+</tr>
+<tr class="even">
+<td>Random Forest</td>
+<td>0.7112</td>
+<td>65.00%</td>
+<td><span class="lang-en">Platt-calibrated</span><span class="lang-pt">Calibrado com Platt scaling</span></td>
+</tr>
+<tr class="odd">
+<td>Logistic Regression</td>
+<td>0.7086</td>
+<td>65.05%</td>
+<td><span class="lang-en">Linear baseline</span><span class="lang-pt">Baseline linear</span></td>
 </tr>
 </tbody>
 </table>
+<blockquote class="blockquote">
+<p><span class="lang-en"><em>The academic literature places the statistical ceiling for ATP prediction at ~0.75–0.77 AUC. Closing this gap requires non-statistical signals — injuries, coaching changes, travel fatigue — not available in public match records.</em></span> <span class="lang-pt"><em>A literatura acadêmica situa o teto estatístico para previsão ATP em ~0.75–0.77 AUC. Fechar essa lacuna exige sinais não-estatísticos — lesões, mudanças de técnico, fadiga de viagem — não disponíveis em registros públicos.</em></span></p>
+</blockquote>
+<section id="feature-importance-shapimportância-das-features-shap" class="level3">
+<h3 class="anchored" data-anchor-id="feature-importance-shapimportância-das-features-shap"><span class="lang-en">Feature Importance (SHAP)</span><span class="lang-pt">Importância das Features (SHAP)</span></h3>
+<p><img src="shap_summary_rf.png" class="img-fluid"></p>
+<p><span class="lang-en"><code>rank_pts_diff</code> (log-transformed rank points differential, |r| = 0.338) is the strongest predictor, outperforming ordinal rank difference (0.228). Surface-specific rolling win rate and first-serve win percentage are next, confirming that recent surface form and serve dominance carry predictive signal beyond ranking alone.</span> <span class="lang-pt"><code>rank_pts_diff</code> (diferencial de pontos de ranking com transformação logarítmica, |r| = 0,338) é o preditor mais forte, superando a diferença ordinal de ranking (0,228). A taxa de vitória por superfície e o percentual de pontos ganhos no primeiro saque vêm a seguir, confirmando que a forma recente por superfície e a dominância no saque carregam sinal preditivo além do ranking.</span></p>
 </section>
-<section id="business-insight-the-calibration-curve" class="level3">
-<h3 class="anchored" data-anchor-id="business-insight-the-calibration-curve">Business Insight: The Calibration Curve</h3>
-<p>In quantitative finance, accuracy is secondary to <strong>Calibration</strong>. If a model says “70% confidence,” the event must happen 70% of the time to be profitable.</p>
-<p>The plot below shows the LSTM’s reliability. The Orange line (Model) closely hugs the Blue line (Perfect Calibration).</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="./calibration_curve_lstm.png" class="img-fluid figure-img"></p>
-<figcaption>Calibration Curve for LSTM Model</figcaption>
-</figure>
-</div>
-<div class="callout callout-style-simple callout-note no-icon">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-body-container">
-<p><strong>Betting Implication:</strong> The model knows what it doesn’t know. Because the probabilities are honest (calibrated), this model can be directly plugged into a <strong>Kelly Criterion</strong> sizing strategy to maximize long-term bankroll growth without the risk of ruin caused by overconfidence.</p>
-</div>
-</div>
-</div>
+<section id="calibrationcalibração" class="level3">
+<h3 class="anchored" data-anchor-id="calibrationcalibração"><span class="lang-en">Calibration</span><span class="lang-pt">Calibração</span></h3>
+<p><img src="calibration_curve_lstm.png" class="img-fluid"></p>
+<p><span class="lang-en">A calibrated model is one where predicted probabilities match empirical frequencies — when the model outputs 0.70, the predicted player wins approximately 70% of the time. The LSTM’s reliability diagram tracks the perfect calibration diagonal closely, a property that matters whenever downstream decisions depend on probability magnitude rather than binary classification.</span> <span class="lang-pt">Um modelo calibrado é aquele em que as probabilidades previstas correspondem às frequências empíricas — quando o modelo produz 0,70, o jogador previsto vence aproximadamente 70% das vezes. O diagrama de confiabilidade do LSTM acompanha de perto a diagonal de calibração perfeita, uma propriedade importante quando decisões subsequentes dependem da magnitude da probabilidade.</span></p>
 <hr>
 </section>
 </section>
-<section id="key-drivers-interpretation" class="level1">
-<h1>5. Key Drivers (Interpretation)</h1>
-<p>While the LSTM acts as the “Engine,” we use the Random Forest baseline to explain the “Why” (Proxy Analysis).</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="./shap_summary_rf.png" class="img-fluid figure-img"></p>
-<figcaption>SHAP Value for Random Forests</figcaption>
-</figure>
-</div>
-<p><strong>SHAP Value Analysis:</strong></p>
-<ol type="1">
-<li><strong>Rank Difference (<code>rank_diff</code>):</strong> The market anchor. The widening gap in ranking remains the single strongest predictor.</li>
-<li><strong>Momentum (<code>win_pct_roll_diff</code>):</strong> The difference in recent win percentage is the critical secondary factor.</li>
-<li><strong>Serve Metrics (<code>svpt</code>):</strong> Performance on serve points acts as a granular proxy for player dominance.</li>
-</ol>
-<hr>
-</section>
-<section id="conclusion" class="level1">
-<h1>Conclusion</h1>
-<p>This project demonstrates the application of <strong>Deep Learning to Time-Series Forecasting</strong> in a hostile, high-noise environment.</p>
-<p>By strictly enforcing time-series validation and prioritizing probability calibration over raw accuracy, BreakPoint AI bridges the gap between “sports data science” and <strong>quantitative financial modeling</strong>.</p>
+<section id="conclusionconclusão" class="level2">
+<h2 class="anchored" data-anchor-id="conclusionconclusão"><span class="lang-en">Conclusion</span><span class="lang-pt">Conclusão</span></h2>
 <ul>
-<li><strong>Code Repository:</strong> <a href="https://www.google.com/search?q=https://github.com/condeg0/breakpoint-ai" class="btn btn-primary" role="button">View on GitHub</a></li>
-<li><strong>Tech Stack:</strong> Python, PyTorch (LSTMs), Optuna, Pandas.</li>
+<li><span class="lang-en">A full ML pipeline — from raw sequential data to stacking ensemble — built with strict temporal validation at every step, eliminating the look-ahead bias that invalidates most published sports forecasting results.</span><span class="lang-pt">Um pipeline completo de ML — de dados sequenciais brutos a ensemble de stacking — construído com validação temporal rigorosa em cada etapa, eliminando o viés de look-ahead que invalida a maioria dos resultados publicados em previsão esportiva.</span></li>
+<li><span class="lang-en">A Siamese LSTM that learns momentum representations from raw sequences, matching a carefully engineered tabular baseline without any manual feature construction.</span><span class="lang-pt">Um Siamese LSTM que aprende representações de momentum a partir de sequências brutas, igualando uma baseline tabular cuidadosamente engenheirada sem construção manual de features.</span></li>
+<li><span class="lang-en">Optuna Bayesian hyperparameter search applied to the LSTM — more sample-efficient than grid search when each trial requires a full training run.</span><span class="lang-pt">Busca Bayesiana de hiperparâmetros com Optuna aplicada ao LSTM — mais eficiente do que grid search quando cada trial exige um treinamento completo.</span></li>
 </ul>
+<hr>
+<hr style="margin-top: 2rem;">
+<p style="font-size: 0.85rem; color: #555;">
+  <strong>Stack:</strong>
+  Python · PyTorch · Optuna · XGBoost · Scikit-Learn · Pandas · SHAP
+  &nbsp;|&nbsp;
+  <a href="https://github.com/Condeg0/BreakPoint-AI" target="_blank">
+    <span class="lang-en">View on GitHub →</span>
+    <span class="lang-pt">Ver no GitHub →</span>
+  </a>
+  &nbsp;|&nbsp;
+  <a href="../projects.html">
+    <span class="lang-en">← Back to Projects</span>
+    <span class="lang-pt">← Voltar aos Projetos</span>
+  </a>
+</p>
 
 
 </section>
