@@ -1,130 +1,236 @@
 ---
-title: "BreakPoint AI: Momentum Modeling in ATP Tennis"
-author: "Rafael Condé Gomes"
-date: "2026-02-03"
-categories: [Deep Learning, Quantitative Finance, Time-Series, PyTorch]
-image: "calibration_curve_lstm.png"
-format:
-  html:
-    toc: true
-    code-fold: true
+title: "BreakPoint AI: Forecasting ATP Tennis with Sequential Deep Learning"
+categories: [Python, PyTorch, Optuna, XGBoost, Time-Series, Ensemble Learning]
+author: Rafael Condé Gomes
+date: February 3, 2026
+toc: true
+toc-depth: 2
 ---
 
-# Executive Summary
+```{=html}
+<style>
+.metric-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin: 1.5rem 0 2rem 0;
+}
+.metric-card {
+  background: #f8f9fa;
+  border-left: 4px solid #2c5f8a;
+  border-radius: 4px;
+  padding: 1rem 1.25rem;
+}
+.metric-value {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #2c5f8a;
+  line-height: 1.1;
+}
+.metric-label {
+  font-size: 0.8rem;
+  color: #555;
+  margin-top: 0.2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.metric-sub {
+  font-size: 0.75rem;
+  color: #888;
+  margin-top: 0.15rem;
+}
+.back-link {
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+  display: block;
+}
+@media (max-width: 600px) {
+  .metric-grid { grid-template-columns: 1fr 1fr; }
+}
+</style>
 
-Sports betting markets are notoriously efficient; a static model relying on average statistics will rarely beat the "closing line."
-This project treats a tennis match not as a row of data, but as the **collision of two historical trajectories**.
+<a class="back-link" href="../projects.html">
+  <span class="lang-en">← Back to Projects</span>
+  <span class="lang-pt">← Voltar aos Projetos</span>
+</a>
 
-By implementing a **Hybrid Siamese LSTM**, I moved beyond static feature engineering to capture latent "momentum," achieving institutional-grade performance:
-
-* **Market Edge:** Achieved **0.706 AUC**, reaching statistical parity with institutional bookmakers in a high-variance domain.
-* **Risk Calibration:** Delivered a perfectly calibrated probability engine (Expected Value $\approx$ Actual Value), essential for Kelly Criterion staking.
-* **Innovation:** Developed a "Twin Network" architecture that learns player form independently before assessing the specific matchup.
-
----
-
-# 1. The Market Problem
-
-### The "Static Stats" Fallacy
-Standard sports modeling suffers from a critical flaw: it aggregates performance (e.g., "Player A serves 65% first in") into a single static number.
-This ignores **Momentum**—the temporal reality that a player's form fluctuates significantly over a season.
-
-### The Objective
-Build a system that answers: **"Given the exact sequence of the last 10 matches for Player A and Player B, what is the probability of Player A winning today?"**
-
-Crucially, this system must avoid **Look-Ahead Bias**, ensuring that no future information leaks into the training set—a common pitfall in academic sports papers.
-
----
-
-# 2. System Architecture
-
-To capture this temporal dynamic, I utilized a **Siamese (Twin) Architecture**.
-The network processes each player's history independently to generate a "Momentum Embedding" before fusion.
-
-### Model Diagram
-```{mermaid}
-%%| label: fig-arch
-%%| fig-cap: "Hybrid Siamese LSTM Architecture"
-graph TD
-    subgraph SP ["Sequence Processing (Twin LSTMs)"]
-        A["Player A History<br/>(Last 10 Matches)"] -->|LSTM| E1[Momentum Embedding A]
-        B["Player B History<br/>(Last 10 Matches)"] -->|LSTM| E2[Momentum Embedding B]
-    end
-
-    subgraph CF ["Context Fusion"]
-        C["Static Context<br/>(Rank, Surface, H2H)"] --> F[Fusion Layer]
-        E1 --> F
-        E2 --> F
-    end
-
-    F -->|Dense + Dropout| O[Win Probability]
-
-    style F fill:#f9f,stroke:#333,stroke-width:2px
-    style O fill:#bbf,stroke:#333,stroke-width:2px
-
+<div class="metric-grid">
+  <div class="metric-card">
+    <div class="metric-value">0.717</div>
+    <div class="metric-label">
+      <span class="lang-en">Ensemble AUC</span>
+      <span class="lang-pt">AUC do Ensemble</span>
+    </div>
+    <div class="metric-sub">
+      <span class="lang-en">2024 unseen test set</span>
+      <span class="lang-pt">Conjunto de teste 2024</span>
+    </div>
+  </div>
+  <div class="metric-card">
+    <div class="metric-value">65.5%</div>
+    <div class="metric-label">
+      <span class="lang-en">Best Accuracy</span>
+      <span class="lang-pt">Melhor Acurácia</span>
+    </div>
+    <div class="metric-sub">Siamese LSTM</div>
+  </div>
+  <div class="metric-card">
+    <div class="metric-value">90K+</div>
+    <div class="metric-label">
+      <span class="lang-en">ATP Match Records</span>
+      <span class="lang-pt">Registros de Partidas ATP</span>
+    </div>
+    <div class="metric-sub">1990 – 2024</div>
+  </div>
+</div>
 ```
 
 ---
 
-# 3. Modeling Strategy
+## <span class="lang-en">The Problem with Static Features</span><span class="lang-pt">O Problema das Features Estáticas</span>
 
-### Benchmarking Complexity
+<span class="lang-en">A player's season average tells you who they are. Their last 10 matches tell you who they are *right now*.</span>
+<span class="lang-pt">A média da temporada de um jogador diz quem ele é. As últimas 10 partidas dizem quem ele é *agora*.</span>
 
-I compared the deep learning approach against an industry-standard baseline to justify the computational cost.
+<span class="lang-en">Standard tabular models collapse match histories into single static numbers — "65% first serve in," "2.4 aces per match." This loses the temporal signal entirely. A player on a 7-match losing streak and a player who just won a Masters title might share identical season averages, but they are not equivalent forecasting targets.</span>
+<span class="lang-pt">Modelos tabulares padrão reduzem históricos de partidas a números estáticos — "65% de primeiro serviço," "2,4 aces por partida." Isso elimina o sinal temporal por completo. Um jogador em uma sequência de 7 derrotas e um jogador que acabou de vencer um Masters podem ter médias idênticas na temporada, mas não são alvos de previsão equivalentes.</span>
 
-1. **Random Forest (Baseline):** Trained on manually engineered rolling averages (e.g., "Avg Aces Last 5 Matches").
-2. **Siamese LSTM (Challenger):** Trained on raw, sequential match logs.
-
-**Winner: Tie (with a caveat).**
-The LSTM matched the Random Forest in accuracy (~64.6%) without needing manual feature engineering. This validates that the neural network successfully "learned" the rolling statistics and momentum features automatically from the raw sequence.
-
----
-
-# 4. Results & Analysis
-
-### Performance Metrics
-
-The final model demonstrated robust separation power between winners and losers.
-
-| Metric | Random Forest (Baseline) | Siamese LSTM (Ours) | Insight |
-| --- | --- | --- | --- |
-| **Test AUC** | 0.7062 | **0.7060** | Parity achieved with engineered baseline. |
-| **Accuracy** | 64.67% | **64.61%** | Consistent edge over coin-flip noise. |
-
-### Business Insight: The Calibration Curve
-
-In quantitative finance, accuracy is secondary to **Calibration**. If a model says "70% confidence," the event must happen 70% of the time to be profitable.
-
-The plot below shows the LSTM's reliability. The Orange line (Model) closely hugs the Blue line (Perfect Calibration).
-
-![Calibration Curve for LSTM Model](./calibration_curve_lstm.png)
-
-::: {.callout-note appearance="simple" icon=false}
-**Betting Implication:** The model knows what it doesn't know.
-Because the probabilities are honest (calibrated), this model can be directly plugged into a **Kelly Criterion** sizing strategy to maximize long-term bankroll growth without the risk of ruin caused by overconfidence.
-:::
+<span class="lang-en">**BreakPoint AI** treats each match as the collision of two historical trajectories. The architecture is designed around one question: can a model learn momentum patterns directly from raw sequential data, without manual feature smoothing?</span>
+<span class="lang-pt">**BreakPoint AI** trata cada partida como a colisão de duas trajetórias históricas. A arquitetura é projetada em torno de uma única pergunta: um modelo pode aprender padrões de momentum diretamente de dados sequenciais brutos, sem suavização manual de features?</span>
 
 ---
 
-# 5. Key Drivers (Interpretation)
+## <span class="lang-en">Temporal Validation — The Silent Failure Mode</span><span class="lang-pt">Validação Temporal — O Erro Silencioso</span>
 
-While the LSTM acts as the "Engine," we use the Random Forest baseline to explain the "Why" (Proxy Analysis).
+<span class="lang-en">Look-ahead bias is the most common — and most quietly damaging — failure mode in sequential forecasting. If any future information leaks into the training set, results are meaningless. The model hasn't learned to predict; it has learned to cheat.</span>
+<span class="lang-pt">O viés de look-ahead é o erro mais comum — e mais silenciosamente prejudicial — em previsão sequencial. Se qualquer informação futura vazar para o conjunto de treinamento, os resultados são inválidos. O modelo não aprendeu a prever; aprendeu a trapacear.</span>
 
-![SHAP Value for Random Forests](./shap_summary_rf.png)
+<span class="lang-en">Every design decision in this project was made with leakage prevention as a hard constraint:</span>
+<span class="lang-pt">Cada decisão de design neste projeto foi tomada com a prevenção de vazamento como restrição inegociável:</span>
 
-**SHAP Value Analysis:**
+<span class="lang-en">**Temporal splits:** Train ≤ 2022, Validation = 2023, Test = 2024. No shuffling. No cross-validation across time boundaries.</span>
+<span class="lang-pt">**Divisões temporais:** Treino ≤ 2022, Validação = 2023, Teste = 2024. Sem embaralhamento. Sem validação cruzada além das fronteiras temporais.</span>
 
-1. **Rank Difference (`rank_diff`):** The market anchor. The widening gap in ranking remains the single strongest predictor.
-2. **Momentum (`win_pct_roll_diff`):** The difference in recent win percentage is the critical secondary factor.
-3. **Serve Metrics (`svpt`):** Performance on serve points acts as a granular proxy for player dominance.
+<span class="lang-en">**Rolling features with `shift(1)`:** Every rolling statistic is computed over the 10 matches *before* the current one. The current match is never part of its own feature window.</span>
+<span class="lang-pt">**Features de janela deslizante com `shift(1)`:** Toda estatística de janela é calculada sobre as 10 partidas *anteriores* à atual. A partida atual nunca faz parte de sua própria janela de feature.</span>
+
+<span class="lang-en">**LSTM sequence filter:** The `_get_sequence()` function enforces `candidate_dates < current_date` (strict less-than) — one character that eliminates an entire class of leakage.</span>
+<span class="lang-pt">**Filtro de sequência LSTM:** A função `_get_sequence()` aplica `candidate_dates < current_date` (estritamente menor) — um caractere que elimina uma classe inteira de vazamento.</span>
+
+<span class="lang-en">**Preprocessor isolation:** `StandardScaler` and `OneHotEncoder` are fit on the training split only, then applied to validation and test. Fitting on the full dataset would encode distributional information from the future.</span>
+<span class="lang-pt">**Isolamento do pré-processador:** `StandardScaler` e `OneHotEncoder` são ajustados apenas no conjunto de treino. Ajustar no conjunto completo codificaria informações distribucionais do futuro.</span>
 
 ---
 
-# Conclusion
+## <span class="lang-en">System Architecture</span><span class="lang-pt">Arquitetura do Sistema</span>
 
-This project demonstrates the application of **Deep Learning to Time-Series Forecasting** in a hostile, high-noise environment.
+### <span class="lang-en">Feature Engineering</span><span class="lang-pt">Engenharia de Features</span>
 
-By strictly enforcing time-series validation and prioritizing probability calibration over raw accuracy, BreakPoint AI bridges the gap between "sports data science" and **quantitative financial modeling**.
+<span class="lang-en">Raw ATP match logs (1990–2024, ~90,000 records) are transformed into a feature matrix across seven groups. Every group uses `shift(1)` before any aggregation:</span>
+<span class="lang-pt">Os registros brutos de partidas ATP (1990–2024, ~90.000 registros) são transformados em uma matriz de features em sete grupos. Cada grupo usa `shift(1)` antes de qualquer agregação:</span>
 
-* **Code Repository:** [View on GitHub](https://www.google.com/search?q=https://github.com/condeg0/breakpoint-ai){.btn .btn-primary role="button"}
-* **Tech Stack:** Python, PyTorch (LSTMs), Optuna, Pandas.
+| <span class="lang-en">Feature Group</span><span class="lang-pt">Grupo de Features</span> | <span class="lang-en">Examples</span><span class="lang-pt">Exemplos</span> |
+|---|---|
+| <span class="lang-en">Rolling form (10-match window)</span><span class="lang-pt">Forma recente (janela de 10 partidas)</span> | <span class="lang-en">Win rate, ace rate, double fault rate, serve points</span><span class="lang-pt">Taxa de vitórias, aces, duplas faltas, pontos de saque</span> |
+| <span class="lang-en">Surface-specific win rate</span><span class="lang-pt">Taxa de vitória por superfície</span> | <span class="lang-en">Clay, grass, hard court form tracked separately</span><span class="lang-pt">Forma em saibro, grama e quadra dura rastreadas separadamente</span> |
+| <span class="lang-en">Serve efficiency</span><span class="lang-pt">Eficiência de saque</span> | <span class="lang-en">BP save rate, 1st/2nd serve win %, rolled over 10 matches</span><span class="lang-pt">Taxa de salvamento de break-points, % de pontos ganhos no 1º/2º saque</span> |
+| <span class="lang-en">Rank quality</span><span class="lang-pt">Qualidade de ranking</span> | <span class="lang-en">Log-transformed rank points differential</span><span class="lang-pt">Diferencial de pontos de ranking com transformação logarítmica</span> |
+| <span class="lang-en">Momentum</span><span class="lang-pt">Momentum</span> | <span class="lang-en">Signed win/loss streak counter, rank trend over 5 matches</span><span class="lang-pt">Contador com sinal de sequência de vitórias/derrotas, tendência de ranking</span> |
+| H2H | <span class="lang-en">Overall and surface-specific head-to-head win rate</span><span class="lang-pt">Taxa de vitória head-to-head geral e por superfície</span> |
+| <span class="lang-en">Context</span><span class="lang-pt">Contexto</span> | <span class="lang-en">Rank difference, days since last match (fatigue proxy)</span><span class="lang-pt">Diferença de ranking, dias desde a última partida (proxy de fadiga)</span> |
+
+### <span class="lang-en">Siamese LSTM Architecture</span><span class="lang-pt">Arquitetura Siamese LSTM</span>
+
+<span class="lang-en">The deep learning component processes each player's last 10 matches as an independent time series. Shared LSTM weights encode a universal momentum representation — the same network processes both players, learning patterns that generalize across players rather than memorizing individual styles.</span>
+<span class="lang-pt">O componente de deep learning processa as últimas 10 partidas de cada jogador como uma série temporal independente. Os pesos compartilhados do LSTM codificam uma representação universal de momentum — a mesma rede processa ambos os jogadores, aprendendo padrões que generalizam entre jogadores.</span>
+
+```{mermaid}
+graph TD
+    A["Player A History (10 × seq_features)"] -->|"Shared LSTM"| E1["Momentum Embedding A"]
+    B["Player B History (10 × seq_features)"] -->|"Shared LSTM"| E2["Momentum Embedding B"]
+    C["Match Context (23 features)"] --> F["Fusion Layer"]
+    E1 --> F
+    E2 --> F
+    F -->|"Dense 64 → Dense 32 → Dense 1"| O["Win Probability"]
+```
+
+<span class="lang-en">The momentum embeddings are concatenated with 23 context features (rank differential, surface, H2H) in a dense fusion layer. This hybrid design lets the LSTM handle temporal dynamics while the tabular path preserves interpretable context signals.</span>
+<span class="lang-pt">Os embeddings de momentum são concatenados com 23 features de contexto (diferencial de ranking, superfície, H2H) em uma camada de fusão densa. Esse design híbrido permite que o LSTM capture dinâmicas temporais enquanto o caminho tabular preserva sinais de contexto interpretáveis.</span>
+
+### <span class="lang-en">Optuna Hyperparameter Tuning</span><span class="lang-pt">Otimização de Hiperparâmetros com Optuna</span>
+
+<span class="lang-en">The LSTM architecture was optimized using Optuna's Bayesian TPE sampler across five hyperparameters: hidden size, number of layers, dropout rate, learning rate, and batch size. Bayesian search is substantially more sample-efficient than grid search when each trial requires a full training run — particularly relevant without GPU infrastructure.</span>
+<span class="lang-pt">A arquitetura LSTM foi otimizada com o amostrador Bayesiano TPE do Optuna em cinco hiperparâmetros: tamanho oculto, número de camadas, dropout, taxa de aprendizado e tamanho de batch. A busca Bayesiana é substancialmente mais eficiente do que grid search quando cada trial exige uma execução completa de treinamento.</span>
+
+<span class="lang-en">Early stopping on validation AUC prevented overfitting across trials. The final LSTM was trained from the best Optuna configuration before evaluation on the held-out 2024 test set.</span>
+<span class="lang-pt">O early stopping no AUC de validação preveniu overfitting entre os trials. O LSTM final foi treinado a partir da melhor configuração do Optuna antes da avaliação no conjunto de teste 2024.</span>
+
+### <span class="lang-en">Stacking Ensemble</span><span class="lang-pt">Ensemble de Stacking</span>
+
+<span class="lang-en">Four base models feed a stacking meta-learner (XGBoost) trained on out-of-fold validation predictions — never on training labels directly:</span>
+<span class="lang-pt">Quatro modelos base alimentam um meta-aprendiz de stacking (XGBoost) treinado em previsões out-of-fold da validação — nunca diretamente nos rótulos de treino:</span>
+
+- <span class="lang-en">**Logistic Regression** — linear baseline</span><span class="lang-pt">**Regressão Logística** — baseline linear</span>
+- <span class="lang-en">**Random Forest** — calibrated with Platt scaling</span><span class="lang-pt">**Random Forest** — calibrado com Platt scaling</span>
+- <span class="lang-en">**XGBoost** — strongest individual model</span><span class="lang-pt">**XGBoost** — modelo individual mais forte</span>
+- <span class="lang-en">**Siamese LSTM** — sequential learner on raw match histories</span><span class="lang-pt">**Siamese LSTM** — aprendiz sequencial em históricos brutos</span>
+
+---
+
+## <span class="lang-en">Results</span><span class="lang-pt">Resultados</span>
+
+<span class="lang-en">All results evaluated on the unseen 2024 test season:</span>
+<span class="lang-pt">Todos os resultados avaliados no conjunto de teste 2024 (não visto durante o treino):</span>
+
+| <span class="lang-en">Model</span><span class="lang-pt">Modelo</span> | Test AUC | <span class="lang-en">Accuracy</span><span class="lang-pt">Acurácia</span> | <span class="lang-en">Notes</span><span class="lang-pt">Notas</span> |
+|---|---|---|---|
+| **<span class="lang-en">Stacking Ensemble</span><span class="lang-pt">Ensemble de Stacking</span>** | **0.7168** | **65.35%** | XGBoost meta-learner |
+| XGBoost | 0.7185 | 65.23% | <span class="lang-en">Strongest individual model</span><span class="lang-pt">Modelo individual mais forte</span> |
+| Siamese LSTM | 0.7140 | 65.50% | <span class="lang-en">Raw sequences, no manual smoothing</span><span class="lang-pt">Sequências brutas, sem suavização manual</span> |
+| Random Forest | 0.7112 | 65.00% | <span class="lang-en">Platt-calibrated</span><span class="lang-pt">Calibrado com Platt scaling</span> |
+| Logistic Regression | 0.7086 | 65.05% | <span class="lang-en">Linear baseline</span><span class="lang-pt">Baseline linear</span> |
+
+> <span class="lang-en">*The academic literature places the statistical ceiling for ATP prediction at ~0.75–0.77 AUC. Closing this gap requires non-statistical signals — injuries, coaching changes, travel fatigue — not available in public match records.*</span>
+> <span class="lang-pt">*A literatura acadêmica situa o teto estatístico para previsão ATP em ~0.75–0.77 AUC. Fechar essa lacuna exige sinais não-estatísticos — lesões, mudanças de técnico, fadiga de viagem — não disponíveis em registros públicos.*</span>
+
+### <span class="lang-en">Feature Importance (SHAP)</span><span class="lang-pt">Importância das Features (SHAP)</span>
+
+![](shap_summary_rf.png)
+
+<span class="lang-en">`rank_pts_diff` (log-transformed rank points differential, |r| = 0.338) is the strongest predictor, outperforming ordinal rank difference (0.228). Surface-specific rolling win rate and first-serve win percentage are next, confirming that recent surface form and serve dominance carry predictive signal beyond ranking alone.</span>
+<span class="lang-pt">`rank_pts_diff` (diferencial de pontos de ranking com transformação logarítmica, |r| = 0,338) é o preditor mais forte, superando a diferença ordinal de ranking (0,228). A taxa de vitória por superfície e o percentual de pontos ganhos no primeiro saque vêm a seguir, confirmando que a forma recente por superfície e a dominância no saque carregam sinal preditivo além do ranking.</span>
+
+### <span class="lang-en">Calibration</span><span class="lang-pt">Calibração</span>
+
+![](calibration_curve_lstm.png)
+
+<span class="lang-en">A calibrated model is one where predicted probabilities match empirical frequencies — when the model outputs 0.70, the predicted player wins approximately 70% of the time. The LSTM's reliability diagram tracks the perfect calibration diagonal closely, a property that matters whenever downstream decisions depend on probability magnitude rather than binary classification.</span>
+<span class="lang-pt">Um modelo calibrado é aquele em que as probabilidades previstas correspondem às frequências empíricas — quando o modelo produz 0,70, o jogador previsto vence aproximadamente 70% das vezes. O diagrama de confiabilidade do LSTM acompanha de perto a diagonal de calibração perfeita, uma propriedade importante quando decisões subsequentes dependem da magnitude da probabilidade.</span>
+
+---
+
+## <span class="lang-en">Conclusion</span><span class="lang-pt">Conclusão</span>
+
+- <span class="lang-en">A full ML pipeline — from raw sequential data to stacking ensemble — built with strict temporal validation at every step, eliminating the look-ahead bias that invalidates most published sports forecasting results.</span><span class="lang-pt">Um pipeline completo de ML — de dados sequenciais brutos a ensemble de stacking — construído com validação temporal rigorosa em cada etapa, eliminando o viés de look-ahead que invalida a maioria dos resultados publicados em previsão esportiva.</span>
+- <span class="lang-en">A Siamese LSTM that learns momentum representations from raw sequences, matching a carefully engineered tabular baseline without any manual feature construction.</span><span class="lang-pt">Um Siamese LSTM que aprende representações de momentum a partir de sequências brutas, igualando uma baseline tabular cuidadosamente engenheirada sem construção manual de features.</span>
+- <span class="lang-en">Optuna Bayesian hyperparameter search applied to the LSTM — more sample-efficient than grid search when each trial requires a full training run.</span><span class="lang-pt">Busca Bayesiana de hiperparâmetros com Optuna aplicada ao LSTM — mais eficiente do que grid search quando cada trial exige um treinamento completo.</span>
+
+---
+
+```{=html}
+<hr style="margin-top: 2rem;">
+<p style="font-size: 0.85rem; color: #555;">
+  <strong>Stack:</strong>
+  Python · PyTorch · Optuna · XGBoost · Scikit-Learn · Pandas · SHAP
+  &nbsp;|&nbsp;
+  <a href="https://github.com/Condeg0/BreakPoint-AI" target="_blank">
+    <span class="lang-en">View on GitHub →</span>
+    <span class="lang-pt">Ver no GitHub →</span>
+  </a>
+  &nbsp;|&nbsp;
+  <a href="../projects.html">
+    <span class="lang-en">← Back to Projects</span>
+    <span class="lang-pt">← Voltar aos Projetos</span>
+  </a>
+</p>
+```
