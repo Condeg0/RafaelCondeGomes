@@ -1,0 +1,1932 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>context – Rafael Condé Gomes</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-244ce1b9ec229af56bb6f90d24b3371d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../lang-toggle.css">
+</head>
+
+<body class="nav-fixed fullcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Rafael Condé Gomes</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../projects.html"> 
+<span class="menu-text">Projects</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+
+
+
+
+<section id="breakpoint-ai-full-technical-context" class="level1">
+<h1>BreakPoint AI — Full Technical Context</h1>
+<blockquote class="blockquote">
+<p><strong>Purpose:</strong> This document is a complete, self-contained reference for the BreakPoint AI project. It is intended to be fed to an LLM so that the LLM can answer any question about the project without needing access to the source code.</p>
+</blockquote>
+<hr>
+<section id="project-overview" class="level2">
+<h2 class="anchored" data-anchor-id="project-overview">1. Project Overview</h2>
+<p><strong>BreakPoint AI</strong> is a production-grade machine learning system for <strong>ATP tennis match outcome prediction</strong>. The core innovation is a hybrid architecture that combines:</p>
+<ul>
+<li>A <strong>Siamese LSTM</strong> (deep learning) model that processes each player’s recent match history as a time series</li>
+<li><strong>Tabular ensemble models</strong> (XGBoost, Random Forest, Logistic Regression) that consume hand-engineered contextual features</li>
+<li>A <strong>stacking meta-learner</strong> (XGBoost) that combines all base model outputs into a final probability</li>
+</ul>
+<p>The system achieves <strong>0.7168 Test AUC</strong> and <strong>65.35% accuracy</strong> on 2024 ATP matches (unseen test data). It implements strict temporal validation to eliminate look-ahead bias — a critical requirement when working with sequential sports data.</p>
+<hr>
+</section>
+<section id="repository-structure" class="level2">
+<h2 class="anchored" data-anchor-id="repository-structure">2. Repository Structure</h2>
+<pre><code>BreakPoint-AI/
+├── configs/
+│   └── config.yaml                  # Master config (hyperparams, paths, feature specs)
+├── src/
+│   ├── config.py                    # Pydantic-based config schema validation
+│   ├── data.py                      # Dataset loading, splitting, preprocessing
+│   ├── features.py                  # FeatureEngineer: rolling stats, H2H, streaks
+│   ├── training.py                  # Trainer: orchestrates model training loops
+│   ├── tuning.py                    # Tuner: Optuna hyperparameter optimization
+│   ├── inference.py                 # MetaLearnerPipeline: batch inference engine
+│   ├── evaluation.py                # Evaluator: metrics, SHAP, calibration curves
+│   ├── logger.py                    # Production logging (file + console handlers)
+│   └── models/
+│       ├── nn.py                    # SiameseLSTM architecture
+│       ├── xgb.py                   # XGBoostModel wrapper
+│       ├── baselines.py             # RandomForestBaseline, LogisticBaseline
+│       └── stacking.py              # StackingMetaLearner ensemble combiner
+├── main.py                          # Training orchestrator (Phases 1–5)
+├── cli_batch_predict.py             # Inference CLI for upcoming matches
+├── data/
+│   ├── raw/                         # ATP match CSVs (1990–2024, 35 files)
+│   └── processed/                   # Engineered feature matrices (train/val/test)
+├── model_prod/                      # Production frozen model weights
+│   ├── global_preprocessor.pkl
+│   ├── lstm/
+│   │   ├── best_model.pt
+│   │   └── global_preprocessor.pkl
+│   └── stacking/
+│       ├── best_model.pt
+│       ├── meta_learner.joblib
+│       └── global_preprocessor.pkl
+├── assets/                          # Evaluation visualizations (10 PNG files)
+├── outputs/                         # Artifact directories from training runs
+├── logs/                            # pipeline.log (persistent execution logs)
+├── requirements.txt
+├── .github/workflows/ci.yml         # GitHub Actions: ruff linting
+└── README.md</code></pre>
+<hr>
+</section>
+<section id="dataset-data-pipeline" class="level2">
+<h2 class="anchored" data-anchor-id="dataset-data-pipeline">3. Dataset &amp; Data Pipeline</h2>
+<section id="data-source" class="level3">
+<h3 class="anchored" data-anchor-id="data-source">3.1 Data Source</h3>
+<ul>
+<li><strong>Source:</strong> ATP match database</li>
+<li><strong>Coverage:</strong> 1990–2024 (35 raw CSV files, one per year)</li>
+<li><strong>Excluded:</strong> Davis Cup, Laver Cup matches (filtered out during loading)</li>
+</ul>
+</section>
+<section id="raw-data-schema" class="level3">
+<h3 class="anchored" data-anchor-id="raw-data-schema">3.2 Raw Data Schema</h3>
+<p>Each CSV row represents one match with the following columns:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Column</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>tourney_id</code>, <code>tourney_name</code></td>
+<td>Tournament identifiers</td>
+</tr>
+<tr class="even">
+<td><code>tourney_date</code></td>
+<td>Match date</td>
+</tr>
+<tr class="odd">
+<td><code>match_num</code></td>
+<td>Match number within tournament</td>
+</tr>
+<tr class="even">
+<td><code>round</code></td>
+<td>Tournament round (R128, R64, …, F)</td>
+</tr>
+<tr class="odd">
+<td><code>winner_name</code>, <code>loser_name</code></td>
+<td>Player names</td>
+</tr>
+<tr class="even">
+<td><code>winner_rank</code>, <code>loser_rank</code></td>
+<td>ATP ranking at time of match</td>
+</tr>
+<tr class="odd">
+<td><code>winner_rank_points</code>, <code>loser_rank_points</code></td>
+<td>Ranking points</td>
+</tr>
+<tr class="even">
+<td><code>surface</code></td>
+<td>Court surface: Clay / Grass / Hard / Carpet</td>
+</tr>
+<tr class="odd">
+<td><code>tourney_level</code></td>
+<td>Tournament level: G (Grand Slam), M (Masters), A (ATP 250/500), etc.</td>
+</tr>
+<tr class="even">
+<td><code>best_of</code></td>
+<td>Best of 3 or 5 sets</td>
+</tr>
+<tr class="odd">
+<td><code>minutes</code></td>
+<td>Match duration</td>
+</tr>
+<tr class="even">
+<td><code>w_ace</code>, <code>l_ace</code></td>
+<td>Aces for winner/loser</td>
+</tr>
+<tr class="odd">
+<td><code>w_df</code>, <code>l_df</code></td>
+<td>Double faults</td>
+</tr>
+<tr class="even">
+<td><code>w_svpt</code>, <code>l_svpt</code></td>
+<td>Serve points played</td>
+</tr>
+<tr class="odd">
+<td><code>w_1stIn</code>, <code>l_1stIn</code></td>
+<td>First serves in</td>
+</tr>
+<tr class="even">
+<td><code>w_1stWon</code>, <code>l_1stWon</code></td>
+<td>Points won on first serve</td>
+</tr>
+<tr class="odd">
+<td><code>w_2ndWon</code>, <code>l_2ndWon</code></td>
+<td>Points won on second serve</td>
+</tr>
+<tr class="even">
+<td><code>w_bpSaved</code>, <code>l_bpSaved</code></td>
+<td>Break points saved</td>
+</tr>
+<tr class="odd">
+<td><code>w_bpFaced</code>, <code>l_bpFaced</code></td>
+<td>Break points faced</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="temporal-splits" class="level3">
+<h3 class="anchored" data-anchor-id="temporal-splits">3.3 Temporal Splits</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Split</th>
+<th>Date Range</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Train</strong></td>
+<td>≤ 2022-12-31</td>
+<td>Model fitting</td>
+</tr>
+<tr class="even">
+<td><strong>Validation</strong></td>
+<td>2023-01-01 – 2023-12-31</td>
+<td>Hyperparameter tuning, early stopping</td>
+</tr>
+<tr class="odd">
+<td><strong>Test</strong></td>
+<td>≥ 2024-01-01</td>
+<td>Final unseen evaluation</td>
+</tr>
+</tbody>
+</table>
+<p>These splits are strictly temporal — no future data ever leaks into training.</p>
+</section>
+<section id="data-processing-steps-srcdata.py" class="level3">
+<h3 class="anchored" data-anchor-id="data-processing-steps-srcdata.py">3.4 Data Processing Steps (<code>src/data.py</code>)</h3>
+<ol type="1">
+<li>Load all 35 CSV files and concatenate</li>
+<li>Parse <code>tourney_date</code> to datetime, sort by date + <code>match_num</code></li>
+<li>Filter out Davis Cup and Laver Cup</li>
+<li>Apply temporal split into train/val/test DataFrames</li>
+<li><strong>Preprocessor</strong> (<code>Preprocessor</code> class):
+<ul>
+<li><code>StandardScaler</code> for all numeric features (fit on train only, applied to val/test)</li>
+<li><code>OneHotEncoder</code> for categorical features (<code>surface</code>, <code>tourney_level</code>)</li>
+<li>Combined via <code>ColumnTransformer</code></li>
+<li>Saved to <code>global_preprocessor.pkl</code> for inference consistency</li>
+</ul></li>
+</ol>
+</section>
+<section id="pytorch-dataset-tennisdataset" class="level3">
+<h3 class="anchored" data-anchor-id="pytorch-dataset-tennisdataset">3.5 PyTorch Dataset (<code>TennisDataset</code>)</h3>
+<p>Two operating modes:</p>
+<ul>
+<li><strong><code>"tabular"</code> mode:</strong> Returns <code>(context_matrix[idx], label)</code> — used by XGBoost, RF, LogReg</li>
+<li><strong><code>"lstm"</code> mode:</strong> Returns <code>(seq_a, seq_b, context, label)</code> — used by Siamese LSTM
+<ul>
+<li><code>seq_a</code> / <code>seq_b</code>: 10-match rolling window sequences per player (shape <code>(10, 9)</code>)</li>
+<li>Sequences built with <code>_get_sequence()</code> enforcing <code>candidate_dates &lt; current_date</code> (strict past-only)</li>
+<li>Pads with zeros if fewer than 10 prior matches exist</li>
+</ul></li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="feature-engineering-srcfeatures.py" class="level2">
+<h2 class="anchored" data-anchor-id="feature-engineering-srcfeatures.py">4. Feature Engineering (<code>src/features.py</code>)</h2>
+<p>The <code>FeatureEngineer</code> class transforms raw match-level data into a rich feature matrix. All features are computed with <strong>temporal integrity</strong> — no future information is used.</p>
+<section id="long-format-transformation" class="level3">
+<h3 class="anchored" data-anchor-id="long-format-transformation">4.1 Long-Format Transformation</h3>
+<p>Raw matches (1 row = 1 match) are first expanded to player-level records (2 rows = 1 match): - One row for the winner (<code>label = 1</code>) - One row for the loser (<code>label = 0</code>) - Preserves <code>surface</code>, <code>tourney_level</code>, <code>tourney_date</code>, all serve stats</p>
+</section>
+<section id="rolling-statistics-10-match-window" class="level3">
+<h3 class="anchored" data-anchor-id="rolling-statistics-10-match-window">4.2 Rolling Statistics (10-match window)</h3>
+<p>All rolling features use <code>shift(1).rolling(10).mean()</code> — the shift ensures the current match is never included.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Feature</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>ace_roll</code></td>
+<td>Rolling mean aces over last 10 matches</td>
+</tr>
+<tr class="even">
+<td><code>df_roll</code></td>
+<td>Rolling mean double faults</td>
+</tr>
+<tr class="odd">
+<td><code>svpt_roll</code></td>
+<td>Rolling mean serve points played</td>
+</tr>
+<tr class="even">
+<td><code>1stIn_roll</code></td>
+<td>Rolling mean 1st serves in</td>
+</tr>
+<tr class="odd">
+<td><code>1stWon_roll</code></td>
+<td>Rolling mean 1st serve points won</td>
+</tr>
+<tr class="even">
+<td><code>2ndWon_roll</code></td>
+<td>Rolling mean 2nd serve points won</td>
+</tr>
+<tr class="odd">
+<td><code>1stIn_pct_roll</code></td>
+<td>Rolling 1st serve in percentage</td>
+</tr>
+<tr class="even">
+<td><code>win_pct_roll</code></td>
+<td>Rolling win rate (recent form)</td>
+</tr>
+<tr class="odd">
+<td><code>{feature}_lag</code></td>
+<td>Previous match value (lag-1) for each feature</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="surface-specific-rolling-win-rate" class="level3">
+<h3 class="anchored" data-anchor-id="surface-specific-rolling-win-rate">4.3 Surface-Specific Rolling Win Rate</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>surf_win_pct_roll <span class="op">=</span> groupby([<span class="st">'player'</span>, <span class="st">'surface'</span>])[<span class="st">'win_pct'</span>].shift(<span class="dv">1</span>).rolling(<span class="dv">10</span>).mean()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Captures each player’s specialization on Clay, Grass, or Hard courts separately.</p>
+</section>
+<section id="serve-efficiency-ratios" class="level3">
+<h3 class="anchored" data-anchor-id="serve-efficiency-ratios">4.4 Serve Efficiency Ratios</h3>
+<p>Derived from match-level stats, then rolled:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Feature</th>
+<th>Formula</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>bp_save_rate</code></td>
+<td><code>bpSaved / bpFaced</code> — break point save percentage</td>
+</tr>
+<tr class="even">
+<td><code>first_srv_win_pct</code></td>
+<td><code>1stWon / 1stIn</code> — 1st serve win percentage</td>
+</tr>
+<tr class="odd">
+<td><code>second_srv_win_pct</code></td>
+<td><code>2ndWon / (svpt - 1stIn)</code> — 2nd serve win percentage</td>
+</tr>
+</tbody>
+</table>
+<p>Each is rolled over 10 matches with the same <code>shift(1)</code> leakage guard.</p>
+</section>
+<section id="winloss-streak" class="level3">
+<h3 class="anchored" data-anchor-id="winloss-streak">4.5 Win/Loss Streak</h3>
+<p>A signed streak counter: - <code>+1, +2, +3, …</code> for consecutive wins - <code>-1, -2, -3, …</code> for consecutive losses - Resets to ±1 on alternation</p>
+<p>Computed with a custom loop over <code>groupby('player')['label'].shift(1)</code>.</p>
+</section>
+<section id="rank-momentum" class="level3">
+<h3 class="anchored" data-anchor-id="rank-momentum">4.6 Rank Momentum</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>rank_trend <span class="op">=</span> current_rank <span class="op">-</span> rolling_mean_rank(<span class="dv">5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Positive = rank worsening (climbing number = losing ground), Negative = improving.</p>
+</section>
+<section id="head-to-head-h2h-features" class="level3">
+<h3 class="anchored" data-anchor-id="head-to-head-h2h-features">4.7 Head-to-Head (H2H) Features</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Feature</th>
+<th>Formula</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>h2h_win_rate</code></td>
+<td><code>cumsum(wins) / count(matches)</code> for each (player, opponent) pair</td>
+</tr>
+<tr class="even">
+<td><code>surf_h2h_win_rate</code></td>
+<td>Same, but grouped by (player, opponent, surface)</td>
+</tr>
+</tbody>
+</table>
+<p>Both use <code>shift(1).cumsum()</code> to prevent future leakage. Default to <strong>0.5</strong> if no prior history exists.</p>
+</section>
+<section id="days-since-last-match" class="level3">
+<h3 class="anchored" data-anchor-id="days-since-last-match">4.8 Days Since Last Match</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>days_since <span class="op">=</span> groupby(<span class="st">'player'</span>)[<span class="st">'tourney_date'</span>].diff().dt.days</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Filled with <strong>365</strong> for a player’s first match (signals a long rest or new player).</p>
+</section>
+<section id="log-transformed-rank-points-difference" class="level3">
+<h3 class="anchored" data-anchor-id="log-transformed-rank-points-difference">4.9 Log-Transformed Rank Points Difference</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>rank_pts_diff <span class="op">=</span> log(player_rank_points <span class="op">+</span> <span class="dv">1</span>) <span class="op">-</span> log(opponent_rank_points <span class="op">+</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Log transformation captures the non-linear relationship between ranking points and match outcomes. This is the <strong>strongest single feature</strong> (SHAP |correlation| ≈ 0.338).</p>
+</section>
+<section id="pivot-back-to-match-format" class="level3">
+<h3 class="anchored" data-anchor-id="pivot-back-to-match-format">4.10 Pivot Back to Match Format</h3>
+<p>The long-format player rows are pivoted back to single-row matches: - Player A features vs.&nbsp;opponent features are merged - <strong>Difference features</strong> computed: <code>{feature}_diff = player_value - opponent_value</code> - Final output: single row per match with both absolute and differential features</p>
+</section>
+<section id="final-feature-sets" class="level3">
+<h3 class="anchored" data-anchor-id="final-feature-sets">4.11 Final Feature Sets</h3>
+<p><strong>Context features (23 total) fed to all models:</strong></p>
+<pre><code>rank_diff, rank, opponent_rank
+ace_roll_diff, df_roll_diff, win_pct_roll_diff
+h2h_win_rate
+days_since
+rank_pts_diff
+surf_win_pct_roll_diff
+bp_save_rate_roll_diff
+first_srv_win_pct_roll_diff
+streak_diff, rank_trend_diff
+surf_h2h_win_rate_diff
+surf_win_pct_roll, streak, rank_trend   (absolute values)</code></pre>
+<p><strong>Sequence features (9 total) fed to LSTM per player per timestep:</strong></p>
+<pre><code>ace, df, svpt, 1stIn, 1stWon, 2ndWon
+rank, bp_save_rate, first_srv_win_pct</code></pre>
+<hr>
+</section>
+</section>
+<section id="model-architectures-hyperparameters" class="level2">
+<h2 class="anchored" data-anchor-id="model-architectures-hyperparameters">5. Model Architectures &amp; Hyperparameters</h2>
+<section id="siamese-lstm-srcmodelsnn.py" class="level3">
+<h3 class="anchored" data-anchor-id="siamese-lstm-srcmodelsnn.py">5.1 Siamese LSTM (<code>src/models/nn.py</code>)</h3>
+<p><strong>Architecture (forward pass):</strong></p>
+<pre><code>Input:
+  seq_a:    (batch_size, 10, 9)   — Player A: 10 past matches × 9 features
+  seq_b:    (batch_size, 10, 9)   — Player B: 10 past matches × 9 features
+  context:  (batch_size, 23)      — Context features
+
+Twin LSTM Encoders (shared weights — same network for both players):
+  LSTM(input_size=9, hidden_size=64, num_layers=2, dropout=0.25, batch_first=True)
+  Output: (batch_size, 10, 64) hidden states for each timestep
+
+Attention (per player):
+  scores  = Linear(64 → 1)(lstm_out)           # (batch, 10, 1)
+  weights = softmax(scores, dim=1)              # (batch, 10, 1)
+  emb     = sum(weights * lstm_out, dim=1)      # (batch, 64)
+
+Concatenation:
+  fused = concat([emb_a, emb_b, context])       # (batch, 64+64+23) = (batch, 151)
+
+Fusion MLP:
+  Dense(151 → 64) + ReLU + Dropout(0.25)
+  Dense(64  → 32) + ReLU + Dropout(0.25)
+  Dense(32  →  1)                               # Raw logit
+
+Output: sigmoid(logit) → win probability ∈ (0, 1)</code></pre>
+<p><strong>Key hyperparameters:</strong></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Parameter</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Sequence length</td>
+<td>10 matches</td>
+</tr>
+<tr class="even">
+<td>Hidden size</td>
+<td>64</td>
+</tr>
+<tr class="odd">
+<td>LSTM layers</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>Dropout</td>
+<td>0.25</td>
+</tr>
+<tr class="odd">
+<td>Fusion dim</td>
+<td>64</td>
+</tr>
+<tr class="even">
+<td>Batch size</td>
+<td>64</td>
+</tr>
+<tr class="odd">
+<td>Epochs</td>
+<td>75 (with early stopping)</td>
+</tr>
+<tr class="even">
+<td>Learning rate</td>
+<td>0.0002</td>
+</tr>
+<tr class="odd">
+<td>Optimizer</td>
+<td>Adam</td>
+</tr>
+<tr class="even">
+<td>Loss</td>
+<td>BCEWithLogitsLoss</td>
+</tr>
+<tr class="odd">
+<td>LR scheduler</td>
+<td>ReduceLROnPlateau (factor=0.5, patience=3)</td>
+</tr>
+<tr class="even">
+<td>Early stopping patience</td>
+<td>5 epochs</td>
+</tr>
+<tr class="odd">
+<td>Gradient clipping</td>
+<td>max_norm=1.0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Why Siamese?</strong> Both players go through the exact same network — shared weights force the model to learn universal momentum patterns rather than player-specific features, which improves generalization and reduces parameters.</p>
+<p><strong>Why Attention?</strong> Learned soft-attention over 10 timesteps allows the model to weight recent matches more heavily without a hard-coded decay function. More flexible than simple last-timestep selection.</p>
+</section>
+<section id="xgboost-srcmodelsxgb.py" class="level3">
+<h3 class="anchored" data-anchor-id="xgboost-srcmodelsxgb.py">5.2 XGBoost (<code>src/models/xgb.py</code>)</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Parameter</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>n_estimators</code></td>
+<td>400</td>
+</tr>
+<tr class="even">
+<td><code>max_depth</code></td>
+<td>5</td>
+</tr>
+<tr class="odd">
+<td><code>learning_rate</code></td>
+<td>0.05</td>
+</tr>
+<tr class="even">
+<td><code>subsample</code></td>
+<td>0.8</td>
+</tr>
+<tr class="odd">
+<td><code>colsample_bytree</code></td>
+<td>0.7</td>
+</tr>
+<tr class="even">
+<td><code>min_child_weight</code></td>
+<td>3</td>
+</tr>
+<tr class="odd">
+<td><code>reg_alpha</code> (L1)</td>
+<td>0.05</td>
+</tr>
+<tr class="even">
+<td><code>reg_lambda</code> (L2)</td>
+<td>1.5</td>
+</tr>
+<tr class="odd">
+<td>Objective</td>
+<td><code>binary:logistic</code></td>
+</tr>
+<tr class="even">
+<td>Eval metric</td>
+<td>AUC</td>
+</tr>
+<tr class="odd">
+<td>Early stopping</td>
+<td>20 rounds on validation AUC</td>
+</tr>
+<tr class="even">
+<td>Input</td>
+<td>23 context features only</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="random-forest-srcmodelsbaselines.py" class="level3">
+<h3 class="anchored" data-anchor-id="random-forest-srcmodelsbaselines.py">5.3 Random Forest (<code>src/models/baselines.py</code>)</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Parameter</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>n_estimators</code></td>
+<td>200</td>
+</tr>
+<tr class="even">
+<td><code>max_depth</code></td>
+<td>8</td>
+</tr>
+<tr class="odd">
+<td><code>min_samples_split</code></td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>Post-processing</td>
+<td><code>CalibratedClassifierCV(method='sigmoid', cv=3)</code></td>
+</tr>
+</tbody>
+</table>
+<p>Platt scaling (sigmoid calibration) post-processes probability outputs to improve reliability.</p>
+</section>
+<section id="logistic-regression-srcmodelsbaselines.py" class="level3">
+<h3 class="anchored" data-anchor-id="logistic-regression-srcmodelsbaselines.py">5.4 Logistic Regression (<code>src/models/baselines.py</code>)</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Parameter</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>penalty</code></td>
+<td>L2</td>
+</tr>
+<tr class="even">
+<td><code>C</code></td>
+<td>1.0</td>
+</tr>
+<tr class="odd">
+<td><code>max_iter</code></td>
+<td>1000</td>
+</tr>
+<tr class="even">
+<td><code>solver</code></td>
+<td>lbfgs</td>
+</tr>
+</tbody>
+</table>
+<p>Serves as a linear baseline; useful for understanding which features have linear separability.</p>
+</section>
+<section id="stacking-meta-learner-srcmodelsstacking.py" class="level3">
+<h3 class="anchored" data-anchor-id="stacking-meta-learner-srcmodelsstacking.py">5.5 Stacking Meta-Learner (<code>src/models/stacking.py</code>)</h3>
+<p><strong>Meta-learner:</strong> XGBoost with <code>n_estimators=100</code>, <code>max_depth=2</code>, <code>learning_rate=0.05</code></p>
+<p><strong>Training procedure:</strong> 1. Base models (LSTM, XGBoost, RF, LogReg) generate <strong>out-of-fold (OOF)</strong> predictions on the validation set 2. Meta-learner trains on these 4 OOF columns → label 3. At test time: stack base model test predictions → feed to meta-learner</p>
+<p>This prevents data leakage because the meta-learner never sees raw training labels during its own fitting.</p>
+<hr>
+</section>
+</section>
+<section id="hyperparameter-tuning-srctuning.py" class="level2">
+<h2 class="anchored" data-anchor-id="hyperparameter-tuning-srctuning.py">6. Hyperparameter Tuning (<code>src/tuning.py</code>)</h2>
+<p><strong>Framework:</strong> Optuna</p>
+<p><strong>Enabled only for LSTM</strong> (<code>lstm.training.tuning_enabled: true</code>); XGBoost and RF use fixed hand-tuned values.</p>
+<p><strong>Search space:</strong></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Parameter</th>
+<th>Search Type</th>
+<th>Range</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>hidden_size</code></td>
+<td>Integer (step=16)</td>
+<td>32 – 128</td>
+</tr>
+<tr class="even">
+<td><code>num_layers</code></td>
+<td>Integer</td>
+<td>1 – 3</td>
+</tr>
+<tr class="odd">
+<td><code>dropout</code></td>
+<td>Float (continuous)</td>
+<td>0.2 – 0.5</td>
+</tr>
+<tr class="even">
+<td><code>learning_rate</code></td>
+<td>Float (log scale)</td>
+<td>5e-5 – 3e-3</td>
+</tr>
+<tr class="odd">
+<td><code>weight_decay</code></td>
+<td>Float (log scale)</td>
+<td>1e-5 – 1e-2</td>
+</tr>
+<tr class="even">
+<td><code>fusion_dim</code></td>
+<td>Categorical</td>
+<td>{64, 128, 256}</td>
+</tr>
+<tr class="odd">
+<td><code>batch_size</code></td>
+<td>Categorical</td>
+<td>{64, 128, 256}</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Tuning settings:</strong> - Direction: maximize AUC - Training epochs per trial: 15 (vs.&nbsp;75 for production) - Pruner: <code>MedianPruner</code> (cuts unpromising trials early) - Number of trials: 20 (configured in <code>main.py</code>)</p>
+<p>Best hyperparameters from tuning patch the config before the full production training run.</p>
+<hr>
+</section>
+<section id="training-pipeline-main.py" class="level2">
+<h2 class="anchored" data-anchor-id="training-pipeline-main.py">7. Training Pipeline (<code>main.py</code>)</h2>
+<p>Training is a 5-phase sequential pipeline:</p>
+<section id="phase-1-data-ingestion" class="level3">
+<h3 class="anchored" data-anchor-id="phase-1-data-ingestion">Phase 1: Data Ingestion</h3>
+<ul>
+<li>Load 35 raw ATP CSVs from <code>data/raw/</code></li>
+<li>Filter Davis Cup / Laver Cup</li>
+<li>Produce: <code>train_raw</code>, <code>val_raw</code>, <code>test_raw</code> DataFrames</li>
+</ul>
+</section>
+<section id="phase-2-feature-engineering" class="level3">
+<h3 class="anchored" data-anchor-id="phase-2-feature-engineering">Phase 2: Feature Engineering</h3>
+<ul>
+<li>Concatenate all splits (to allow rolling stats to span boundaries)</li>
+<li>Sort by date</li>
+<li>Run <code>FeatureEngineer.generate_features()</code></li>
+<li>Re-split by date back into train/val/test</li>
+</ul>
+</section>
+<section id="phase-3-preprocessing" class="level3">
+<h3 class="anchored" data-anchor-id="phase-3-preprocessing">Phase 3: Preprocessing</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> mode <span class="op">==</span> <span class="st">"stacking"</span>:</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Load frozen preprocessor from base artifact directory</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Fit StandardScaler + OneHotEncoder on training set ONLY</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    preprocessor.fit(train_df)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    preprocessor.save(<span class="st">"global_preprocessor.pkl"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="phase-4-model-training" class="level3">
+<h3 class="anchored" data-anchor-id="phase-4-model-training">Phase 4: Model Training</h3>
+<p>For each model in <code>config.pipeline.models_to_train</code>:</p>
+<ol type="1">
+<li><strong>LSTM</strong> (if enabled):
+<ul>
+<li>Optional Optuna tuning (20 trials, 15 epochs each)</li>
+<li>Full training: 75 epochs, Adam, BCEWithLogitsLoss, EarlyStopping(patience=5)</li>
+<li>Save <code>best_model.pt</code> on best validation AUC</li>
+</ul></li>
+<li><strong>XGBoost:</strong>
+<ul>
+<li><code>fit(train_ds, eval_set=[(val_ds, "val")], early_stopping_rounds=20)</code></li>
+<li>Save <code>model.joblib</code></li>
+</ul></li>
+<li><strong>Random Forest:</strong>
+<ul>
+<li><code>fit(train_ds)</code> + <code>CalibratedClassifierCV</code></li>
+<li>Save <code>model.joblib</code></li>
+</ul></li>
+<li><strong>Logistic Regression:</strong>
+<ul>
+<li><code>fit(train_ds)</code></li>
+<li>Save <code>model.joblib</code></li>
+</ul></li>
+<li><strong>Stacking</strong> (separate run, requires base models already trained):
+<ul>
+<li>Load base model artifacts from <code>stacking_base_artifact_dir</code></li>
+<li>Generate OOF predictions on validation set</li>
+<li>Fit XGBoost meta-learner on OOF stack</li>
+<li>Save <code>meta_learner.joblib</code></li>
+</ul></li>
+</ol>
+<p>Each model saves <code>hyperparameters.json</code> alongside its weights.</p>
+</section>
+<section id="phase-5-evaluation" class="level3">
+<h3 class="anchored" data-anchor-id="phase-5-evaluation">Phase 5: Evaluation</h3>
+<p>For each trained model: - Generate predictions on test set - Compute: AUC, Accuracy, Precision, Recall, F1 - Generate and save: - Confusion matrix (<code>confusion_matrix_{model}.png</code>) - ROC curve (<code>roc_curve_{model}.png</code>) - Calibration curve (<code>calibration_curve_{model}.png</code>) - Metrics bar chart (<code>metrics_summary_{model}.png</code>) - SHAP summary plot (<code>shap_summary_{model}.png</code>) - Write <code>metrics.json</code> and <code>report.txt</code></p>
+<hr>
+</section>
+</section>
+<section id="evaluation-results" class="level2">
+<h2 class="anchored" data-anchor-id="evaluation-results">8. Evaluation Results</h2>
+<section id="test-set-performance-2024-atp-matches" class="level3">
+<h3 class="anchored" data-anchor-id="test-set-performance-2024-atp-matches">8.1 Test Set Performance (2024 ATP Matches)</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Model</th>
+<th>Test AUC</th>
+<th>Accuracy</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Stacking Ensemble</strong></td>
+<td><strong>0.7168</strong></td>
+<td><strong>65.35%</strong></td>
+<td>Meta-learner over all 4 base models</td>
+</tr>
+<tr class="even">
+<td><strong>XGBoost</strong></td>
+<td><strong>0.7185</strong></td>
+<td><strong>65.23%</strong></td>
+<td>Strongest individual model</td>
+</tr>
+<tr class="odd">
+<td><strong>Siamese LSTM</strong></td>
+<td><strong>0.7140</strong></td>
+<td><strong>65.50%</strong></td>
+<td>Best accuracy, third-best AUC</td>
+</tr>
+<tr class="even">
+<td><strong>Random Forest</strong></td>
+<td><strong>0.7112</strong></td>
+<td><strong>65.00%</strong></td>
+<td>Sigmoid-calibrated</td>
+</tr>
+<tr class="odd">
+<td><strong>Logistic Regression</strong></td>
+<td><strong>0.7086</strong></td>
+<td><strong>65.05%</strong></td>
+<td>Linear baseline</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="metrics-computed-per-model" class="level3">
+<h3 class="anchored" data-anchor-id="metrics-computed-per-model">8.2 Metrics Computed per Model</h3>
+<ul>
+<li><strong>AUC</strong> (primary metric): Area Under the ROC Curve</li>
+<li><strong>Accuracy</strong>: % correct binary classifications at threshold 0.5</li>
+<li><strong>Precision</strong>: TP / (TP + FP)</li>
+<li><strong>Recall</strong>: TP / (TP + FN)</li>
+<li><strong>F1</strong>: 2 × (Precision × Recall) / (Precision + Recall)</li>
+</ul>
+</section>
+<section id="feature-importance-shap-values" class="level3">
+<h3 class="anchored" data-anchor-id="feature-importance-shap-values">8.3 Feature Importance (SHAP Values)</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Feature</th>
+<th>SHAP Importance</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>rank_pts_diff</code></td>
+<td>0.338 (strongest)</td>
+<td>Log-transformed ranking points difference</td>
+</tr>
+<tr class="even">
+<td><code>rank_diff</code></td>
+<td>0.228</td>
+<td>Ordinal rank difference</td>
+</tr>
+<tr class="odd">
+<td><code>surf_win_pct_roll_diff</code></td>
+<td>High</td>
+<td>Surface specialization rolling win %</td>
+</tr>
+<tr class="even">
+<td><code>first_srv_win_pct_roll_diff</code></td>
+<td>High</td>
+<td>1st serve efficiency difference</td>
+</tr>
+</tbody>
+</table>
+<p><strong>SHAP method per model:</strong> - XGBoost / RF: <code>TreeExplainer</code> (fast, exact) - Logistic Regression: <code>LinearExplainer</code> - LSTM: <code>KernelExplainer</code> (slow — uses 20-sample approximation)</p>
+</section>
+<section id="context-atp-prediction-ceiling" class="level3">
+<h3 class="anchored" data-anchor-id="context-atp-prediction-ceiling">8.4 Context: ATP Prediction Ceiling</h3>
+<p>Academic literature suggests a maximum of ~0.75–0.77 AUC for pure statistical ATP prediction without external signals (injury, weather, player psychology). The 0.7168 AUC achieved here is competitive with published benchmarks.</p>
+<hr>
+</section>
+</section>
+<section id="inference-pipeline-srcinference.py-cli_batch_predict.py" class="level2">
+<h2 class="anchored" data-anchor-id="inference-pipeline-srcinference.py-cli_batch_predict.py">9. Inference Pipeline (<code>src/inference.py</code>, <code>cli_batch_predict.py</code>)</h2>
+<section id="batch-inference-cli" class="level3">
+<h3 class="anchored" data-anchor-id="batch-inference-cli">9.1 Batch Inference CLI</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> cli_batch_predict.py <span class="at">--config</span> configs/config.yaml <span class="at">--model</span> stacking</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Workflow:</strong></p>
+<ol type="1">
+<li>Load last 2 years of ATP match history</li>
+<li>Load upcoming matches CSV</li>
+<li>Tag upcoming rows with <code>is_inference=True</code></li>
+<li>Concatenate history + upcoming, run full feature engineering pipeline
+<ul>
+<li>Feature values for upcoming matches computed only from historical data</li>
+</ul></li>
+<li>Load frozen artifacts: <code>global_preprocessor.pkl</code> + model weights</li>
+<li>Generate probabilities for each upcoming match</li>
+<li>Output predictions CSV</li>
+</ol>
+</section>
+<section id="production-pipeline-metalearnerpipeline" class="level3">
+<h3 class="anchored" data-anchor-id="production-pipeline-metalearnerpipeline">9.2 Production Pipeline (<code>MetaLearnerPipeline</code>)</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> src.inference <span class="im">import</span> MetaLearnerPipeline</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>pipeline <span class="op">=</span> MetaLearnerPipeline.load_frozen_model(Path(<span class="st">"model_prod"</span>))</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> pipeline.predict_batch(combined_df)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>Handles missing models gracefully (fills with 0.5 neutral probability)</li>
+<li>Outputs: <code>player_1_win_probability</code>, <code>player_2_win_probability</code>, <code>confidence_spread</code></li>
+</ul>
+</section>
+<section id="inference-input-format" class="level3">
+<h3 class="anchored" data-anchor-id="inference-input-format">9.3 Inference Input Format</h3>
+<pre><code>tourney_id, tourney_date, match_num, winner_name, loser_name,
+winner_rank, loser_rank, winner_rank_points, loser_rank_points,
+surface, tourney_level, w_ace, w_df, w_svpt, w_1stIn, w_1stWon, w_2ndWon,
+l_ace, l_df, l_svpt, l_1stIn, l_1stWon, l_2ndWon, ...</code></pre>
+</section>
+<section id="inference-output-format" class="level3">
+<h3 class="anchored" data-anchor-id="inference-output-format">9.4 Inference Output Format</h3>
+<pre><code>player_1, player_2, player_1_win_probability, player_2_win_probability, confidence_spread
+Djokovic, Sinner, 0.6234, 0.3766, 0.2468</code></pre>
+<hr>
+</section>
+</section>
+<section id="configuration-schema-configsconfig.yaml-srcconfig.py" class="level2">
+<h2 class="anchored" data-anchor-id="configuration-schema-configsconfig.yaml-srcconfig.py">10. Configuration Schema (<code>configs/config.yaml</code> + <code>src/config.py</code>)</h2>
+<p>The master configuration file governs all aspects of the pipeline. Schema is validated with Pydantic:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">project</span><span class="kw">:</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">"breakpoint_ai"</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span><span class="kw">:</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">paths</span><span class="kw">:</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">raw_dir</span><span class="kw">:</span><span class="at"> </span><span class="st">"data/raw/"</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">processed_dir</span><span class="kw">:</span><span class="at"> </span><span class="st">"data/processed/"</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">artifact_dir</span><span class="kw">:</span><span class="at"> </span><span class="st">"artifacts/"</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">temporal_splits</span><span class="kw">:</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">train_cutoff</span><span class="kw">:</span><span class="at"> </span><span class="st">"2022-12-31"</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">test_start</span><span class="kw">:</span><span class="at"> </span><span class="st">"2024-01-01"</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">features</span><span class="kw">:</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">context</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">23 features listed above</span><span class="kw">]</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">sequence</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">9 features listed above</span><span class="kw">]</span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">categorical</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">"surface"</span><span class="kw">,</span><span class="at"> </span><span class="st">"tourney_level"</span><span class="kw">]</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">target</span><span class="kw">:</span><span class="at"> </span><span class="st">"label"</span></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a><span class="fu">pipeline</span><span class="kw">:</span></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">models_to_train</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">"lstm"</span><span class="kw">,</span><span class="at"> </span><span class="st">"xgboost"</span><span class="kw">,</span><span class="at"> </span><span class="st">"random_forest"</span><span class="kw">,</span><span class="at"> </span><span class="st">"logistic_regression"</span><span class="kw">]</span></span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a><span class="co">  # Or ["stacking"] for the meta-learner phase</span></span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">stacking_base_artifact_dir</span><span class="kw">:</span><span class="at"> </span><span class="st">"artifacts/20260403_141809"</span></span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">use_stacking</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">run_evaluation</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">inference_artifact_dir</span><span class="kw">:</span><span class="at"> </span><span class="st">"model_prod"</span></span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">inference_input_file</span><span class="kw">:</span><span class="at"> </span><span class="st">"data/inference/upcoming_matches.csv"</span></span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">inference_output_file</span><span class="kw">:</span><span class="at"> </span><span class="st">"data/inference/predictions.csv"</span></span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a><span class="fu">models</span><span class="kw">:</span></span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">lstm</span><span class="kw">:</span></span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">architecture</span><span class="kw">:</span></span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">seq_len</span><span class="kw">:</span><span class="at"> </span><span class="dv">10</span></span>
+<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">hidden_size</span><span class="kw">:</span><span class="at"> </span><span class="dv">64</span></span>
+<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">num_layers</span><span class="kw">:</span><span class="at"> </span><span class="dv">2</span></span>
+<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">dropout</span><span class="kw">:</span><span class="at"> </span><span class="fl">0.25</span></span>
+<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">fusion_dim</span><span class="kw">:</span><span class="at"> </span><span class="dv">64</span></span>
+<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">training</span><span class="kw">:</span></span>
+<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">batch_size</span><span class="kw">:</span><span class="at"> </span><span class="dv">64</span></span>
+<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">epochs</span><span class="kw">:</span><span class="at"> </span><span class="dv">75</span></span>
+<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">learning_rate</span><span class="kw">:</span><span class="at"> </span><span class="fl">0.0002</span></span>
+<span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">tuning_enabled</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb14-41"><a href="#cb14-41" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">xgboost</span><span class="kw">:</span></span>
+<span id="cb14-42"><a href="#cb14-42" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">hyperparameters</span><span class="kw">:</span></span>
+<span id="cb14-43"><a href="#cb14-43" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">n_estimators</span><span class="kw">:</span><span class="at"> </span><span class="dv">400</span></span>
+<span id="cb14-44"><a href="#cb14-44" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">max_depth</span><span class="kw">:</span><span class="at"> </span><span class="dv">5</span></span>
+<span id="cb14-45"><a href="#cb14-45" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">learning_rate</span><span class="kw">:</span><span class="at"> </span><span class="fl">0.05</span></span>
+<span id="cb14-46"><a href="#cb14-46" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">subsample</span><span class="kw">:</span><span class="at"> </span><span class="fl">0.8</span></span>
+<span id="cb14-47"><a href="#cb14-47" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">colsample_bytree</span><span class="kw">:</span><span class="at"> </span><span class="fl">0.7</span></span>
+<span id="cb14-48"><a href="#cb14-48" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">min_child_weight</span><span class="kw">:</span><span class="at"> </span><span class="dv">3</span></span>
+<span id="cb14-49"><a href="#cb14-49" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">reg_alpha</span><span class="kw">:</span><span class="at"> </span><span class="fl">0.05</span></span>
+<span id="cb14-50"><a href="#cb14-50" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">reg_lambda</span><span class="kw">:</span><span class="at"> </span><span class="fl">1.5</span></span>
+<span id="cb14-51"><a href="#cb14-51" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">training</span><span class="kw">:</span></span>
+<span id="cb14-52"><a href="#cb14-52" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">tuning_enabled</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
+<span id="cb14-53"><a href="#cb14-53" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">random_forest</span><span class="kw">:</span></span>
+<span id="cb14-54"><a href="#cb14-54" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">hyperparameters</span><span class="kw">:</span></span>
+<span id="cb14-55"><a href="#cb14-55" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">n_estimators</span><span class="kw">:</span><span class="at"> </span><span class="dv">200</span></span>
+<span id="cb14-56"><a href="#cb14-56" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">max_depth</span><span class="kw">:</span><span class="at"> </span><span class="dv">8</span></span>
+<span id="cb14-57"><a href="#cb14-57" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">min_samples_split</span><span class="kw">:</span><span class="at"> </span><span class="dv">2</span></span>
+<span id="cb14-58"><a href="#cb14-58" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">training</span><span class="kw">:</span></span>
+<span id="cb14-59"><a href="#cb14-59" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">tuning_enabled</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
+<span id="cb14-60"><a href="#cb14-60" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">logistic_regression</span><span class="kw">:</span></span>
+<span id="cb14-61"><a href="#cb14-61" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">hyperparameters</span><span class="kw">:</span></span>
+<span id="cb14-62"><a href="#cb14-62" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">penalty</span><span class="kw">:</span><span class="at"> </span><span class="st">"l2"</span></span>
+<span id="cb14-63"><a href="#cb14-63" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">C</span><span class="kw">:</span><span class="at"> </span><span class="fl">1.0</span></span>
+<span id="cb14-64"><a href="#cb14-64" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">max_iter</span><span class="kw">:</span><span class="at"> </span><span class="dv">1000</span></span>
+<span id="cb14-65"><a href="#cb14-65" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">training</span><span class="kw">:</span></span>
+<span id="cb14-66"><a href="#cb14-66" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">tuning_enabled</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
+<span id="cb14-67"><a href="#cb14-67" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">stacking</span><span class="kw">:</span></span>
+<span id="cb14-68"><a href="#cb14-68" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">meta_learner</span><span class="kw">:</span><span class="at"> </span><span class="st">"xgboost"</span></span>
+<span id="cb14-69"><a href="#cb14-69" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">cv_folds</span><span class="kw">:</span><span class="at"> </span><span class="dv">5</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Pydantic classes</strong> defined in <code>src/config.py</code>: <code>ProjectConfig</code>, <code>DataConfig</code>, <code>TemporalSplits</code>, <code>FeatureSets</code>, <code>LSTMConfig</code>, <code>XGBoostConfig</code>, <code>RandomForestConfig</code>, <code>LogRegConfig</code>, <code>StackingConfig</code></p>
+<hr>
+</section>
+<section id="production-artifacts-model_prod" class="level2">
+<h2 class="anchored" data-anchor-id="production-artifacts-model_prod">11. Production Artifacts (<code>model_prod/</code>)</h2>
+<pre><code>model_prod/
+├── global_preprocessor.pkl          # Global StandardScaler + OneHotEncoder
+├── lstm/
+│   ├── best_model.pt                # Torch state dict (SiameseLSTM weights)
+│   └── global_preprocessor.pkl     # LSTM-specific preprocessor copy
+└── stacking/
+    ├── best_model.pt                # Unused (kept for compatibility)
+    ├── meta_learner.joblib          # XGBoost meta-learner
+    └── global_preprocessor.pkl     # Stacking preprocessor copy</code></pre>
+<p><strong>Per-run artifacts</strong> (saved under <code>artifacts/{run_id}/{model_name}/</code>): - <code>hyperparameters.json</code> — model config used for this run - <code>best_model.pt</code> — LSTM weights (or <code>model.joblib</code> for sklearn models) - <code>metrics.json</code> — AUC, Accuracy, Precision, Recall, F1 on test set - <code>report.txt</code> — human-readable summary - <code>plots/</code> — all 5 evaluation visualizations</p>
+<hr>
+</section>
+<section id="leakage-prevention-implementation-details" class="level2">
+<h2 class="anchored" data-anchor-id="leakage-prevention-implementation-details">12. Leakage Prevention — Implementation Details</h2>
+<p>Look-ahead bias is the most critical failure mode in sports prediction. Three layers of protection:</p>
+<p><strong>1. Rolling windows with shift:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>rolling_stats <span class="op">=</span> grouped[<span class="st">'feature'</span>].shift(<span class="dv">1</span>).rolling(<span class="dv">10</span>).mean()</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co"># shift(1) excludes the current match from its own rolling feature</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>2. Sequence building with strict date filter:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>mask <span class="op">=</span> candidate_dates <span class="op">&lt;</span> current_date   <span class="co"># strict "&lt;" not "&lt;="</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>past_indices <span class="op">=</span> all_indices[mask]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>3. Cumulative H2H with shift:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>h2h_wins <span class="op">=</span> h2h_grp[<span class="st">'win'</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: x.shift(<span class="dv">1</span>).cumsum())</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Only counts matches before the current one</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>4. Preprocessor fit only on train:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>preprocessor.fit(train_df)   <span class="co"># val and test are only .transform()'d</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>5. Meta-learner uses OOF predictions:</strong> The stacking meta-learner trains on base model predictions for the validation set — never on training labels directly.</p>
+<hr>
+</section>
+<section id="logging-monitoring-srclogger.py" class="level2">
+<h2 class="anchored" data-anchor-id="logging-monitoring-srclogger.py">13. Logging &amp; Monitoring (<code>src/logger.py</code>)</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_logger(name: <span class="bu">str</span>, artifact_dir: <span class="bu">str</span> <span class="op">=</span> <span class="st">"logs"</span>) <span class="op">-&gt;</span> logging.Logger:</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Routes to both:</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">#   console (stdout)</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">#   persistent file: logs/pipeline.log</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Format: "YYYY-MM-DD HH:MM:SS | LEVEL | MODULE | MESSAGE"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>logs/pipeline.log</code> accumulates across runs (551+ lines from training history).</p>
+<p><strong>Logged events:</strong> - Data ingestion: file counts, date ranges, row counts after filtering - Feature engineering: input/output shapes at each step - Preprocessing: feature normalization stats - Training: per-epoch loss, AUC, LR schedule changes, early stopping triggers - Evaluation: per-model metrics, visualization file paths</p>
+<hr>
+</section>
+<section id="dependencies-environment" class="level2">
+<h2 class="anchored" data-anchor-id="dependencies-environment">14. Dependencies &amp; Environment</h2>
+<p><strong>Python:</strong> 3.11+</p>
+<p><strong>Key dependencies (<code>requirements.txt</code>):</strong></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Package</th>
+<th>Version</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>numpy</code></td>
+<td>&gt;=1.24</td>
+<td>Numerical computation</td>
+</tr>
+<tr class="even">
+<td><code>pandas</code></td>
+<td>&gt;=2.0</td>
+<td>Data manipulation</td>
+</tr>
+<tr class="odd">
+<td><code>scikit-learn</code></td>
+<td>&gt;=1.3</td>
+<td>RF, LogReg, preprocessing, calibration</td>
+</tr>
+<tr class="even">
+<td><code>torch</code></td>
+<td>&gt;=2.1</td>
+<td>LSTM training (CUDA optional, auto-detected)</td>
+</tr>
+<tr class="odd">
+<td><code>xgboost</code></td>
+<td>latest</td>
+<td>XGBoost models</td>
+</tr>
+<tr class="even">
+<td><code>optuna</code></td>
+<td>latest</td>
+<td>Hyperparameter tuning</td>
+</tr>
+<tr class="odd">
+<td><code>pydantic</code></td>
+<td>&gt;=2.0</td>
+<td>Config schema validation</td>
+</tr>
+<tr class="even">
+<td><code>pyyaml</code></td>
+<td>&gt;=6.0</td>
+<td>YAML config parsing</td>
+</tr>
+<tr class="odd">
+<td><code>shap</code></td>
+<td>&gt;=0.40.0</td>
+<td>Feature importance</td>
+</tr>
+<tr class="even">
+<td><code>matplotlib</code></td>
+<td>&gt;=3.7.0</td>
+<td>Plotting</td>
+</tr>
+<tr class="odd">
+<td><code>seaborn</code></td>
+<td>&gt;=0.12.0</td>
+<td>Statistical visualizations</td>
+</tr>
+<tr class="even">
+<td><code>joblib</code></td>
+<td>&gt;=1.3</td>
+<td>Model serialization</td>
+</tr>
+<tr class="odd">
+<td><code>tqdm</code></td>
+<td>&gt;=4.66</td>
+<td>Progress bars</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Runtime:</strong> - CPU and CUDA both supported (auto-detected at training start) - Tested on Linux (Arch Linux, Ubuntu)</p>
+<hr>
+</section>
+<section id="cicd-.githubworkflowsci.yml" class="level2">
+<h2 class="anchored" data-anchor-id="cicd-.githubworkflowsci.yml">15. CI/CD (<code>.github/workflows/ci.yml</code>)</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">on</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">push</span><span class="kw">,</span><span class="at"> pull_request</span><span class="kw">]</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">jobs</span><span class="kw">:</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">lint</span><span class="kw">:</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">runs-on</span><span class="kw">:</span><span class="at"> ubuntu-latest</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">steps</span><span class="kw">:</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/setup-python@v4</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">with</span><span class="kw">:</span><span class="at"> </span><span class="kw">{</span><span class="at"> </span><span class="fu">python-version</span><span class="kw">:</span><span class="at"> </span><span class="st">"3.11"</span><span class="at"> </span><span class="kw">}</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">run</span><span class="kw">:</span><span class="at"> pip install ruff</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">run</span><span class="kw">:</span><span class="at"> ruff check src/ main.py cli_batch_predict.py</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Only linting is automated. No automated test suite (training is too expensive to run in CI).</p>
+<hr>
+</section>
+<section id="design-choices-rationale" class="level2">
+<h2 class="anchored" data-anchor-id="design-choices-rationale">16. Design Choices &amp; Rationale</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Choice</th>
+<th>Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Siamese LSTM</td>
+<td>Player histories are sequences; shared weights encode universal momentum patterns rather than player-specific quirks</td>
+</tr>
+<tr class="even">
+<td>10-match window</td>
+<td>Captures ~1–2 months of play; longer windows lose recency signal, shorter windows lack context</td>
+</tr>
+<tr class="odd">
+<td>Log-transformed rank points</td>
+<td>Ranking points have diminishing returns — log is more linearly predictive than ordinal rank</td>
+</tr>
+<tr class="even">
+<td>Surface-specific rolling win rate</td>
+<td>Clay/grass/hard courts reward different playing styles; surface form differs from overall form</td>
+</tr>
+<tr class="odd">
+<td>Attention over LSTM states</td>
+<td>More flexible than last-timestep only; lets model learn which past matches matter most</td>
+</tr>
+<tr class="even">
+<td>Stacking ensemble</td>
+<td>Combines complementary strengths: LSTM (sequence patterns) + XGBoost (tabular interactions) + RF (robustness)</td>
+</tr>
+<tr class="odd">
+<td>Optuna tuning for LSTM only</td>
+<td>LSTM has many more hyperparameters; XGBoost/RF are more robust to suboptimal settings</td>
+</tr>
+<tr class="even">
+<td>Calibration on RF</td>
+<td>Random Forest probability outputs are poorly calibrated by default; Platt scaling corrects this</td>
+</tr>
+<tr class="odd">
+<td>OOF meta-learner</td>
+<td>Prevents the meta-learner from overfitting to base model training errors</td>
+</tr>
+<tr class="even">
+<td>CalibratedClassifierCV</td>
+<td>In probabilistic forecasting, calibration matters as much as discrimination (AUC)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="known-limitations" class="level2">
+<h2 class="anchored" data-anchor-id="known-limitations">17. Known Limitations</h2>
+<ol type="1">
+<li><strong>Prediction ceiling:</strong> Academic literature puts the statistical ATP prediction ceiling at ~0.75–0.77 AUC. Closing this gap requires non-statistical signals (injuries, fatigue, travel schedule, coaching changes).</li>
+<li><strong>No injury data:</strong> Model uses only match statistics — player health is not modeled.</li>
+<li><strong>New player cold start:</strong> Players with &lt; 10 historical matches get zero-padded sequences; early predictions are unreliable.</li>
+<li><strong>SHAP speed on LSTM:</strong> <code>KernelExplainer</code> uses a 20-sample approximation — SHAP values are approximate, not exact.</li>
+<li><strong>Stacking requires two training runs:</strong> Base models must be fully trained first, then the meta-learner is trained separately using their validation OOF predictions.</li>
+<li><strong>Static H2H:</strong> H2H only counts raw win rate; does not weight recency or surface.</li>
+</ol>
+<hr>
+</section>
+<section id="reproducibility-guide" class="level2">
+<h2 class="anchored" data-anchor-id="reproducibility-guide">18. Reproducibility Guide</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Install dependencies</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="at">-r</span> requirements.txt</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Ensure 35 raw CSVs are present</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> data/raw/atp_matches_<span class="pp">*</span>.csv   <span class="co"># should list 1990-2024</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Train base models (edit config if needed)</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="co">#    models_to_train: ["lstm", "xgboost", "random_forest", "logistic_regression"]</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> main.py <span class="at">--config</span> configs/config.yaml</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Note the run ID printed at start (e.g. 20260403_141809)</span></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a><span class="co">#    Update config: stacking_base_artifact_dir: "artifacts/20260403_141809"</span></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a><span class="co">#    Set: models_to_train: ["stacking"]</span></span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. Train stacking meta-learner</span></span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> main.py <span class="at">--config</span> configs/config.yaml</span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a><span class="co"># 6. Run batch inference on upcoming matches</span></span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> cli_batch_predict.py <span class="at">--config</span> configs/config.yaml <span class="at">--model</span> stacking</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Output artifacts per run:</strong></p>
+<pre><code>artifacts/{run_id}/
+├── {model_name}/
+│   ├── hyperparameters.json
+│   ├── best_model.pt  (or model.joblib)
+│   ├── metrics.json
+│   ├── report.txt
+│   └── plots/
+│       ├── confusion_matrix.png
+│       ├── roc_curve.png
+│       ├── calibration_curve.png
+│       ├── metrics_summary.png
+│       └── shap_summary.png</code></pre>
+<hr>
+</section>
+<section id="evaluation-visualizations-assets" class="level2">
+<h2 class="anchored" data-anchor-id="evaluation-visualizations-assets">19. Evaluation Visualizations (<code>assets/</code>)</h2>
+<p>Pre-generated plots from a production training run:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>File</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>calibration_curve_lstm.png</code></td>
+<td>Reliability diagram: predicted probability vs.&nbsp;actual win rate</td>
+</tr>
+<tr class="even">
+<td><code>calibration_curve_rf.png</code></td>
+<td>Same for Random Forest (post-Platt-scaling)</td>
+</tr>
+<tr class="odd">
+<td><code>confusion_matrix_lstm.png</code></td>
+<td>True/False positive breakdown at threshold 0.5</td>
+</tr>
+<tr class="even">
+<td><code>confusion_matrix_rf.png</code></td>
+<td>Same for Random Forest</td>
+</tr>
+<tr class="odd">
+<td><code>roc_curve_lstm.png</code></td>
+<td>AUC ~0.714 ROC curve</td>
+</tr>
+<tr class="even">
+<td><code>roc_curve_rf.png</code></td>
+<td>AUC ~0.711 ROC curve</td>
+</tr>
+<tr class="odd">
+<td><code>metrics_summary_lstm.png</code></td>
+<td>Bar chart: AUC, Accuracy, Precision, Recall, F1</td>
+</tr>
+<tr class="even">
+<td><code>metrics_summary_rf.png</code></td>
+<td>Same for Random Forest</td>
+</tr>
+<tr class="odd">
+<td><code>shap_summary_lstm.png</code></td>
+<td>Feature importance via KernelExplainer (20-sample approx)</td>
+</tr>
+<tr class="even">
+<td><code>shap_summary_rf.png</code></td>
+<td>Feature importance via TreeExplainer (exact)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="glossary" class="level2">
+<h2 class="anchored" data-anchor-id="glossary">20. Glossary</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Term</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>AUC</td>
+<td>Area Under ROC Curve — measures discrimination ability of a classifier</td>
+</tr>
+<tr class="even">
+<td>BCEWithLogitsLoss</td>
+<td>Binary Cross-Entropy loss combining sigmoid + log-likelihood</td>
+</tr>
+<tr class="odd">
+<td>Calibration</td>
+<td>How well predicted probabilities match true empirical frequencies</td>
+</tr>
+<tr class="even">
+<td>Look-ahead bias</td>
+<td>Using future data to predict past events — the cardinal sin of time-series ML</td>
+</tr>
+<tr class="odd">
+<td>OOF</td>
+<td>Out-of-Fold — predictions generated on held-out data during cross-validation</td>
+</tr>
+<tr class="even">
+<td>Platt scaling</td>
+<td>Post-hoc probability calibration using logistic regression on model outputs</td>
+</tr>
+<tr class="odd">
+<td>SHAP</td>
+<td>SHapley Additive exPlanations — game-theoretic feature importance</td>
+</tr>
+<tr class="even">
+<td>Siamese network</td>
+<td>Twin networks with shared weights, used to compare two inputs</td>
+</tr>
+<tr class="odd">
+<td>Stacking</td>
+<td>Ensemble method where a meta-learner trains on base model predictions</td>
+</tr>
+<tr class="even">
+<td>ReduceLROnPlateau</td>
+<td>PyTorch LR scheduler that halves LR when validation metric stops improving</td>
+</tr>
+</tbody>
+</table>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script src="lang-toggle.js"></script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/condeg0\.github\.io\/RafaelCondeGomes");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>© Rafael Condé Gomes</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="mailto:condeg.rafael@gmail.com">
+      <i class="bi bi-envelope" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/rafael-conde-878284250/">
+      <i class="bi bi-linkedin" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/Condeg0">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

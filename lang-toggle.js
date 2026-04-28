@@ -7,13 +7,15 @@
       el.style.display = lang === 'pt' ? 'inline' : 'none';
     });
 
-    // Swap resume href (match EN filename, avoid double-replacing PT)
+    // Swap resume href — resolve relative to current page so it works on
+    // both localhost (quarto preview) and GitHub Pages without hardcoding a host.
+    var filename = lang === 'pt'
+      ? 'Resume-RafaelCondeGomes-PT.pdf'
+      : 'Resume-RafaelCondeGomes.pdf';
+    var resumeUrl = new URL('artifacts/' + filename, window.location.href).href;
     document.querySelectorAll('a').forEach(function (a) {
-      if (!a.href) return;
-      if (lang === 'pt' && a.href.match(/Resume-RafaelCondeGomes\.pdf/)) {
-        a.href = a.href.replace('Resume-RafaelCondeGomes.pdf', 'Resume-RafaelCondeGomes-PT.pdf');
-      } else if (lang === 'en' && a.href.match(/Resume-RafaelCondeGomes-PT\.pdf/)) {
-        a.href = a.href.replace('Resume-RafaelCondeGomes-PT.pdf', 'Resume-RafaelCondeGomes.pdf');
+      if (a.href && a.href.indexOf('Resume-RafaelCondeGomes') !== -1) {
+        a.href = resumeUrl;
       }
     });
 
