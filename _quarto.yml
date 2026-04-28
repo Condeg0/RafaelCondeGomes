@@ -3,6 +3,7 @@ project:
   output-dir: _site
   resources:
     - lang-toggle.js
+    - artifacts/Resume-RafaelCondeGomes-PT.pdf
 
 website:
   title: "Rafael Condé Gomes"
