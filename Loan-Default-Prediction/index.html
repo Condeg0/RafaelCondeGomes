@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Rafael Condé Gomes">
-<meta name="dcterms.date" content="2026-01-22">
+<meta name="dcterms.date" content="2026-02-03">
 
-<title>Optimizing Credit Risk: A Profit-First Approach – Rafael Condé Gomes</title>
+<title>Credit Risk Optimization Engine: Profit-First Loan Approval – Rafael Condé Gomes</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -24,41 +24,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -108,6 +73,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../lang-toggle.css">
 </head>
@@ -156,30 +150,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
-  <ul>
-  <li><a href="#executive-summary" id="toc-executive-summary" class="nav-link active" data-scroll-target="#executive-summary">Executive Summary</a></li>
-  <li><a href="#the-business-problem" id="toc-the-business-problem" class="nav-link" data-scroll-target="#the-business-problem">1. The Business Problem</a>
   <ul class="collapse">
-  <li><a href="#asymmetry-of-errors" id="toc-asymmetry-of-errors" class="nav-link" data-scroll-target="#asymmetry-of-errors">Asymmetry of Errors</a></li>
-  <li><a href="#the-objective" id="toc-the-objective" class="nav-link" data-scroll-target="#the-objective">The Objective</a></li>
-  </ul></li>
-  <li><a href="#system-architecture" id="toc-system-architecture" class="nav-link" data-scroll-target="#system-architecture">2. System Architecture</a>
-  <ul class="collapse">
-  <li><a href="#directory-structure" id="toc-directory-structure" class="nav-link" data-scroll-target="#directory-structure">Directory Structure</a></li>
-  <li><a href="#feature-engineering-pipeline" id="toc-feature-engineering-pipeline" class="nav-link" data-scroll-target="#feature-engineering-pipeline">Feature Engineering Pipeline</a></li>
-  </ul></li>
-  <li><a href="#modeling-strategy" id="toc-modeling-strategy" class="nav-link" data-scroll-target="#modeling-strategy">3. Modeling Strategy</a>
-  <ul class="collapse">
-  <li><a href="#model-selection" id="toc-model-selection" class="nav-link" data-scroll-target="#model-selection">Model Selection</a></li>
-  <li><a href="#the-strategy-curve" id="toc-the-strategy-curve" class="nav-link" data-scroll-target="#the-strategy-curve">The “Strategy Curve”</a></li>
-  </ul></li>
-  <li><a href="#results-analysis" id="toc-results-analysis" class="nav-link" data-scroll-target="#results-analysis">4. Results &amp; Analysis</a>
-  <ul class="collapse">
-  <li><a href="#performance-metrics" id="toc-performance-metrics" class="nav-link" data-scroll-target="#performance-metrics">Performance Metrics</a></li>
-  <li><a href="#business-insight-the-optimization-peak" id="toc-business-insight-the-optimization-peak" class="nav-link" data-scroll-target="#business-insight-the-optimization-peak">Business Insight: The Optimization Peak</a></li>
-  </ul></li>
-  <li><a href="#key-risk-drivers-interpretation" id="toc-key-risk-drivers-interpretation" class="nav-link" data-scroll-target="#key-risk-drivers-interpretation">5. Key Risk Drivers (Interpretation)</a></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#the-problem-with-optimizing-accuracyo-problema-de-otimizar-acurácia" id="toc-the-problem-with-optimizing-accuracyo-problema-de-otimizar-acurácia" class="nav-link active" data-scroll-target="#the-problem-with-optimizing-accuracyo-problema-de-otimizar-acurácia"><span class="lang-en">The Problem with Optimizing Accuracy</span><span class="lang-pt">O Problema de Otimizar Acurácia</span></a></li>
+  <li><a href="#financial-engineering-reconstructing-the-assetengenharia-financeira-reconstruindo-o-ativo" id="toc-financial-engineering-reconstructing-the-assetengenharia-financeira-reconstruindo-o-ativo" class="nav-link" data-scroll-target="#financial-engineering-reconstructing-the-assetengenharia-financeira-reconstruindo-o-ativo"><span class="lang-en">Financial Engineering: Reconstructing the Asset</span><span class="lang-pt">Engenharia Financeira: Reconstruindo o Ativo</span></a></li>
+  <li><a href="#the-strategy-curvea-curva-de-estratégia" id="toc-the-strategy-curvea-curva-de-estratégia" class="nav-link" data-scroll-target="#the-strategy-curvea-curva-de-estratégia"><span class="lang-en">The Strategy Curve</span><span class="lang-pt">A Curva de Estratégia</span></a></li>
+  <li><a href="#model-benchmarkingbenchmarking-de-modelos" id="toc-model-benchmarkingbenchmarking-de-modelos" class="nav-link" data-scroll-target="#model-benchmarkingbenchmarking-de-modelos"><span class="lang-en">Model Benchmarking</span><span class="lang-pt">Benchmarking de Modelos</span></a></li>
+  <li><a href="#model-analysisanálise-do-modelo" id="toc-model-analysisanálise-do-modelo" class="nav-link" data-scroll-target="#model-analysisanálise-do-modelo"><span class="lang-en">Model Analysis</span><span class="lang-pt">Análise do Modelo</span></a></li>
+  <li><a href="#conclusionconclusão" id="toc-conclusionconclusão" class="nav-link" data-scroll-target="#conclusionconclusão"><span class="lang-en">Conclusion</span><span class="lang-pt">Conclusão</span></a></li>
   </ul>
 </nav>
     </div>
@@ -188,12 +165,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Optimizing Credit Risk: A Profit-First Approach</h1>
+<h1 class="title">Credit Risk Optimization Engine: Profit-First Loan Approval</h1>
   <div class="quarto-categories">
-    <div class="quarto-category">Machine Learning</div>
-    <div class="quarto-category">Finance</div>
-    <div class="quarto-category">Risk Modeling</div>
     <div class="quarto-category">Python</div>
+    <div class="quarto-category">Scikit-Learn</div>
+    <div class="quarto-category">XGBoost</div>
+    <div class="quarto-category">Financial Engineering</div>
+    <div class="quarto-category">SHAP</div>
   </div>
   </div>
 
@@ -211,7 +189,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">January 22, 2026</p>
+      <p class="date">February 3, 2026</p>
     </div>
   </div>
   
@@ -223,144 +201,306 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="executive-summary" class="level1">
-<h1>Executive Summary</h1>
-<p>In consumer lending, accuracy is a misleading metric. A model that blindly predicts “No Default” can achieve 85% accuracy but bankrupt a lender by missing the few massive defaults.</p>
-<p>This project re-engineers the credit scoring process by shifting the optimization objective from <strong>Statistical Accuracy (F1-Score)</strong> to <strong>Economic Profit</strong>.</p>
-<p>By developing a modular classification engine and applying a custom profit-maximization threshold, this strategy achieved:</p>
-<ul>
-<li><strong>Financial Impact:</strong> Projected portfolio value of <strong>$1.26M</strong>, a <strong>~40% ROI lift</strong> over the baseline.</li>
-<li><strong>Risk Policy:</strong> Identified an optimal cutoff rejecting the riskiest <strong>17.3%</strong> of applicants.</li>
-<li><strong>Model Performance:</strong> Achieved a <strong>0.685 ROC-AUC</strong> using a defensible, regulator-friendly Logistic Regression model.</li>
-</ul>
-<hr>
-</section>
-<section id="the-business-problem" class="level1">
-<h1>1. The Business Problem</h1>
-<section id="asymmetry-of-errors" class="level3">
-<h3 class="anchored" data-anchor-id="asymmetry-of-errors">Asymmetry of Errors</h3>
-<p>In credit risk, confusion matrix errors are not created equal:</p>
-<ul>
-<li><strong>False Positive (Type I Error):</strong> We reject a good applicant. <em>Cost = Opportunity Cost of Interest.</em></li>
-<li><strong>False Negative (Type II Error):</strong> We approve a defaulter. <em>Cost = Loss of Principal.</em></li>
-</ul>
-<p>Since the Principal is significantly larger than the Interest, avoiding False Negatives is mathematically more critical than avoiding False Positives. Standard “out-of-the-box” machine learning models often fail to capture this asymmetry by themselves.</p>
-</section>
-<section id="the-objective" class="level3">
-<h3 class="anchored" data-anchor-id="the-objective">The Objective</h3>
-<p>Build a system that answers: <strong>“What is the exact probability threshold that maximizes Net Portfolio Profit?”</strong></p>
-<hr>
-</section>
-</section>
-<section id="system-architecture" class="level1">
-<h1>2. System Architecture</h1>
-<p>To ensure reproducibility and prevent data leakage, I moved beyond ad-hoc notebooks to a production-grade modular architecture.</p>
-<section id="directory-structure" class="level3">
-<h3 class="anchored" data-anchor-id="directory-structure">Directory Structure</h3>
-<p>The project is organized as a Python package (<code>src</code>), separating business logic from training pipelines.</p>
-<pre class="text"><code>├── src/
-│   ├── data_pipeline.py  # Custom Transformers (Financial Engineering)
-│   ├── training.py       # Cross-Validation &amp; Hyperparameter Tuning
-│   ├── evaluation.py     # Profit &amp; Strategy Curve Logic
-│   └── config.py         # Centralized Assumptions
-├── notebooks/            # Narrative Analysis
-└── README.md</code></pre>
-</section>
-<section id="feature-engineering-pipeline" class="level3">
-<h3 class="anchored" data-anchor-id="feature-engineering-pipeline">Feature Engineering Pipeline</h3>
-<p>A critical component was the FinancialFeatureEngineer transformer, which derives economic variables before the model sees the data. This calculates the Present Value (PV) of the loan using standard amortization formulas.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># src/data_pipeline.py Snippet</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> engineer_financial_features(df):</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">    Derives the Principal (PV) using the Annuity Formula.</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">    PV = Installment * (1 - (1+r)^-n) / r</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    monthly_rate <span class="op">=</span> df[<span class="st">'int.rate'</span>] <span class="op">/</span> <span class="dv">12</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    term <span class="op">=</span> <span class="dv">36</span> <span class="co"># Assumed 36-month term</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Vectorized Calculation of Risk Exposure</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    df[<span class="st">'principal'</span>] <span class="op">=</span> df[<span class="st">'installment'</span>] <span class="op">*</span> (</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>        <span class="dv">1</span> <span class="op">-</span> (<span class="dv">1</span> <span class="op">+</span> monthly_rate)<span class="op">**</span>(<span class="op">-</span>term)</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    ) <span class="op">/</span> monthly_rate</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<hr>
-</section>
-</section>
-<section id="modeling-strategy" class="level1">
-<h1>3. Modeling Strategy</h1>
-<section id="model-selection" class="level3">
-<h3 class="anchored" data-anchor-id="model-selection">Model Selection</h3>
-<p>I benchmarked three architectures:</p>
-<ol type="1">
-<li>Logistic Regression: Linear, highly interpretable (industry standard for compliance).</li>
-<li>Random Forest: Handles non-linearities but prone to overfitting on noise.</li>
-<li>XGBoost: Gradient boosting for maximizing weak signals.</li>
-</ol>
-<p><strong>Winner: Logistic Regression</strong>. Surprisingly, the simpler linear model outperformed the complex tree ensembles on the test set (AUC 0.685 vs 0.67 &amp; 0.66 respectively). This suggests the signal in this specific dataset is largely linear (e.g., FICO scores linearly correlate with risk), and the complex models were overfitting the noise.</p>
-</section>
-<section id="the-strategy-curve" class="level3">
-<h3 class="anchored" data-anchor-id="the-strategy-curve">The “Strategy Curve”</h3>
-<p>Instead of accepting the default decision threshold of 0.5, I implemented a custom evaluation function to plot Profit vs.&nbsp;Approval Rate.</p>
-<ul>
-<li>X-Axis: Percentage of loans approved (sorted by safety).</li>
-<li>Y-Axis: Total Portfolio Profit.</li>
-</ul>
-<p><img src="LogReg-StrategyCurve.png" class="img-fluid" alt="Profit as a percentage of loan approval rate"> This visualization allows stakeholders to visually “pick” their risk appetite.</p>
-<hr>
-</section>
-</section>
-<section id="results-analysis" class="level1">
-<h1>4. Results &amp; Analysis</h1>
-<section id="performance-metrics" class="level3">
-<h3 class="anchored" data-anchor-id="performance-metrics">Performance Metrics</h3>
-<p>The final model demonstrated robust separation power between “Good” and “Bad” loans.</p>
-<ul>
-<li>ROC-AUC: 0.685</li>
-<li>Precision (Class 0 - Paid): 0.86</li>
-<li>Recall (Class 1 - Default): Tunable via threshold.</li>
-</ul>
-</section>
-<section id="business-insight-the-optimization-peak" class="level3">
-<h3 class="anchored" data-anchor-id="business-insight-the-optimization-peak">Business Insight: The Optimization Peak</h3>
-<p>The analysis revealed a convex profit curve.</p>
-<ol type="1">
-<li><strong>At 100% Approval:</strong> The portfolio absorbs all toxic assets, significantly reducing net profit.</li>
-<li><strong>At 82.7% Approval (The Peak):</strong> By cutting the bottom 17.3% of risky applicants, we maximize profit at $1,264,043.</li>
-<li><strong>Below 80% Approval:</strong> We start rejecting too many good customers, and the opportunity cost (lost interest) begins to outweigh the savings from avoided defaults.</li>
-</ol>
-<div class="callout callout-style-simple callout-note no-icon">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-body-container">
-<p><strong>Managerial Conclusion:</strong> The optimal policy is strict but not draconian. We should approve the safest ~83% of applicants. This creates a projected 40% increase in profitability compared to a naive strategy.</p>
-</div>
-</div>
+<style>
+.metric-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin: 1.5rem 0 2rem 0;
+}
+.metric-card {
+  background: #f8f9fa;
+  border-left: 4px solid #2c5f8a;
+  border-radius: 4px;
+  padding: 1rem 1.25rem;
+}
+.metric-value {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #2c5f8a;
+  line-height: 1.1;
+}
+.metric-label {
+  font-size: 0.8rem;
+  color: #555;
+  margin-top: 0.2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.metric-sub {
+  font-size: 0.75rem;
+  color: #888;
+  margin-top: 0.15rem;
+}
+.results-table th {
+  background: #f0f4f8;
+}
+.back-link {
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+  display: block;
+}
+@media (max-width: 600px) {
+  .metric-grid { grid-template-columns: 1fr 1fr; }
+}
+</style>
+
+<a class="back-link" href="../projects.html">
+  <span class="lang-en">← Back to Projects</span>
+  <span class="lang-pt">← Voltar aos Projetos</span>
+</a>
+
+<div class="metric-grid">
+  <div class="metric-card">
+    <div class="metric-value">$1,264,043</div>
+    <div class="metric-label">
+      <span class="lang-en">Optimal Portfolio Profit</span>
+      <span class="lang-pt">Lucro Ótimo do Portfólio</span>
+    </div>
+    <div class="metric-sub">
+      <span class="lang-en">Logistic Regression, test set</span>
+      <span class="lang-pt">Regressão Logística, conjunto de teste</span>
+    </div>
+  </div>
+  <div class="metric-card">
+    <div class="metric-value">+35.4%</div>
+    <div class="metric-label">
+      <span class="lang-en">ROI Lift vs. Approve All</span>
+      <span class="lang-pt">Ganho de ROI vs. Aprovar Tudo</span>
+    </div>
+    <div class="metric-sub">$933,898 → $1,264,043</div>
+  </div>
+  <div class="metric-card">
+    <div class="metric-value">9,578</div>
+    <div class="metric-label">
+      <span class="lang-en">Consumer Loans</span>
+      <span class="lang-pt">Empréstimos ao Consumidor</span>
+    </div>
+    <div class="metric-sub">LendingClub · 16% default rate</div>
+  </div>
 </div>
 <hr>
-</section>
-</section>
-<section id="key-risk-drivers-interpretation" class="level1">
-<h1>5. Key Risk Drivers (Interpretation)</h1>
-<p>Using coefficient analysis (and SHAP values for tree benchmarks), the primary drivers of default were:</p>
-<ol type="1">
-<li><strong>FICO Score:</strong> The single strongest predictor. Lower scores exponentially increase default odds.</li>
-<li><strong>Inquiries (Last 6 Months):</strong> A high velocity of recent credit applications is a strong distress signal.</li>
-<li><strong>Interest Rate:</strong> The market is efficient—loans priced with higher rates did default more often, confirming that the original underwriters correctly identified risk (though they often underpriced it).</li>
-</ol>
+<section id="the-problem-with-optimizing-accuracyo-problema-de-otimizar-acurácia" class="level2">
+<h2 class="anchored" data-anchor-id="the-problem-with-optimizing-accuracyo-problema-de-otimizar-acurácia"><span class="lang-en">The Problem with Optimizing Accuracy</span><span class="lang-pt">O Problema de Otimizar Acurácia</span></h2>
+<p><span class="lang-en">A model that predicts “fully paid” for every single applicant achieves 84% accuracy on this dataset — because 84% of loans are actually repaid. That model is useless. It approves every default and leaves $330,145 in recoverable profit on the table.</span> <span class="lang-pt">Um modelo que prevê “pagamento total” para todos os solicitantes atinge 84% de acurácia neste dataset — porque 84% dos empréstimos são de fato pagos. Esse modelo é inútil. Ele aprova todos os inadimplentes e deixa $330.145 em lucro recuperável na mesa.</span></p>
+<p><span class="lang-en">Standard classification metrics — accuracy, F1-score — are blind to the asymmetry of credit risk. A missed default costs far more than a rejected good applicant. <strong>The correct objective function is portfolio net profit, not classification accuracy.</strong></span> <span class="lang-pt">Métricas padrão de classificação — acurácia, F1-score — são cegas à assimetria do risco de crédito. Um default perdido custa muito mais do que um bom solicitante rejeitado. <strong>A função objetivo correta é o lucro líquido do portfólio, não a acurácia de classificação.</strong></span></p>
+<p><span class="lang-en">This project builds a credit scoring engine that makes that substitution explicitly — replacing the classification threshold with a profit-maximizing approval rate, grounded in the actual P&amp;L structure of the loan portfolio.</span> <span class="lang-pt">Este projeto constrói um motor de scoring de crédito que faz essa substituição explicitamente — trocando o threshold de classificação por uma taxa de aprovação que maximiza o lucro, fundamentada na estrutura real de P&amp;L do portfólio de empréstimos.</span></p>
 <hr>
 </section>
-<section id="conclusion" class="level1">
-<h1>Conclusion</h1>
-<p>This project demonstrates that Data Science is not just about prediction; it is about decision-making.</p>
-<p>By translating a classification problem into a financial optimization problem, I delivered a model that speaks the language of the business: Profit, ROI, and Risk Exposure.</p>
+<section id="financial-engineering-reconstructing-the-assetengenharia-financeira-reconstruindo-o-ativo" class="level2">
+<h2 class="anchored" data-anchor-id="financial-engineering-reconstructing-the-assetengenharia-financeira-reconstruindo-o-ativo"><span class="lang-en">Financial Engineering: Reconstructing the Asset</span><span class="lang-pt">Engenharia Financeira: Reconstruindo o Ativo</span></h2>
+<p><span class="lang-en">The dataset provides monthly installment amounts and interest rates, but not the loan principal — the capital at risk in a default scenario. Before any modeling, the principal must be derived. I applied the <strong>Present Value of an Annuity</strong> formula, assuming a 36-month fixed term:</span> <span class="lang-pt">O dataset fornece valores de parcelas mensais e taxas de juros, mas não o principal do empréstimo — o capital em risco em um cenário de inadimplência. Antes de qualquer modelagem, o principal deve ser derivado. Apliquei a fórmula do <strong>Valor Presente de uma Anuidade</strong>, assumindo prazo fixo de 36 meses:</span></p>
+<p><span class="math display">\[P = A \times \frac{1 - (1 + r/12)^{-36}}{r/12}\]</span></p>
+<p><span class="lang-en">where <span class="math inline">\(A\)</span> is the monthly installment and <span class="math inline">\(r\)</span> is the annual interest rate. This engineered <code>principal</code> feature becomes the foundation of the profit function — it defines exactly how much capital is lost when a loan defaults.</span> <span class="lang-pt">onde <span class="math inline">\(A\)</span> é a parcela mensal e <span class="math inline">\(r\)</span> é a taxa de juros anual. Essa feature engenheirada <code>principal</code> torna-se a base da função de lucro — ela define exatamente quanto capital é perdido quando um empréstimo entra em default.</span></p>
+<section id="the-profit-functiona-função-de-lucro" class="level3">
+<h3 class="anchored" data-anchor-id="the-profit-functiona-função-de-lucro"><span class="lang-en">The Profit Function</span><span class="lang-pt">A Função de Lucro</span></h3>
+<p><span class="lang-en">Each loan approval decision maps to one of three financial outcomes:</span> <span class="lang-pt">Cada decisão de aprovação de empréstimo mapeia para um de três resultados financeiros:</span></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><span class="lang-en">Outcome</span><span class="lang-pt">Resultado</span></th>
+<th><span class="lang-en">Formula</span><span class="lang-pt">Fórmula</span></th>
+<th><span class="lang-en">Interpretation</span><span class="lang-pt">Interpretação</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="lang-en">Approved, repaid (TN)</span><span class="lang-pt">Aprovado, pago (TN)</span></td>
+<td><span class="math inline">\((installment \times 36) - principal\)</span></td>
+<td><span class="lang-en">Total interest income</span><span class="lang-pt">Receita total de juros</span></td>
+</tr>
+<tr class="even">
+<td><span class="lang-en">Approved, defaulted (FN)</span><span class="lang-pt">Aprovado, inadimplente (FN)</span></td>
+<td><span class="math inline">\((principal \times 0.30) - principal = -0.70 \times principal\)</span></td>
+<td><span class="lang-en">Net loss after 30% recovery</span><span class="lang-pt">Perda líquida após 30% de recuperação</span></td>
+</tr>
+<tr class="odd">
+<td><span class="lang-en">Rejected (any class)</span><span class="lang-pt">Rejeitado (qualquer classe)</span></td>
+<td><span class="math inline">\(0\)</span></td>
+<td><span class="lang-en">Opportunity cost — no gain or loss</span><span class="lang-pt">Custo de oportunidade — sem ganho ou perda</span></td>
+</tr>
+</tbody>
+</table>
+<p><span class="lang-en">The 30% recovery rate reflects industry approximations for unsecured consumer debt. Assumptions not modeled: cost of capital (assumed 0%), time value of money, and prepayment risk — all documented as future work.</span> <span class="lang-pt">A taxa de recuperação de 30% reflete aproximações do setor para dívida não garantida ao consumidor. Premissas não modeladas: custo de capital (assumido 0%), valor do dinheiro no tempo e risco de pré-pagamento — todos documentados como trabalho futuro.</span></p>
+<hr>
+</section>
+</section>
+<section id="the-strategy-curvea-curva-de-estratégia" class="level2">
+<h2 class="anchored" data-anchor-id="the-strategy-curvea-curva-de-estratégia"><span class="lang-en">The Strategy Curve</span><span class="lang-pt">A Curva de Estratégia</span></h2>
+<p><span class="lang-en">The core of the engine is not a classifier — it is a <strong>strategy curve</strong>: a sweep across 200 candidate thresholds (0.01–0.99) that computes realized portfolio profit at each approval rate. A loan is approved when its predicted default probability falls below the threshold. The optimal threshold is determined empirically per model, not fixed at 0.5.</span> <span class="lang-pt">O núcleo do motor não é um classificador — é uma <strong>curva de estratégia</strong>: uma varredura por 200 thresholds candidatos (0,01–0,99) que computa o lucro realizado do portfólio em cada taxa de aprovação. Um empréstimo é aprovado quando sua probabilidade prevista de default está abaixo do threshold. O threshold ótimo é determinado empiricamente por modelo, não fixado em 0,5.</span></p>
+<p><img src="../../Loan-Default-Prediction/assets/comparison_strategy_curves.png" class="img-fluid"></p>
+<p><span class="lang-en">The comparison above shows all three models against the naive baseline ($933,898 — approve all applicants). Every model outperforms the baseline at its optimal threshold. Logistic Regression achieves the highest portfolio profit despite having the lowest raw accuracy — a result that requires explanation.</span> <span class="lang-pt">A comparação acima mostra os três modelos versus a baseline ingênua ($933.898 — aprovar todos os solicitantes). Cada modelo supera a baseline no seu threshold ótimo. A Regressão Logística atinge o maior lucro do portfólio apesar de ter a menor acurácia bruta — um resultado que requer explicação.</span></p>
+<hr>
+</section>
+<section id="model-benchmarkingbenchmarking-de-modelos" class="level2">
+<h2 class="anchored" data-anchor-id="model-benchmarkingbenchmarking-de-modelos"><span class="lang-en">Model Benchmarking</span><span class="lang-pt">Benchmarking de Modelos</span></h2>
+<p><span class="lang-en">Three models were tuned via <code>RandomizedSearchCV</code> (35 iterations, 3-fold CV, AUC scoring) on an 80/20 stratified split. All models handle the 16% default class imbalance explicitly — Logistic Regression and Random Forest via <code>class_weight='balanced'</code>; XGBoost via <code>scale_pos_weight</code>.</span> <span class="lang-pt">Três modelos foram ajustados via <code>RandomizedSearchCV</code> (35 iterações, CV de 3 folds, scoring por AUC) em uma divisão estratificada 80/20. Todos os modelos tratam explicitamente o desbalanceamento de 16% da classe de default — Regressão Logística e Random Forest via <code>class_weight='balanced'</code>; XGBoost via <code>scale_pos_weight</code>.</span></p>
+<p><span class="lang-en">All results verified on the held-out 2024 test set (1,916 loans):</span> <span class="lang-pt">Todos os resultados verificados no conjunto de teste (1.916 empréstimos):</span></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><span class="lang-en">Model</span><span class="lang-pt">Modelo</span></th>
+<th>AUC</th>
+<th><span class="lang-en">Accuracy</span><span class="lang-pt">Acurácia</span></th>
+<th><span class="lang-en">Optimal Threshold</span><span class="lang-pt">Threshold Ótimo</span></th>
+<th><span class="lang-en">Approval Rate</span><span class="lang-pt">Taxa de Aprovação</span></th>
+<th><span class="lang-en">Portfolio Profit</span><span class="lang-pt">Lucro do Portfólio</span></th>
+<th><span class="lang-en">ROI Lift</span><span class="lang-pt">Ganho de ROI</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Logistic Regression</strong></td>
+<td><strong>0.685</strong></td>
+<td>64.0%</td>
+<td>0.606</td>
+<td>82.7%</td>
+<td><strong>$1,264,043</strong></td>
+<td><strong>+35.4%</strong></td>
+</tr>
+<tr class="even">
+<td>Random Forest</td>
+<td>0.673</td>
+<td>82.2%</td>
+<td>0.453</td>
+<td>89.2%</td>
+<td>$1,173,295</td>
+<td>+25.6%</td>
+</tr>
+<tr class="odd">
+<td>XGBoost</td>
+<td>0.661</td>
+<td>83.7%</td>
+<td>0.246</td>
+<td>84.1%</td>
+<td>$1,121,846</td>
+<td>+20.1%</td>
+</tr>
+<tr class="even">
+<td><em><span class="lang-en">Baseline (approve all)</span><span class="lang-pt">Baseline (aprovar tudo)</span></em></td>
+<td><em>—</em></td>
+<td><em>84.0%</em></td>
+<td><em>—</em></td>
+<td><em>100%</em></td>
+<td><em>$933,898</em></td>
+<td><em>—</em></td>
+</tr>
+</tbody>
+</table>
+<section id="why-logistic-regression-winspor-que-a-regressão-logística-vence" class="level3">
+<h3 class="anchored" data-anchor-id="why-logistic-regression-winspor-que-a-regressão-logística-vence"><span class="lang-en">Why Logistic Regression Wins</span><span class="lang-pt">Por Que a Regressão Logística Vence</span></h3>
+<p><span class="lang-en">XGBoost achieves 83.7% accuracy — but look at its confusion matrix: it assigns recall of 0.01 to the default class, meaning it correctly identifies almost no defaults. It achieves high accuracy by predicting “fully paid” for nearly everyone, which is identical to the naive baseline in behavior. High accuracy here is a symptom of the problem, not a solution to it.</span> <span class="lang-pt">O XGBoost atinge 83,7% de acurácia — mas observe sua matriz de confusão: ele atribui recall de 0,01 à classe de default, significando que identifica corretamente quase nenhum inadimplente. Atinge alta acurácia prevendo “pagamento total” para quase todos, o que é idêntico ao comportamento da baseline ingênua. Alta acurácia aqui é um sintoma do problema, não uma solução.</span></p>
+<p><span class="lang-en">Logistic Regression with <code>class_weight='balanced'</code> accepts lower overall accuracy (64%) in exchange for genuine sensitivity to defaults (recall=0.58). The <code>class_weight</code> adjustment re-weights the loss function so that misclassifying a default is penalized proportionally to its financial cost. This is the correct behavior when the objective is profit, not classification score.</span> <span class="lang-pt">A Regressão Logística com <code>class_weight='balanced'</code> aceita menor acurácia geral (64%) em troca de sensibilidade genuína aos inadimplentes (recall=0,58). O ajuste de <code>class_weight</code> reponde à função de perda para que classificar incorretamente um default seja penalizado proporcionalmente ao seu custo financeiro. Esse é o comportamento correto quando o objetivo é lucro, não pontuação de classificação.</span></p>
+<hr>
+</section>
+</section>
+<section id="model-analysisanálise-do-modelo" class="level2">
+<h2 class="anchored" data-anchor-id="model-analysisanálise-do-modelo"><span class="lang-en">Model Analysis</span><span class="lang-pt">Análise do Modelo</span></h2>
+<section id="roc-curvescurvas-roc" class="level3">
+<h3 class="anchored" data-anchor-id="roc-curvescurvas-roc"><span class="lang-en">ROC Curves</span><span class="lang-pt">Curvas ROC</span></h3>
+<div class="grid">
+<div class="g-col-12 g-col-md-4">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../Loan-Default-Prediction/assets/logisticregression/roc_curve.png" class="img-fluid figure-img"></p>
+<figcaption><span class="lang-en">Logistic Regression — AUC 0.685</span><span class="lang-pt">Regressão Logística — AUC 0,685</span></figcaption>
+</figure>
+</div>
+</div>
+<div class="g-col-12 g-col-md-4">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../Loan-Default-Prediction/assets/randomforest/roc_curve.png" class="img-fluid figure-img"></p>
+<figcaption><span class="lang-en">Random Forest — AUC 0.673</span><span class="lang-pt">Random Forest — AUC 0,673</span></figcaption>
+</figure>
+</div>
+</div>
+<div class="g-col-12 g-col-md-4">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../Loan-Default-Prediction/assets/xgboost/roc_curve.png" class="img-fluid figure-img"></p>
+<figcaption><span class="lang-en">XGBoost — AUC 0.661</span><span class="lang-pt">XGBoost — AUC 0,661</span></figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="feature-importance-shapimportância-das-features-shap" class="level3">
+<h3 class="anchored" data-anchor-id="feature-importance-shapimportância-das-features-shap"><span class="lang-en">Feature Importance (SHAP)</span><span class="lang-pt">Importância das Features (SHAP)</span></h3>
+<p><img src="../../Loan-Default-Prediction/assets/logisticregression/shap_summary.png" class="img-fluid"></p>
+<p><span class="lang-en">SHAP analysis on the selected Logistic Regression model reveals three dominant risk drivers:</span> <span class="lang-pt">A análise SHAP no modelo de Regressão Logística selecionado revela três principais fatores de risco:</span></p>
+<p><span class="lang-en"><strong>FICO score</strong> is the strongest monotonic predictor of creditworthiness — higher scores strongly reduce predicted default probability, consistent with its role as a standardized creditworthiness signal.</span> <span class="lang-pt">O <strong>FICO score</strong> é o preditor monotônico mais forte de solvência — scores mais altos reduzem fortemente a probabilidade prevista de default, consistente com seu papel como sinal padronizado de crédito.</span></p>
+<p><span class="lang-en"><strong>Credit inquiries in the last 6 months</strong> (<code>inq.last.6mths</code>) is the second most important feature. High credit-seeking velocity is a well-documented distress signal — applicants approaching multiple lenders simultaneously are more likely to be facing liquidity constraints.</span> <span class="lang-pt"><strong>Consultas de crédito nos últimos 6 meses</strong> (<code>inq.last.6mths</code>) é a segunda feature mais importante. Alta velocidade de busca de crédito é um sinal documentado de dificuldade financeira — solicitantes que abordam múltiplos credores simultaneamente têm maior probabilidade de enfrentar restrições de liquidez.</span></p>
+<p><span class="lang-en"><strong>Interest rate</strong> (<code>int.rate</code>) confirms that riskier loans are priced higher — but also that the risk premium embedded in the rate is often insufficient to offset default losses in the lowest credit quality deciles, where rejecting the applicant outright is more profitable than extending credit.</span> <span class="lang-pt"><strong>Taxa de juros</strong> (<code>int.rate</code>) confirma que empréstimos mais arriscados têm precificação mais alta — mas também que o prêmio de risco embutido na taxa frequentemente é insuficiente para compensar as perdas por default nos decis de menor qualidade de crédito, onde rejeitar o solicitante é mais lucrativo do que conceder crédito.</span></p>
+</section>
+<section id="individual-strategy-curvescurvas-de-estratégia-individuais" class="level3">
+<h3 class="anchored" data-anchor-id="individual-strategy-curvescurvas-de-estratégia-individuais"><span class="lang-en">Individual Strategy Curves</span><span class="lang-pt">Curvas de Estratégia Individuais</span></h3>
+<div class="grid">
+<div class="g-col-12 g-col-md-4">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../Loan-Default-Prediction/assets/logisticregression/strategy_curve.png" class="img-fluid figure-img"></p>
+<figcaption><span class="lang-en">Logistic Regression — Optimal at 82.7%</span><span class="lang-pt">Regressão Logística — Ótimo em 82,7%</span></figcaption>
+</figure>
+</div>
+</div>
+<div class="g-col-12 g-col-md-4">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../Loan-Default-Prediction/assets/randomforest/strategy_curve.png" class="img-fluid figure-img"></p>
+<figcaption><span class="lang-en">Random Forest — Optimal at 89.2%</span><span class="lang-pt">Random Forest — Ótimo em 89,2%</span></figcaption>
+</figure>
+</div>
+</div>
+<div class="g-col-12 g-col-md-4">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../Loan-Default-Prediction/assets/xgboost/strategy_curve.png" class="img-fluid figure-img"></p>
+<figcaption><span class="lang-en">XGBoost — Optimal at 84.1%</span><span class="lang-pt">XGBoost — Ótimo em 84,1%</span></figcaption>
+</figure>
+</div>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="conclusionconclusão" class="level2">
+<h2 class="anchored" data-anchor-id="conclusionconclusão"><span class="lang-en">Conclusion</span><span class="lang-pt">Conclusão</span></h2>
 <ul>
-<li>Code Repository: <a href="https://github.com/Condeg0/Loan-Default-Prediction" class="btn btn-primary" role="button">View on GitHub</a></li>
-<li>Tech Stack: Python, Scikit-Learn, Pandas, Matplotlib.</li>
+<li><span class="lang-en">Reframed loan approval as a financial optimization problem — replacing accuracy with portfolio net profit as the objective function, grounded in the P&amp;L structure of the loan asset.</span><span class="lang-pt">Reformulou a aprovação de empréstimos como um problema de otimização financeira — substituindo acurácia por lucro líquido do portfólio como função objetivo, fundamentada na estrutura de P&amp;L do ativo de empréstimo.</span></li>
+<li><span class="lang-en">Derived loan principal from installment data using the PV of an annuity formula — enabling a realistic profit calculation where none was possible with raw features alone.</span><span class="lang-pt">Derivou o principal do empréstimo a partir dos dados de parcelas usando a fórmula do VP de uma anuidade — possibilitando um cálculo de lucro realista onde nenhum era possível com as features brutas.</span></li>
+<li><span class="lang-en">Demonstrated that high accuracy (84% for XGBoost) can be financially worse than lower accuracy (64% for Logistic Regression) — when the model with high accuracy achieves it by ignoring the minority class that drives the most capital loss.</span><span class="lang-pt">Demonstrou que alta acurácia (84% para XGBoost) pode ser financeiramente pior do que menor acurácia (64% para Regressão Logística) — quando o modelo com alta acurácia a alcança ignorando a classe minoritária que gera as maiores perdas de capital.</span></li>
 </ul>
+<hr>
+<hr style="margin-top: 2rem;">
+<p style="font-size: 0.85rem; color: #555;">
+  <strong>Stack:</strong>
+  Python · scikit-learn · XGBoost · pandas · SHAP · Matplotlib
+  &nbsp;|&nbsp;
+  <a href="https://github.com/Condeg0/Loan-Default-Prediction" target="_blank">
+    <span class="lang-en">View on GitHub →</span>
+    <span class="lang-pt">Ver no GitHub →</span>
+  </a>
+  &nbsp;|&nbsp;
+  <a href="../projects.html">
+    <span class="lang-en">← Back to Projects</span>
+    <span class="lang-pt">← Voltar aos Projetos</span>
+  </a>
+</p>
 
 
 </section>
