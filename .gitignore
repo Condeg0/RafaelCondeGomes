@@ -4,3 +4,4 @@ CLAUDE.md
 **/*.quarto_ipynb
 _site
 /tennis-forecast/CONTEXT.md
+dir_structure.txt

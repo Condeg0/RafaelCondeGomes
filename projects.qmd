@@ -13,37 +13,37 @@ format:
 ### BreakPoint AI: ATP Tennis Forecasting
 ![](tennis-forecast/shap_summary_rf.png)
 
-**Stack:** Python, PyTorch (LSTMs), Optuna, Time-Series Analysis
+**Stack:** Python, PyTorch (LSTMs), Optuna, XGBoost, Scikit-Learn, SHAP
 
-<span class="lang-en">**The Problem:**</span><span class="lang-pt">**O Problema:**</span> <span class="lang-en">Sports betting markets are highly efficient. Standard models fail to beat the "closing line" because they rely on static averages rather than dynamic form.</span><span class="lang-pt">Mercados de apostas esportivas são altamente eficientes. Modelos padrão falham em bater a linha de fechamento porque dependem de médias estáticas, não de forma dinâmica.</span>
+<span class="lang-en">**The Problem:**</span><span class="lang-pt">**O Problema:**</span> <span class="lang-en">Static features can't capture momentum. A player's last 10 matches tell a different story than their season average — but standard tabular models treat both identically.</span><span class="lang-pt">Features estáticas não capturam momentum. As últimas 10 partidas de um jogador contam uma história diferente da média na temporada — mas modelos tabulares padrão tratam ambas de forma idêntica.</span>
 
-<span class="lang-en">**The Solution:**</span><span class="lang-pt">**A Solução:**</span> <span class="lang-en">I built a **Hybrid Siamese LSTM** network that models a match as the collision of two historical trajectories (momentum), rather than static player stats.</span><span class="lang-pt">Construí uma rede **Hybrid Siamese LSTM** que modela uma partida como a colisão de duas trajetórias históricas (momentum), em vez de estatísticas estáticas do jogador.</span>
+<span class="lang-en">**The Solution:**</span><span class="lang-pt">**A Solução:**</span> <span class="lang-en">A **Hybrid Siamese LSTM** that models each match as the collision of two historical momentum trajectories, with strict temporal validation eliminating look-ahead bias at every step.</span><span class="lang-pt">Um **Hybrid Siamese LSTM** que modela cada partida como a colisão de duas trajetórias históricas de momentum, com validação temporal rigorosa eliminando look-ahead bias em cada etapa.</span>
 
-* <span class="lang-en">**Innovation:**</span><span class="lang-pt">**Inovação:**</span> <span class="lang-en">Strict `date < current_date` filtration to prevent look-ahead bias (data leakage).</span><span class="lang-pt">Filtragem rigorosa por data para evitar look-ahead bias (vazamento de dados).</span>
-* <span class="lang-en">**Result:**</span><span class="lang-pt">**Resultado:**</span> <span class="lang-en">Achieved **64.6% Accuracy** and **0.706 AUC**, reaching parity with institutional bookmakers.</span><span class="lang-pt">Alcançou **64,6% de Acurácia** e **0.706 AUC**, atingindo paridade com casas de apostas institucionais.</span>
+* <span class="lang-en">**Innovation:**</span><span class="lang-pt">**Inovação:**</span> <span class="lang-en">Siamese LSTM matched an engineered baseline using only raw sequential data — the model learns rolling statistics automatically without manual feature construction.</span><span class="lang-pt">O Siamese LSTM igualou uma baseline engenheirada usando apenas dados sequenciais brutos — o modelo aprende estatísticas de janela deslizante automaticamente.</span>
+* <span class="lang-en">**Result:**</span><span class="lang-pt">**Resultado:**</span> <span class="lang-en">Stacking ensemble achieved **0.717 AUC** and **65.5% accuracy** on the unseen 2024 test season across 90,000+ ATP records.</span><span class="lang-pt">Ensemble de stacking atingiu **0,717 AUC** e **65,5% de acurácia** no conjunto de teste 2024 com mais de 90.000 registros ATP.</span>
 
 [<span class="lang-en">**View Technical Report →**</span><span class="lang-pt">**Ver Relatório Técnico →**</span>](./tennis-forecast/index.html){.btn .btn-primary}
 :::
 
 ::: {.g-col-12 .g-col-md-6}
-### <span class="lang-en">Optimizing Credit Risk: Profit-First Logic</span><span class="lang-pt">Otimizando Risco de Crédito: Lógica Profit-First</span>
-![](Loan-Default-Prediction/LogReg-StrategyCurve.png)
+### <span class="lang-en">Credit Risk Optimization Engine: Profit-First Loan Scoring</span><span class="lang-pt">Motor de Otimização de Risco de Crédito: Scoring Orientado a Lucro</span>
+![](Loan-Default-Prediction/assets/comparison_strategy_curves.png)
 
-**Stack:** Python, Scikit-Learn, Pandas, Financial Engineering
+**Stack:** Python, Scikit-Learn, XGBoost, Pandas, SHAP, Financial Engineering
 
-<span class="lang-en">**The Problem:**</span><span class="lang-pt">**O Problema:**</span> <span class="lang-en">Standard classification models maximize *accuracy*, but banks care about *profit*. A default costs significantly more than a rejected loan saves.</span><span class="lang-pt">Modelos padrão maximizam *acurácia*, mas bancos se importam com *lucro*. Um default custa muito mais do que um empréstimo rejeitado economiza.</span>
+<span class="lang-en">**The Problem:**</span><span class="lang-pt">**O Problema:**</span> <span class="lang-en">Standard classification models maximize *accuracy*, but banks care about *profit*. A model with 84% accuracy that predicts "fully paid" for almost every applicant is not better than approving everyone — it just looks better on a confusion matrix.</span><span class="lang-pt">Modelos padrão maximizam *acurácia*, mas bancos se importam com *lucro*. Um modelo com 84% de acurácia que prevê "pago" para quase todos não é melhor do que aprovar todos — apenas parece melhor em uma matriz de confusão.</span>
 
-<span class="lang-en">**The Solution:**</span><span class="lang-pt">**A Solução:**</span> <span class="lang-en">I engineered a **Threshold Optimization Engine** that shifts the decision boundary based on the specific cost-benefit matrix of the loan portfolio.</span><span class="lang-pt">Desenvolvi um **Threshold Optimization Engine** que ajusta o limite de decisão com base na matriz custo-benefício específica do portfólio de empréstimos.</span>
+<span class="lang-en">**The Solution:**</span><span class="lang-pt">**A Solução:**</span> <span class="lang-en">A custom profit function derived from the loan's P&L structure replaces accuracy as the optimization target. A strategy curve searches 200 threshold candidates to find the empirically optimal approval rate per model.</span><span class="lang-pt">Uma função de lucro derivada da estrutura de P&L do empréstimo substitui a acurácia como alvo de otimização. Uma curva de estratégia pesquisa 200 candidatos de threshold para encontrar a taxa ótima de aprovação por modelo.</span>
 
-* <span class="lang-en">**Strategy:**</span><span class="lang-pt">**Estratégia:**</span> <span class="lang-en">Prioritized recall for high-risk segments.</span><span class="lang-pt">Priorizou recall para segmentos de alto risco.</span>
-* <span class="lang-en">**Result:**</span><span class="lang-pt">**Resultado:**</span> <span class="lang-en">Projected **~40% ROI lift** ($1.26M portfolio value) compared to standard accuracy-based thresholds.</span><span class="lang-pt">Projetou **~40% de aumento no ROI** (portfólio de $1,26M) em comparação com thresholds baseados em acurácia padrão.</span>
+* <span class="lang-en">**Key insight:**</span><span class="lang-pt">**Insight principal:**</span> <span class="lang-en">The model with the lowest accuracy (64%) produced the highest portfolio profit — by $142,197 over XGBoost's 84% accuracy.</span><span class="lang-pt">O modelo com menor acurácia (64%) produziu o maior lucro de portfólio — $142.197 a mais que o XGBoost com 84% de acurácia.</span>
+* <span class="lang-en">**Result:**</span><span class="lang-pt">**Resultado:**</span> <span class="lang-en">**+35.4% ROI lift** ($1,264,043 portfolio profit) over the naive approve-all baseline on 9,578 LendingClub loans.</span><span class="lang-pt">**+35,4% de ganho de ROI** ($1.264.043 em lucro) sobre a baseline ingênua em 9.578 empréstimos.</span>
 
 [<span class="lang-en">**View Full Analysis →**</span><span class="lang-pt">**Ver Análise Completa →**</span>](./Loan-Default-Prediction/index.html){.btn .btn-primary}
 :::
 
 ::: {.g-col-12 .g-col-md-6}
-### NYC Ride-Share <span class="lang-en">Demand Analysis</span><span class="lang-pt">Análise de Demanda</span>
-![](Uber-NYC-Analysis/NYC Uber Rise Map.png)
+### NYC Ride-Share <span class="lang-en">Demand Analysis</span><span class="lang-pt">Análise de Demanda de Transporte em NYC</span>
+![](Uber-NYC-Analysis/NYC_Uber_Rise_Map.png)
 
 **Stack:** R (ggplot2, dplyr), Geospatial Analysis
 
